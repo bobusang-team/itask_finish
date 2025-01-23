@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user">
+	<!-- 유저 회원가입 -->
+	<insert id="join" parameterType="UserDTO">
+		insert into tbl_user(user_num, user_id, user_pw, user_name, user_nick, user_phone, user_mail, user_cert, user_moniter, user_agree, user_career)
+		values(seq_user.nextVal, #{userId}, #{userPw}, #{userName}, #{userNick}, #{userPhone}, #{userMail}, #{userCert}, #{userMoniter}, #{userAgree}, #{userCareer})
+	</insert>
+	
+	<!-- 유저 로그인 -->
+	<select id = 'login' parameterType="UserDTO" resultType="UserDTO">
+		select user_num, user_id, user_pw, user_name, user_nick, user_phone, user_mail, user_cert, user_moniter, user_agree, user_career
+		from tbl_user
+		where user_id = #{userId} and user_pw = #{userPw}
+	</select>
+	
+	<!-- 비밀번호 재설정 전 해당 유저 존재 확인 -->
+	<select id='pwfind' parameterType="UserDTO" resultType="UserDTO">
+		select user_num
+		from tbl_user
+		where user_id = #{userId} and user_name = #{userName} and user_phone = #{userPhone}
+	</select>
+	
+	<!-- 비밀번호 재설정 -->
+	<update id = 'reset' parameterType="UserDTO">
+		UPDATE tbl_user
+		SET user_pw = #{userPw}
+		WHERE user_num = #{userNum}
+	</update>
+	
+	<!-- 중복체크 (중복수 count) -->
+	<!-- 아이디 -->
+	<select id='idCnt' resultType='int'>
+		SELECT count (user_id)
+		FROM tbl_user
+		WHERE user_id = #{userId}
+	</select>
+	<!-- 닉네임 -->
+	<select id='nickCnt' resultType='int'>
+		SELECT count (user_nick)
+		FROM tbl_user
+		WHERE user_nick = #{userNick}
+	</select>
+	<!-- 이메일 -->
+	<select id='mailCnt' resultType='int'>
+		SELECT count (user_mail)
+		FROM tbl_user
+		WHERE user_mail = #{userMail}
+	</select>
+</mapper>
