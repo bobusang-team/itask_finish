@@ -1,0 +1,37 @@
+@charset "UTF-8";
+@charset "UTF-8";
+/* 이용 약관 01 */
+*{margin: 0; padding: 0;}
+
+.itAskBox{
+  width: 1200px;
+  margin: 100px auto 200px;
+  text-align: center;
+  color: #606060;
+  font-size: 20px;
+  text-align: center;
+  /* border: 1px solid #D96073; */
+}
+/* 로고 */
+.itAskBox>a{
+  width: 370px;
+  display: block;
+  margin: 50px auto 50px;    
+}
+.itAskBox>a>img{
+  width: 100%;
+}
+
+h3{
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+p{
+  width: 800px;
+  border: 1px solid #DFDFDF;
+  font-size: 12px;
+  margin: auto;
+  padding: 20px;
+  text-align: left;
+  border-radius: 20px;
+}
