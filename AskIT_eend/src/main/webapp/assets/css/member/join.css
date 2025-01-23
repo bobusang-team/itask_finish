@@ -1,0 +1,305 @@
+/* 회원가입 페이지 2/3 : 회원정보 입력*/
+/* *{ padding: 0; margin: 0;} */
+.itAskBox{
+  width: 1200px;
+  margin: 150px auto;
+  text-align: center;
+  color: #606060;
+}
+
+/* 로고 */
+.itAskBox>a{
+  width: 370px;
+  display: block;
+  margin: 0px auto 50px;
+}
+.itAskBox>a>img{
+  width: 100%;
+}
+.itAskBox>p{
+  font-size: 40px;
+  margin-bottom: 50px;
+}
+.itAskBox>p>span{
+  font-size: 20px;
+}
+
+.itAskBox>form{
+  margin: auto;
+}
+
+
+
+
+/* 회원정보 상자 */
+.lsa-join-inforForm{
+  margin: auto;
+  width: 4869px;
+  /* border: 1px solid #D96073; */
+  align-items: center;
+}
+/* 모든 칸에 20px 띄워주기 */
+.lsa-join-infoForm>div{
+  margin-bottom: 20px;
+}
+/* 이름입력칸 */
+.lsa-join-infoBox-name{
+  margin: auto;
+}
+.lsa-join-infoBox-name>input{
+  border: 1px solid #DFDFDF;
+  padding-left: 30px;
+  text-align: left;
+  width: 456px;
+  height: 70px;
+  border-radius: 50px; 
+}
+/* 폰번호입력칸 */
+.lsa-join-infoBox-phoneNumber{
+  margin: auto; 
+  width: 486px;
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+}
+.lsa-join-info-phoneNumber{
+  border: 1px solid #DFDFDF;
+  padding-left: 30px;
+  text-align: left;
+  width: 336px;
+  height: 70px;
+  border-radius: 50px; 
+}
+.lsa-join-info-phoneNumber-btn{
+  border: none;
+  background-color:#D96073;
+  border-radius: 50px;
+  width: 100px;
+  color: white;
+  cursor: pointer;
+}
+.lsa-join-info-phoneNumber-btn:hover{
+  color: #D96073;
+  border: 1px solid #D96073;
+  background-color: white;
+}
+
+/* 인증번호입력칸 */
+.lsa-join-infoBox-certiNumber{
+  width: 486px;
+  margin: auto;
+}
+.lsa-join-info-certiNumber{
+  width: 336px;
+  height: 70px;
+  border: 1px solid #DFDFDF;
+  padding-left: 30px;
+  border-radius: 50px;
+  margin-right: 10px;
+}
+.lsa-join-certiNumber-btn{
+  border: none;
+  height: 70px;
+  background-color:#D96073;
+  border-radius: 50px;
+  width: 100px;
+  color: white;
+  cursor: pointer;
+}
+.lsa-join-certiNumber-btn:hover{
+  color: #D96073;
+  border: 1px solid #D96073;
+  background-color: white;
+}
+.lsa-join-info-certiNumber-check{
+  text-align: left;
+  font-size: 12px;
+  padding-left: 30px;
+  padding-top: 5px;
+  color: #22A309 ;
+}
+/* 아이디 */
+.lsa-join-infoBox-id{
+  margin: auto;
+  width: 486px;
+}
+.lsa-join-info-id{
+  width: 336px;
+  height: 70px;
+  border: 1px solid #DFDFDF;
+  padding-left: 30px;
+  border-radius: 50px;
+  margin-right: 10px;
+}
+.lsa-join-info-id-btn{
+  border: none;
+  height: 70px;
+  background-color:#D96073;
+  border-radius: 50px;
+  width: 100px;
+  color: white;
+  cursor: pointer;
+}
+.lsa-join-info-id-btn:hover{
+  color: #D96073;
+  border: 1px solid #D96073;
+  background-color: white;
+}
+.lsa-join-infoBox-id>p{
+  text-align: left;
+  font-size: 12px;
+  padding-left: 30px;
+  padding-top: 5px;
+  color: #22A309 ;
+}
+/* 비밀번호 */
+.lsa-join-infoBox-pw1{
+  position: relative;
+  width: 486px;
+  height: 100px;
+  margin: auto;
+}
+.lsa-join-infoBox-pw1>.lsa-join-info-pw{
+  position: absolute;
+  border: 1px solid #DFDFDF;
+  border-radius: 50px;
+  width: 456px;
+  padding-left: 30px;
+height: 70px;
+left: 0px;
+}
+.lsa-join-infoBox-pw1>img{
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+}
+.lsa-join-infoBox-pw1>p{
+  width: 486px;
+  position: absolute;
+  top: 80px;
+  padding-left: 30px;
+  color: #22A309 ;
+  font-size: 12px;
+  text-align: left;
+}
+
+/* 비밀번호 확인 */
+.lsa-join-infoBox-pw2{
+  position: relative;
+  width: 486px;
+  height: 100px;
+  margin: auto;
+}
+.lsa-join-infoBox-pw2>.lsa-join-info-pw{
+  position: absolute;
+  border: 1px solid #DFDFDF;
+  border-radius: 50px;
+  width: 456px;
+  padding-left: 30px;
+height: 70px;
+left: 0px;
+}
+.lsa-join-infoBox-pw2>img{
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+}
+.lsa-join-infoBox-pw2>p{
+  width: 486px;
+  position: absolute;
+  top: 80px;
+  padding-left: 30px;
+  color: #22A309 ;
+  font-size: 12px;
+  text-align: left;
+}
+
+/* 닉네임 */
+.lsa-join-infoBox-nickName{
+  margin: auto;
+  width: 486px;
+}
+.lsa-join-info-nickName{
+  width: 336px;
+  height: 70px;
+  border: 1px solid #DFDFDF;
+  padding-left: 30px;
+  border-radius: 50px;
+  margin-right: 10px;
+}
+.lsa-join-info-nickName-btn{
+  border: none;
+  height: 70px;
+  background-color:#D96073;
+  border-radius: 50px;
+  width: 100px;
+  color: white;
+  cursor: pointer;
+}
+.lsa-join-info-nickName-btn:hover{
+  color: #D96073;
+  border: 1px solid #D96073;
+  background-color: white;
+}
+.lsa-join-infoBox-nickName>p{
+  text-align: left;
+  font-size: 12px;
+  padding-left: 30px;
+  padding-top: 5px;
+  color: #22A309 ;
+}
+/* 이메일 */
+.lsa-join-infoBox-email{
+  margin: auto;
+  width: 486px;
+}
+.lsa-join-info-email{
+  width: 456px;
+  height: 70px;
+  border: 1px solid #DFDFDF;
+  padding-left: 30px;
+  border-radius: 50px;
+  margin-right: 10px;
+}
+.lsa-join-info-email-btn{
+  border: none;
+  height: 70px;
+  background-color:#D96073;
+  border-radius: 50px;
+  width: 100px;
+  color: white;
+  cursor: pointer;
+}
+.lsa-join-info-email-btn:hover{
+  color: #D96073;
+  border: 1px solid #D96073;
+  background-color: white;
+}
+.lsa-join-infoBox-email>p{
+  text-align: left;
+  font-size: 12px;
+  padding-left: 30px;
+  padding-top: 5px;
+  color: #22A309 ;
+}
+
+/* 회원가입버튼 */
+
+.lsa-join-infoBtn{
+  width: 486px;
+  height: 70px;
+  color: white;
+  background-color: #D96073;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+}
+.lsa-join-infoBtn:hover{
+  color: #D96073;
+  font-weight: bold;
+  border:1px solid #D96073;
+  background-color: white;
+}
