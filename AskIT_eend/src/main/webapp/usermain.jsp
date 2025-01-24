@@ -62,45 +62,25 @@
 					</section>
 
 					<!-- 메인 (랭킹 오른쪽에 위치) -->
-					<section class="main-best">
-						<hgroup class>
-							<h2>이달의 best 질문</h2>
-							<h2>이달의 best 꿀팁</h2>
-						</hgroup>
-						<div>
-							<div class="best-reword">
-								<!-- 해당 달의 BEST 질문 하나의 게시글 데베에서 받아와야함-->
-								<a href="#" class="best-que" aria-label="이달의 BEST 질문">
-									<div class="best-over">
-										<img class="best-img"
-											src=".${pageContext.request.contextPath }/assets/img/best-que.png"
-											alt="이달의 BEST 질문"> <span
-											class="best-img-text best-img-box"> java </span>
-									</div>
-									<section>
-										<div>
-											<h3>이달의 BEST 질문</h3>
-											<div>이달의 BEST 질문의내용내용내용</div>
-										</div>
-									</section>
-								</a>
-								<!-- 해당 달의 BEST 꿀팁 하나의 게시글 데베에서 받아와야함-->
-								<a href="#" class="best-tip" aria-label="이달의 BEST 꿀팁">
-									<section>
-										<img class="best-img"
-											src="${pageContext.request.contextPath }/assets/img/best-tip.png"
-											alt="이달의 BEST 질문">
-									</section>
-									<section>
-										<div>
-											<h3>이달의 BEST 꿀팁</h3>
-											<div>이달의 BEST 꿀팁의내용내용내용</div>
-										</div>
-									</section>
-								</a>
-							</div>
-						</div>
-					</section>
+					 <section class="bestQ">
+            <h3>이달의 Best 질문</h3>
+            <a href="#">
+              <span>java</span>
+              <div><img src="./assets/img/best-que.png" alt=""></div>
+              <h4>게시물 제목</h4>
+              <p>이달의 베스트 질문 게시물 내용입니다 이달의 베스트 질문 게시물 내용입니다 이달의 베스트 질문 게시물 내용입니다 이달의 베스트 질문 게시물 내용입니다이달의 베스트 질문 게시물 내용입니다 </p>
+            </a>
+          </section>
+
+          <section class="bestT">
+            <h3>이달의 Best 질문</h3>
+            <a href="#">
+              <span>java</span>
+              <div><img src="./assets/img/best-tip.png" alt=""></div>
+              <h4>게시물 제목</h4>
+              <p>이달의 베스트 질문 게시물 내용입니다 이달의 베스트 질문 게시물 내용입니다 이달의 베스트 질문 게시물 내용입니다 이달의 베스트 질문 게시물 내용입니다 이달의 베스트 질문 게시물 내용입니다</p>
+            </a>
+          </section>
 		</main>
 
 		<!-- 메인 공지사항 -->

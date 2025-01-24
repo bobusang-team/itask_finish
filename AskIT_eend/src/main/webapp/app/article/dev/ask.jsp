@@ -69,7 +69,7 @@
 				                        ${dev.userNick}
 				                    </span>
 				                    <span class="bjs-ask-post-views">조회수 ${dev.articleView}</span>
-				                    <span class="bjs-ask-post-replies">답글 100+</span>
+				                    <span class="bjs-ask-post-replies">답글 0</span>
 				                    <span class="bjs-ask-post-monitor">
 				                        <img src="${pageContext.request.contextPath}/assets/img/monitor.png" alt="사진오류"> 
 				                        ${dev.articleMoniter}

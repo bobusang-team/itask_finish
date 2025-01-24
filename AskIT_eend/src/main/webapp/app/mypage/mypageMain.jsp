@@ -47,10 +47,10 @@
                System.out.println(session);
                System.out.println(userInfo);
              
-               boolean userCert = userInfo.isUserCert();
-               if (userCert == true) {
+               char userCert = userInfo.getUserCert();
+               if (userCert == 'T') {
                   out.println("멘토회원🏅");
-               } else if (userCert == false) {
+               } else if (userCert == 'F') {
                   out.println("일반회원");
                }
                
@@ -179,7 +179,7 @@
                <!-- 세션이 있으면 -->
                <%
                		/* 멘토회원이면 */
-               		if(userInfo.isUserCert() == true){
+               		if(userInfo.getUserCert() == 'T'){
                			String career = userInfo.getUserCareer();
                			/* ,단위로 라인을 바꿔가며 출력 */
                			career = career.replace(",", "<br>");
@@ -191,7 +191,7 @@
                			}
                			
                			
-               		}else if(userInfo.isUserCert() == false){
+               		}else if(userInfo.getUserCert() == 'F'){
                			out.println("현재 등록된 경력사항이 없습니다");
                		}
                %>
