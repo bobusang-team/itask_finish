@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dev">
+ 
+      <!-- 게시물 리스트  조회 -->
+   <select id = "selectAllAsk" resultType = "ArticleListDTO" parameterType="ArticleListDTO">
+	<!-- 댓글 포함하지않은 게시글 목록페이지 -->
+		SELECT 
+		A.ARTICLE_NUM, 
+		A.ARTICLE_TITLE, 
+		A.ARTICLE_TEXT, 
+		A.ARTICLE_DATE, 
+		A.ARTICLE_VIEW, 
+		A.ARTICLE_MONITER_NUM, 
+		A.ARTICLE_TOPCATE, 
+		A.ARTICLE_BOTCATE, 
+		A.ARTICLE_TAGNAME, 
+		U.USER_NICK,
+		CASE WHEN USER_CERT = 'T' THEN '🏅' END AS badge
+		FROM TBL_ARTICLE A
+		JOIN TBL_USER U ON A.USER_NUM = U.USER_NUM
+		WHERE ((A.ARTICLE_TOPCATE) = '개발'AND (A.ARTICLE_BOTCATE) = '질문')
+		ORDER BY A.ARTICLE_DATE DESC
+   </select>
+   
+         <!-- 게시물 리스트  조회 -->
+   <select id = "selectAllTip" resultType = "ArticleListDTO" parameterType="ArticleListDTO">
+	<!-- 댓글 포함하지않은 게시글 목록페이지 -->
+		
+		SELECT 
+		A.ARTICLE_NUM, 
+		A.ARTICLE_TITLE, 
+		A.ARTICLE_TEXT, 
+		A.ARTICLE_DATE, 
+		A.ARTICLE_VIEW, 
+		A.ARTICLE_MONITER_NUM, 
+		A.ARTICLE_TOPCATE, 
+		A.ARTICLE_BOTCATE, 
+		A.ARTICLE_TAGNAME, 
+		U.USER_NICK,
+		CASE WHEN USER_CERT = 'T' THEN '🏅' END AS badge
+		FROM TBL_ARTICLE A
+		JOIN TBL_USER U ON A.USER_NUM = U.USER_NUM
+		WHERE ((A.ARTICLE_TOPCATE) = '개발'AND (A.ARTICLE_BOTCATE) = '꿀팁')
+		ORDER BY A.ARTICLE_DATE DESC
+   </select>
+   
+      <!--게시물 상세페이지  조회-->
+   <select id = "selectOne" resultType = "ArticleListDTO" parameterType="int">
+		<!-- 댓글 포함하지않은 게시글 목록페이지 -->
+		SELECT 
+		A.ARTICLE_NUM, 
+		U.USER_NICK,
+		A.ARTICLE_TITLE, 
+		A.ARTICLE_TEXT, 
+		A.ARTICLE_DATE, 
+		A.ARTICLE_VIEW, 
+		A.ARTICLE_MONITER_NUM, 
+		A.ARTICLE_TOPCATE, 
+		A.ARTICLE_BOTCATE, 
+		A.ARTICLE_TAGNAME,
+		CASE WHEN USER_CERT = 'T' THEN '🏅' END AS badge
+		FROM TBL_ARTICLE A
+		JOIN TBL_USER U ON A.USER_NUM = U.USER_NUM
+		AND A.ARTICLE_NUM = #{articleNum}
+   </select>
+   
+   <!--   게시물 삭제 -->
+    <delete id ="delete" parameterType = "int">
+     DELETE 
+     FROM TBL_ARTICLE
+     WHERE article_num = #{articleNum}
+    </delete>
+  
+   <!--  게시물 수정 -->
+    <update id="update" parameterType = "ArticleDetailDTO">
+      UPDATE 
+      TBL_ARTICLE
+      SET
+	  article_title = #{articleTitle},	
+      ARTICLE_TEXT = #{articleText} 
+      WHERE article_num = #{articleNum} 
+    </update>
+   
+    <!-- 조회수 증가 -->
+   <update id="increaseView" parameterType = "int">
+    UPDATE tbl_article 
+    SET  article_view = article_view + 1 
+    WHERE article_num = #{articleNum}
+   </update> 
+   
+   
+    <select id="comment" parameterType="int" resultType="CommentDTO">
+	SELECT 
+    C.COMMENT_NUM,                     
+    C.USER_NUM,                    
+    U.USER_NAME,                     
+    U.USER_NICK,                   
+    C.COMMENT_TEXT,                 
+    C.COMMENT_MONITOR_NUM,         
+    C.COMMENT_DATE,             
+    U.USER_MONITER AS USER_MONITER,
+    U.user_nick 
+	FROM 
+	    TBL_COMMENT C
+	JOIN 
+	    TBL_USER U ON C.USER_NUM = U.USER_NUM  
+	WHERE 
+	    C.ARTICLE_NUM = #{articleNum}                  
+	ORDER BY 
+	    C.COMMENT_DATE DESC       
+
+    </select> 
+	
+    
+	<insert id="commmentUpdate" parameterType="CommentDTO">
+        INSERT INTO TBL_comment (comment_num, comment_text, user_num, comment_date)
+        VALUES (#{commentNum}, #{commentText}, #{userNum}, #{commentDate})
+    </insert>
+	
+</mapper>
+   
+
+   
+
+
+   
+ 
+
+
+   
+   
+
