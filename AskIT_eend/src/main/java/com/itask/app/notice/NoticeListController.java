@@ -22,7 +22,7 @@ public class NoticeListController implements Execute{
 		String noticeNumStr = request.getParameter("noticeNum");
 		if(noticeNumStr == null || noticeNumStr.trim().isEmpty()) {
 			System.out.println("noticeNum 값이 없습니다");
-			result.setPath("/notice/notice.jsp"); //게시글 목록 페이지로 리다이렉트
+			result.setPath("/app/notice/notice.jsp"); //게시글 목록 페이지로 리다이렉트
 			result.setRedirect(true);
 			return result;
 		}

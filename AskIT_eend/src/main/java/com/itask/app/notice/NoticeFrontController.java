@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.itask.app.Result;
 
 public class NoticeFrontController extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 	
 	public NoticeFrontController() {
@@ -38,13 +39,13 @@ public class NoticeFrontController extends HttpServlet {
 	    Result result = new Result();
 	    
 	    switch (target) {
-	    case "/notice/notice.no":
+	    case "/app/notice/notice.no":
 	         System.out.println("공지사항 목록보기");
 	         result = new NoticeListController().execute(request, response);
 	         System.out.println(result);
 	         System.out.println(result.getPath() + "==========");
 	         break;
-	      case "/notice/noticeDetail.no":
+	      case "/app/notice/noticeDetail.no":
 	         System.out.println("공지사항 글상세보기");
 	         result = new NoticeDetailController().execute(request, response);
 	         System.out.println(result);
