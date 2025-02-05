@@ -19,7 +19,7 @@
           </button>
         </div>
         <!-- 검색상자 -->
-        <a href="#" class="write-box">
+        <a href="${pageContext.request.contextPath }/write/write.wr" class="write-box">
           <img src="${pageContext.request.contextPath}/assets/img/File Plus 02.png" alt="fileplus2" class="icon"> 글쓰기
         </a>
       </div>
@@ -28,19 +28,18 @@
         <ul class="head-container">
           <li class="head-item">
             <!-- 내정보 모니터 -->
-            
             <%@ page session="true" %>
 			<%
 			    UserDTO userInfo = (UserDTO)session.getAttribute("userDTO");
 				System.out.println(userInfo);
 				String userNick = "";
-				int userMoniter = 0;
+				int userMonitor = 0;
 			
 			    if (userInfo != null) {
 			        userNick = userInfo.getUserNick();
-			        userMoniter = userInfo.getUserMonitor();
+			        userMonitor = userInfo.getUserMonitor();
 			        
-			      	System.out.println(userMoniter);
+			      	System.out.println(userMonitor);
 			    }else{
 			%>
 			
@@ -51,24 +50,24 @@
 			    }
 			%>
             
-            <a href="#" class="head-link">
+            <a href="${pageContext.request.contextPath}/mypage/mypageMainOk.my" class="head-link">
               <span id="user-name">
 				<%= userNick %>님
               </span>
               <div class="monitor-box">
                 <div class="monitor-level" id="monitor-levelup">
-                <%= userMoniter/100 %> inch
+                <%= userMonitor/100 %> inch
                 </div>
                 <img src="${pageContext.request.contextPath}/assets/img/monitor.png" alt="monitor" class="monitor-icon">
                 <span id="monitor-level">
-				<%= userMoniter %> m
+				<%= userMonitor%100 %> m
                 </span>
               </div>
             </a>
           </li>
           <li class="head-item">
             <!-- 유저 아이콘 -->
-            <a href="#" class="head-link">
+            <a href="${pageContext.request.contextPath}/mypage/mypageMainOk.my" class="head-link">
               <div class="user-png">
                 <img src="${pageContext.request.contextPath}/assets/img/user.png" alt="user" class="user-icon">
               </div>
@@ -92,33 +91,34 @@
     <div class="navbar-container">
       <ul class="navbar-nav">
         <li class="nav-item dropdown">
-          <a href="#" class="nav-link">ITASK란?</a>
+          <a href="${pageContext.request.contextPath}/app/introduce/itask.jsp" class="nav-link">ITASK란?</a>
           <ul class="dropdown-menu">
-            <li><a href="#" class="dropdown-link">소개글</a></li>
-            <li><a href="#" class="dropdown-link">명예의 전당</a></li>
+            <li><a href="${pageContext.request.contextPath}/app/intro/itask.jsp" class="dropdown-link">소개글</a></li>
+            <li><a href="${pageContext.request.contextPath}/app/intro/contents.jsp" class="dropdown-link">명예의 전당</a></li>
           </ul>
         </li>
         <li class="nav-item"><a href="${pageContext.request.contextPath}/app/notice/notice.no"
          class="nav-link">공지사항</a></li>
         <li class="nav-item dropdown">
-          <a href="#" class="nav-link">개발</a>
+          <a href="${pageContext.request.contextPath}/dev/listAsk.dev" class="nav-link">개발</a>
           <ul class="dropdown-menu">
-            <li><a href="#" class="dropdown-link">질문</a></li>
-            <li><a href="#" class="dropdown-link">꿀팁</a></li>
+            <li><a href="${pageContext.request.contextPath}/dev/listAsk.dev" class="dropdown-link">질문</a></li>
+            <li><a href="${pageContext.request.contextPath}/dev/listTip.dev" class="dropdown-link">꿀팁</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <a href="#" class="nav-link">보안</a>
+          <a href="${pageContext.request.contextPath}/app/article/sec/ask.jsp" class="nav-link">보안</a>
           <ul class="dropdown-menu">
-            <li><a href="#" class="dropdown-link">질문</a></li>
-            <li><a href="#" class="dropdown-link">꿀팁</a></li>
+            <li><a href="${pageContext.request.contextPath}/app/article/sec/ask.jsp" class="dropdown-link">질문</a></li>
+            <li><a href="${pageContext.request.contextPath}/app/article/sec/tip.jsp" class="dropdown-link">꿀팁</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
           <a href="${pageContext.request.contextPath}/app/article/qual/guide/infoPro.jsp" class="nav-link">자격증</a>
           <ul class="dropdown-menu">
-            <li><a href="#" class="dropdown-link">시험안내</a></li>
-            <li><a href="#" class="dropdown-link">질문</a></li>
+            <li><a href="${pageContext.request.contextPath}/app/article/qual/guide/infoPro.jsp" class="dropdown-link">시험안내</a></li>
+            <li><a href="${pageContext.request.contextPath}/app/article/qual/ask.jsp" class="dropdown-link">질문</a></li>
+            <li><a href="${pageContext.request.contextPath}/app/article/qual/tip.jsp" class="dropdown-link">꿀팁</a></li>
           </ul>
         </li>
       </ul>
