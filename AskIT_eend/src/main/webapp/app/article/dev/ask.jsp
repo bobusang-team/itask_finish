@@ -36,7 +36,7 @@
 		      <!-- 자격증 태그 버튼 --> <!-- 나중에 더 추가될 수 있으니 ul > li로 바꾸는 것은 어떤지 초현님과 상의 필요-->
 		      <div class="bjs-ask-tag"> 
 		        <button class="bjs-ask-tag-btn bjs-ask-select">전체</button>
-		        <button class="bjs-ask-tag-btn">JAVA</button>
+		        <button class="bjs-ask-tag-btn"><a href="${pageContext.request.contextPath}/dev/listAskJava.dev" class="nav-link">JAVA</a></button>
 		        <button class="bjs-ask-tag-btn">HTML</button>
 		        <button class="bjs-ask-tag-btn">CSS</button>
 		        <button class="bjs-ask-tag-btn">JAVASCRIPT</button>
@@ -68,7 +68,7 @@
 				                        ${dev.badge} 
 				                        ${dev.userNick}
 				                    </span>
-				                    <span class="bjs-ask-post-views">조회수 ${dev.articleView}</span>
+				                    <span class="bjs-ask-post-views">조회수 ${dev.getArticleView()}</span>
 				                    <span class="bjs-ask-post-replies">답글 0</span>
 				                    <span class="bjs-ask-post-monitor">
 				                        <img src="${pageContext.request.contextPath}/assets/img/monitor.png" alt="사진오류"> 
@@ -83,14 +83,51 @@
 				    </section>
 				</c:forEach>
 				<div class="pagination">
-		        <a href="#">«</a>
-		        <a href="#">‹</a>
-		        <a href="#">1</a>
-		        <a href="#">2</a>
-		        <a href="#">3</a>
-		        <a href="#">›</a>
-		        <a href="#">»</a>
-		    	</div>
+         <ul>
+            <!-- ========== 페이징 처리 예시 ============ -->
+            <!--             <li><a href="#" class="prev">&lt;</a></li>
+            <li><a href="#" class="active">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#" class="next">&gt;</a></li> -->
+            <c:if test="${prev}">
+               <li><a
+                  href="${pageContext.request.contextPath}/dev/listAsk.dev?page=${startPage - 1}"
+                  class="prev">&lt;</a></li>
+            </c:if>
+            <c:set var="realStartPage" value="${startPage < 0 ? 0:startPage }" />
+            <c:forEach var="i" begin="${realStartPage}" end="${endPage}">
+               <c:choose>
+                  <c:when test="${!(i == page)}">
+                     <li><a
+                        href="${pageContext.request.contextPath}/dev/listAsk.dev?page=${i}">
+                           <c:out value="${i}" />
+                     </a></li>
+                  </c:when>
+                  <c:otherwise>
+                     <li><a href="#" class="active"> <c:out value="${i}" />
+                     </a></li>
+                  </c:otherwise>
+               </c:choose>
+
+            </c:forEach>
+            <c:if test="${next}">
+               <li><a
+                  href="${pageContext.request.contextPath}/dev/listAsk.dev?page=${endPage + 1}"
+                  class="next">&gt;</a></li>
+            </c:if>
+            <!-- ========== /페이징 처리 예시 ============ -->
+         </ul>
+
+
+      </div>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      
+      <script>
+      let userNum = "${sessionScope.userNum}";
+   	  </script>
 		    	<script>
 		    	 function setCategory(category) {
 		    	        document.getElementById('noticeCategory').value = category;

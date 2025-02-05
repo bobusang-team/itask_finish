@@ -3,24 +3,31 @@
 <mapper namespace="dev">
  
       <!-- 게시물 리스트  조회 -->
-   <select id = "selectAllAsk" resultType = "ArticleListDTO" parameterType="ArticleListDTO">
+   <select id = "selectAllAsk" resultType = "ArticleListDTO">
 	<!-- 댓글 포함하지않은 게시글 목록페이지 -->
+<![CDATA[
+SELECT * FROM (
+     SELECT ROWNUM AS rnum, subquery.*
+     FROM (
 		SELECT 
-		A.ARTICLE_NUM, 
-		A.ARTICLE_TITLE, 
-		A.ARTICLE_TEXT, 
-		A.ARTICLE_DATE, 
-		A.ARTICLE_VIEW, 
-		A.ARTICLE_MONITER_NUM, 
-		A.ARTICLE_TOPCATE, 
-		A.ARTICLE_BOTCATE, 
-		A.ARTICLE_TAGNAME, 
-		U.USER_NICK,
-		CASE WHEN USER_CERT = 'T' THEN '🏅' END AS badge
+			A.ARTICLE_NUM, 
+			A.ARTICLE_TITLE, 
+			A.ARTICLE_TEXT, 
+			A.ARTICLE_DATE, 
+			A.ARTICLE_VIEW, 
+			A.ARTICLE_MONITER_NUM, 
+			A.ARTICLE_TOPCATE, 
+			A.ARTICLE_BOTCATE, 
+			A.ARTICLE_TAGNAME, 
+			U.USER_NICK,
+			CASE WHEN USER_CERT = 'T' THEN '🏅' END AS badge
 		FROM TBL_ARTICLE A
 		JOIN TBL_USER U ON A.USER_NUM = U.USER_NUM
-		WHERE ((A.ARTICLE_TOPCATE) = '개발'AND (A.ARTICLE_BOTCATE) = '질문')
+		WHERE ((A.ARTICLE_TOPCATE) = '개발' AND (A.ARTICLE_BOTCATE) = '질문')
 		ORDER BY A.ARTICLE_DATE DESC
+	) subquery
+   ) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+    ]]>
    </select>
    
          <!-- 게시물 리스트  조회 -->
@@ -41,7 +48,7 @@
 		CASE WHEN USER_CERT = 'T' THEN '🏅' END AS badge
 		FROM TBL_ARTICLE A
 		JOIN TBL_USER U ON A.USER_NUM = U.USER_NUM
-		WHERE ((A.ARTICLE_TOPCATE) = '개발'AND (A.ARTICLE_BOTCATE) = '꿀팁')
+		WHERE ((A.ARTICLE_TOPCATE) = '개발' AND (A.ARTICLE_BOTCATE) = '꿀팁')
 		ORDER BY A.ARTICLE_DATE DESC
    </select>
    
@@ -64,6 +71,22 @@
 		JOIN TBL_USER U ON A.USER_NUM = U.USER_NUM
 		AND A.ARTICLE_NUM = #{articleNum}
    </select>
+   
+   <!-- BoardMapper.xml에 total을 가져오기 위한 쿼리 작성 -->
+   <!-- 개발 질문 게시글 총 개수 -->
+   <select id="getTotalDevAsk" resultType="int">
+        SELECT COUNT(ARTICLE_NUM) 
+        FROM TBL_ARTICLE
+        WHERE ((ARTICLE_TOPCATE) = '개발' AND (ARTICLE_BOTCATE) = '질문')
+   </select>
+   
+   <!-- 개발 질문 게시글 총 개수 -->
+   <select id="getTotalDevAskJava" resultType="int">
+        SELECT COUNT(ARTICLE_NUM) 
+        FROM TBL_ARTICLE
+        WHERE ((ARTICLE_TOPCATE) = '개발' AND (ARTICLE_BOTCATE) = '질문' AND (ARTICLE_TAGNAME) = 'JAVA')
+   </select>
+   
    
    <!--   게시물 삭제 -->
     <delete id ="delete" parameterType = "int">

@@ -54,6 +54,11 @@ public class DevFrontController extends HttpServlet {
                 System.out.println("질문게시물 목록 실행!");
                 result = new DevListAskController().execute(request, response);
                 break;
+            
+            case"/dev/listAskJava.dev":
+            	System.out.println("질문게시물 java카테고리 목록 실행");
+            	result = new DevListAskJavaController().execute(request, response);
+                break;
                 
             case "/dev/listTip.dev": // 개발 질문게시물 목록 조회
                 System.out.println("꿀팁게시물 목록 실행!");
