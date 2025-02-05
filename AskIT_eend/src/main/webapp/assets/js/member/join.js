@@ -28,8 +28,6 @@ document.addEventListener("DOMContentLoaded", function() {
 	const pwRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,20}$/;
 	// 닉네임 유효성 검사
 	const nickRegex = /^[가-힣a-zA-Z0-9]{2,10}$/;
-	// 인증번호 고정값
-	const checkNum = "0316";
 	// 핸드폰 번호 유효성 검사
 	const phoneRegex = /^010\d{8}$/;
 	
@@ -98,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 	
 	//인증번호 받기 버튼 
-	phoneCheckBtn.addEventListener("click", function(){
+	phoneCheckBtn.addEventListener("click", function(event){
 		event.preventDefault(); // 폼 제출 방지
 		const phone = phoneInput.value;
 		phoneCheckFlag = false;
@@ -107,6 +105,31 @@ document.addEventListener("DOMContentLoaded", function() {
 			phoneCheckFlag = true;
 			phoneCheckResult1.textContent = "인증번호가 전송되었습니다.";
 			phoneCheckResult1.style.color = "#22A309";
+			
+			/*인증번호 보내는 fetch 시작 */
+			const phoneNumber = phoneInput.value.trim();
+		        if (phoneNumber === "") {
+		            alert("핸드폰 번호를 입력해주세요.");
+		            return;
+		        }
+
+		        fetch("sendSMS.me", {
+		            method: "POST",
+		            headers: { "Content-Type": "application/json" },
+		            body: JSON.stringify({ phoneNumber: phoneNumber })
+		        })
+		         .then(response => {
+		                 if (!response.ok) throw new Error(`HTTP 오류! 상태 코드: ${response.status}`);
+		             })
+		         .then(() => {
+		            console.log("발송 성공");
+		         })
+	            .catch(error => {
+	                console.error("SMS 발송 오류:", error);
+	                alert("인증번호 발송 중 오류가 발생했습니다.");
+	            });
+			/*인증번호 보내는 fetch 끝 */
+			
 		}else if(phone === ""){
 			phoneCheckResult1.textContent = "핸드폰 번호를 입력해주세요 (-없이 입력)";
 			phoneCheckResult1.style.color = "red";
@@ -118,28 +141,41 @@ document.addEventListener("DOMContentLoaded", function() {
 	});
 	
 	// 인증번호 확인
-	checkCheckBtn.addEventListener("click", function(){
+    checkCheckBtn.addEventListener("click", function(event) {
 		event.preventDefault(); // 폼 제출 방지
-		const check = checkInput.value;
 		checkFlag = false;
-		if(phoneCheckFlag){
-			if(check===checkNum){
-				checkCheckResult1.textContent = "인증번호가 일치합니다";
-				checkCheckResult1.style.color = "#22A309";
-				checkFlag = true;
-			}else if(check===""){
-				checkCheckResult1.textContent = "인증번호를 입력해주세요";
-				checkCheckResult1.style.color = "red";
-			}else{
-				checkCheckResult1.textContent = "인증번호가 일치하지 않습니다";
-				checkCheckResult1.style.color = "red";
-				checkFlag = false;
-			}
-		}else{
-			checkCheckResult1.textContent = "인증번호를 먼저 받아주세요";
-			checkCheckResult1.style.color = "red";
-		}
-	});
+        const verificationCode = checkInput.value.trim();
+        if (verificationCode === "") {
+            checkCheckResult1.textContent = "인증번호를 입력해주세요."; 
+            checkCheckResult1.style.color = "red";
+            return;
+        }
+
+        fetch("verifyCode.me", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ code: verificationCode })
+        })
+            .then(response => {
+                if (!response.ok) throw new Error(`HTTP 오류! 상태 코드: ${response.status}`);
+                return response.json();
+            })
+            .then(data => {
+            console.log(data);
+                if (data.success) {
+                    checkCheckResult1.textContent = "인증에 성공했습니다.";
+                    checkCheckResult1.style.color = "green";
+                } else {
+                    checkCheckResult1.textContent = "인증번호가 일치하지 않습니다.";
+                    checkCheckResult1.style.color = "red";
+                }
+            })
+            .catch(error => {
+                console.error("인증 확인 오류:", error);
+                checkCheckResult1.textContent = "인증 처리 중 오류가 발생했습니다.";
+                checkCheckResult1.style.color = "red";
+            });
+    });
 	
 	// 아이디 유효성 검사
 	idInput.addEventListener("blur", function(){
@@ -247,6 +283,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		}
 	});
 	
+	
 
 });
 
@@ -280,6 +317,5 @@ mark2.addEventListener("click", () => {
   }
   pwStatus2 = !pwStatus2; // 상태 변경
 });
-
 
 

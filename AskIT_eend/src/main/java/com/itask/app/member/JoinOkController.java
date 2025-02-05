@@ -20,36 +20,45 @@ public class JoinOkController implements Execute{
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
 		
+		HttpSession session = request.getSession();
+		
 		UserDAO userDAO = new UserDAO();
 		UserDTO userDTO = new UserDTO();
 		Result result = new Result();
 		
 		System.out.println(userDTO);
 //		userMoniter
+		userDTO.setUserMonitor(0);
 		String userId = request.getParameter("userId");
-        String userPw = request.getParameter("userPw");
-        String userName = request.getParameter("userName");
-        String userNick = request.getParameter("userNick");
-        String userPhone = request.getParameter("userPhone");
-        String userMail = request.getParameter("userMail");
-        String userCareer = request.getParameter("userCareer");
+		
+		String userNick = request.getParameter("userNick");
+		String userMail = request.getParameter("userMail");
+		
+		String agreeOp = (String) session.getAttribute("agreeOption");
+		
+		if(agreeOp == null) {
+			System.out.println("선택약관 동의 세션 받아오지 못함");
+		}else if(agreeOp.equals("true")) {
+			System.out.println("선택약관 동의");
+			userDTO.setUserAgree('T');
+		}else {
+			System.out.println("선택약관 미동의");
+			userDTO.setUserAgree('F');
+		}
 		
 		userDTO.setUserId(userId);
-        userDTO.setUserPw(userPw);
-        userDTO.setUserName(userName);
-        userDTO.setUserNick(userNick);
-        userDTO.setUserPhone(userPhone);
-        userDTO.setUserMail(userMail != null ? userMail : ""); // null일 경우 빈 문자열로 처리
-        userDTO.setUserMoniter("0"); // 고정 값
-        userDTO.setUserAgree("F"); // 고정 값
-        userDTO.setUserCert('F'); // 고정 값
-        userDTO.setUserCareer(userCareer != null ? userCareer : ""); // null일 경우 빈 문자열로 처리
+		userDTO.setUserPw(request.getParameter("userPw"));
+		userDTO.setUserName(request.getParameter("userName"));
+		userDTO.setUserNick(userNick);
+		userDTO.setUserPhone(request.getParameter("userPhone"));
+		userDTO.setUserMail(userMail);
 		
 		
 		userDAO.join(userDTO);
 		
-		HttpSession session = request.getSession();
+		
 		session.setAttribute("userDTO", userDTO);
+		
 		
 		result.setRedirect(true);
 		result.setPath(request.getContextPath()+"/app/member/joinfinish.jsp");
