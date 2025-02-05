@@ -19,49 +19,59 @@ public class mypageMainOkController implements Execute{
 	public Result execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		
+		
+		
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		
 		Result result = new Result();
 		MypageDAO mypageDAO = new MypageDAO();
-		
-		// 원하는 값을 저장할 DTO를 생성해야함
 		MypageMainDTO mypageMainDTO = new MypageMainDTO();
 		
 		// 해당 사용자의 세션을 통해 정보 받아오기
 		HttpSession session = request.getSession();
-		
-		Integer userNum = (Integer)request.getSession().getAttribute("userNum");
-		
-//		Integer userNum2 = (Integer)request.getSession().getAttribute("userDTO",getUserNum);
-		
-		
-		System.out.println(userNum);
 		UserDTO thisUser = (UserDTO) session.getAttribute("userDTO");
+		String path = null;
 		
-		System.out.println(thisUser); // 확인용
+		System.out.println("========해당 유저 DTO : " + thisUser); // 확인용
 		
-		// 사용자의 아이디
-		String userId = thisUser.getUserId();
-		System.out.println("userId확인용================" + userId);
+		// 로그인 상태가 아니라면
+		if(thisUser == null) {
+			path = "/app/member/login.jsp";
+			result.setPath(path);
+			result.setRedirect(true);
+		} else {
+			path = "/app/mypage/mypageMain.jsp";
+			
+			// 사용자의 아이디
+			String userId = thisUser.getUserId();
+			System.out.println("================userId확인용" + userId);
+			
+			//쿼리 실행
+			mypageMainDTO = mypageDAO.mainPage(userId);
+			System.out.println(mypageMainDTO); // 확인용
+			
+			request.setAttribute("MypageMainDTO", mypageMainDTO);
+			result.setPath(path);
+			result.setRedirect(false);
+		}
+
+
+		
+
 		
 		
-		//쿼리 실행
-		mypageMainDTO = mypageDAO.mainPage(userId);
-		System.out.println(mypageMainDTO); // 확인용
-		
-		//사용자의 세션에 저장
-		session.setAttribute("MypageMainDTO", mypageMainDTO);
 		
 		//생성된다면
-		if(mypageMainDTO != null) {
-			result.setPath("/app/mypage/mypageMain.jsp");
-			result.setRedirect(false);
-		}else {
-			//실패시 메인화면으로
-			result.setPath("/usermain.jsp");
-			result.setRedirect(true);
-		}
+//		if(mypageMainDTO != null) {
+//			result.setPath("/app/mypage/mypageMain.jsp");
+//			result.setRedirect(false);
+//		}else {
+//			//실패시 메인화면으로
+//			result.setPath("/usermain.jsp");
+//			result.setRedirect(true);
+//		}
 		
 		return result;
 	}
