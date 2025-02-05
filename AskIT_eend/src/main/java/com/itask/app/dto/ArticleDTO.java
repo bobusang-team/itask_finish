@@ -9,45 +9,35 @@ public class ArticleDTO {
 //		    ARTICLE_TAGNAME VARCHAR2(100) CHECK (UPPER(ARTICLE_TAGNAME) IN ('JAVA', 'HTML', 'CSS', 'JAVASCRIPT', 'ORACLE', 
 //		        'NETWORK', 'WEB', 'MOBILE', '포렌식', '악성코드', 
 //		        '정보보안', '정보처리', '네트워크관리사', '리눅스마스터', 'SQLD')),
-//		    ARTICLE_TITLE VARCHAR2(100) NOT NULL,
+//		    ARTICLE_TITLE VARCHAR2(1000) NOT NULL,
 //		    ARTICLE_TEXT VARCHAR2(3000) NOT NULL,
 //		    ARTICLE_DATE DATE NOT NULL,
 //		    ARTICLE_MODIFY_DATE DATE NULL,
 //		    ARTICLE_VIEW NUMBER DEFAULT 0 NOT NULL,
-//		    ARTICLE_MONITER_NUM NUMBER DEFAULT 0 NOT NULL,
+//		    ARTICLE_MONITOR_NUM NUMBER DEFAULT 0 NOT NULL,
 //		    CONSTRAINT TBL_ARTICLE_PK PRIMARY KEY (ARTICLE_NUM),
 //		    CONSTRAINT TBL_USER_FK FOREIGN KEY (USER_NUM) REFERENCES TBL_USER (USER_NUM) ON DELETE CASCADE
 //		);
 	
-	private int userNum;
+	//필드
 	private int articleNum;
-	private String articleTopcate;
-	private String articleBotcate;
-	private String articleTagname;
+	private int userNum;
+	private String articleTopCate;
+	private String articleBotCate;
+	private String articleTagName;
 	private String articleTitle;
 	private String articleText;
-	private String articledate;
+	private String articleDate;
 	private String articleModifyDate;
-	private int articleView;
-	private int articleMoniter;
-	private String userNick; //관리자페이지에서 필요한 DTO
-	private String grade;
-	private String userMoniter;
+	private int articleView = 0;
+	private int articleMonitorNum = 0;
 	
-	
-	
-	
-	public String getUserNick() {
-		return userNick;
+	//세터,게터
+	public int getArticleNum() {
+		return articleNum;
 	}
-	public void setUserNick(String userNick) {
-		this.userNick = userNick;
-	}
-	public String getGrade() {
-		return grade;
-	}
-	public void setGrade(String grade) {
-		this.grade = grade;
+	public void setArticleNum(int articleNum) {
+		this.articleNum = articleNum;
 	}
 	public int getUserNum() {
 		return userNum;
@@ -55,29 +45,23 @@ public class ArticleDTO {
 	public void setUserNum(int userNum) {
 		this.userNum = userNum;
 	}
-	public int getArticleNum() {
-		return articleNum;
+	public String getArticleTopCate() {
+		return articleTopCate;
 	}
-	public void setArticleNum(int articleNum) {
-		this.articleNum = articleNum;
+	public void setArticleTopCate(String articleTopCate) {
+		this.articleTopCate = articleTopCate;
 	}
-	public String getArticleTopcate() {
-		return articleTopcate;
+	public String getArticleBotCate() {
+		return articleBotCate;
 	}
-	public void setArticleTopcate(String articleTopcate) {
-		this.articleTopcate = articleTopcate;
+	public void setArticleBotCate(String articleBotCate) {
+		this.articleBotCate = articleBotCate;
 	}
-	public String getArticleBotcate() {
-		return articleBotcate;
+	public String getArticleTagName() {
+		return articleTagName;
 	}
-	public void setArticleBotcate(String articleBotcate) {
-		this.articleBotcate = articleBotcate;
-	}
-	public String getArticleTagname() {
-		return articleTagname;
-	}
-	public void setArticleTagname(String articleTagname) {
-		this.articleTagname = articleTagname;
+	public void setArticleTagName(String articleTagName) {
+		this.articleTagName = articleTagName;
 	}
 	public String getArticleTitle() {
 		return articleTitle;
@@ -91,11 +75,11 @@ public class ArticleDTO {
 	public void setArticleText(String articleText) {
 		this.articleText = articleText;
 	}
-	public String getArticledate() {
-		return articledate;
+	public String getArticleDate() {
+		return articleDate;
 	}
-	public void setArticledate(String articledate) {
-		this.articledate = articledate;
+	public void setArticleDate(String articleDate) {
+		this.articleDate = articleDate;
 	}
 	public String getArticleModifyDate() {
 		return articleModifyDate;
@@ -109,42 +93,22 @@ public class ArticleDTO {
 	public void setArticleView(int articleView) {
 		this.articleView = articleView;
 	}
-	public int getArticleMoniter() {
-		return articleMoniter;
+	public int getArticleMonitorNum() {
+		return articleMonitorNum;
 	}
-	public void setArticleMoniter(int articleMoniter) {
-		this.articleMoniter = articleMoniter;
+	public void setArticleMonitorNum(int articleMonitorNum) {
+		this.articleMonitorNum = articleMonitorNum;
 	}
-		
-	public String getUserMoniter() {
-		return userMoniter;
-	}
-	public void setUserMoniter(String userMoniter) {
-		this.userMoniter = userMoniter;
-	}
-	
-	public String getFormattedMoniter() {
-	    if (userMoniter == null || userMoniter.isEmpty()) {
-	        return "0inch 0m";
-	    }
-
-	    try {
-	        int monitorValue = Integer.parseInt(userMoniter); 
-	        int inch = monitorValue / 100; 
-	        return inch + "inch ";
-	    } catch (NumberFormatException e) {
-	        return "Invalid format";
-	    }
-	}
-
 	
 	@Override
 	public String toString() {
-		return "ArticleDTO [userNum=" + userNum + ", articleNum=" + articleNum + ", articleTopcate="
-				+ articleTopcate + ", articleBotcate=" + articleBotcate + ", articleTagname=" + articleTagname
-				+ ", articleTitle=" + articleTitle + ", articleText=" + articleText + ", articledate=" + articledate
-				+ ", articleModifyDate=" + articleModifyDate + ", articleView=" + articleView + ", articleMoniter="
-				+ articleMoniter + "]";
+		return "ArticleDTO [articleNum=" + articleNum + ", userNum=" + userNum + ", articleTopCate=" + articleTopCate
+				+ ", articleBotCate=" + articleBotCate + ", articleTagName=" + articleTagName + ", articleTitle="
+				+ articleTitle + ", articleText=" + articleText + ", articleDate=" + articleDate
+				+ ", articleModifyDate=" + articleModifyDate + ", articleView=" + articleView + ", articleMonitorNum="
+				+ articleMonitorNum + "]";
 	}
-
+	
+	
+	
 }

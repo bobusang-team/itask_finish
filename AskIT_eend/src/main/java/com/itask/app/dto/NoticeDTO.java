@@ -8,41 +8,33 @@ public class NoticeDTO {
 //			NOTICE_TITLE VARCHAR2(100) NOT NULL,
 //			NOTICE_TEXT VARCHAR2(3000) NOT NULL,
 //			NOTICE_VIEW NUMBER DEFAULT 0 NOT NULL,
+//			NOTICE_DATE DATE NOT NULL,
+//			NOTICE_MODIFY_DATE DATE,
 //			CONSTRAINT TBL_NOTICE_PK PRIMARY KEY (NOTICE_NUM),
 //			CONSTRAINT TBL_ADMIN_FK FOREIGN KEY (ADMIN_NUM) REFERENCES TBL_ADMIN(ADMIN_NUM) ON DELETE CASCADE
 //			);
 	
+	//필드
 	private int noticeNum;
 	private int adminNum;
 	private String noticeCategory;
 	private String noticeTitle;
 	private String noticeText;
-	private int noticeView;
+	private int noticeView = 0;
 	private String noticeDate;
 	private String noticeModifyDate;
 	
-	public String getNoticeDate() {
-		return noticeDate;
-	}
-	public void setNoticeDate(String noticeDate) {
-		this.noticeDate = noticeDate;
-	}
-	public String getNoticeModifyDate() {
-		return noticeModifyDate;
-	}
-	public void setNoticeModifyDate(String noticeModifyDate) {
-		this.noticeModifyDate = noticeModifyDate;
-	}
+	//세터, 게터
 	public int getNoticeNum() {
 		return noticeNum;
 	}
 	public void setNoticeNum(int noticeNum) {
 		this.noticeNum = noticeNum;
 	}
-	public int getAdminNUm() {
+	public int getAdminNum() {
 		return adminNum;
 	}
-	public void setAdminNUm(int adminNum) {
+	public void setAdminNum(int adminNum) {
 		this.adminNum = adminNum;
 	}
 	public String getNoticeCategory() {
@@ -69,14 +61,25 @@ public class NoticeDTO {
 	public void setNoticeView(int noticeView) {
 		this.noticeView = noticeView;
 	}
-	
+	public String getNoticeDate() {
+		return noticeDate;
+	}
+	public void setNoticeDate(String noticeDate) {
+		this.noticeDate = noticeDate;
+	}
+	public String getNoticeModifyDate() {
+		return noticeModifyDate;
+	}
+	public void setNoticeModifyDate(String noticeModifyDate) {
+		this.noticeModifyDate = noticeModifyDate;
+	}
 	
 	@Override
 	public String toString() {
-		return "NoticeDTO [noticeNum=" + noticeNum + ", adminNUm=" + adminNum + ", noticeCategory=" + noticeCategory
-				+ ", noticeTitle=" + noticeTitle + ", noticeText=" + noticeText + ", noticeView=" + noticeView + "]";
+		return "NoticeDTO [noticeNum=" + noticeNum + ", adminNum=" + adminNum + ", noticeCategory=" + noticeCategory
+				+ ", noticeTitle=" + noticeTitle + ", noticeText=" + noticeText + ", noticeView=" + noticeView
+				+ ", noticeDate=" + noticeDate + ", noticeModifyDate=" + noticeModifyDate + "]";
 	}
-	
 	
 	
 }
