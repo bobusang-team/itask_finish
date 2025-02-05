@@ -64,14 +64,14 @@ public class mypageMainOkController implements Execute{
 		
 		
 		//생성된다면
-		if(mypageMainDTO != null) {
-			result.setPath("/app/mypage/mypageMain.jsp");
-			result.setRedirect(false);
-		}else {
-			//실패시 메인화면으로
-			result.setPath("/usermain.jsp");
-			result.setRedirect(true);
-		}
+//		if(mypageMainDTO != null) {
+//			result.setPath("/app/mypage/mypageMain.jsp");
+//			result.setRedirect(false);
+//		}else {
+//			//실패시 메인화면으로
+//			result.setPath("/usermain.jsp");
+//			result.setRedirect(true);
+//		}
 		
 		return result;
 	}

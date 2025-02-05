@@ -21,8 +21,8 @@
       <typeAlias type="com.itask.app.dto.AttachedFileDTO" alias="AttachFileDTO"></typeAlias>
       <typeAlias type="com.itask.app.dto.CommentDTO" alias="CommentDTO"></typeAlias>
       <typeAlias type="com.itask.app.dto.AdminDTO" alias="AdminDTO"></typeAlias>   
-   	  <typeAlias type="com.itask.app.dto.MypageMainDTO" alias="MypageMainDTO"></typeAlias>
-   	  <typeAlias type="com.itask.app.dto.NoticeDTO" alias="NoticeDTO"></typeAlias>
+        <typeAlias type="com.itask.app.dto.MypageMainDTO" alias="MypageMainDTO"></typeAlias>
+        <typeAlias type="com.itask.app.dto.NoticeDTO" alias="NoticeDTO"></typeAlias>
    </typeAliases>
 
    <environments default="oracle">
@@ -40,7 +40,7 @@
    <mappers>
       <mapper resource="com/mybatis/mapper/UserMapper.xml" />
      <mapper resource="com/mybatis/mapper/MypageMapper.xml" />
-	 <mapper resource="com/mybatis/mapper/DevMapper.xml" />
+    <mapper resource="com/mybatis/mapper/DevMapper.xml" />
       <mapper resource="com/mybatis/mapper/IntroMapper.xml" /> 
        <mapper resource="com/mybatis/mapper/QualMapper.xml" />
       <mapper resource="com/mybatis/mapper/SecMapper.xml" />
