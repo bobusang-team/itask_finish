@@ -2,5 +2,72 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="notice">
 
+<!-- 전체 게시글 조회 -->
+   <select id="selectAll" resultType="NoticeDTO">
+    SELECT * FROM (
+        SELECT ROWNUM AS rnum, subquery.*
+        FROM (
+            SELECT 
+                a.admin_num,
+                n.notice_num,
+                n.notice_title,
+                n.notice_date,
+                n.notice_view
+            FROM tbl_admin a
+            JOIN tbl_notice n ON a.admin_num = n.admin_num
+            ORDER BY n.notice_date DESC
+        ) subquery
+    ) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+</select>
+
+   <!-- 게시글 총 개수 -->
+   <select id="getTotal" resultType="int">
+        SELECT COUNT(notice_num) 
+        FROM tbl_notice
+   </select>
+   
+   <!-- 공지사항 글 한개씩 불러오는 쿼리 -->
+      <select id="select" parameterType="int"
+      resultType="NoticeDTO">
+      select
+      a.admin_num, a.admin_id, n.notice_num,
+      n.notice_title ,
+      n.notice_content , n.notice_date , n.notice_view
+      from tbl_admin a
+      join tbl_notice n
+      on notice_num = #{noticeNum} and
+      a.admin_num =
+      n.admin_num
+   </select>
+   
+     <select id="selectOne" parameterType="int"
+      resultType="NoticeDTO">
+      SELECT
+      n.notice_num,
+      n.notice_title,
+      n.notice_content,
+      n.notice_date,
+      n.notice_view,
+      a.admin_num,
+      a.admin_id
+      FROM
+      tbl_notice n
+      JOIN
+      tbl_admin a
+      ON
+      n.admin_num = a.admin_num
+      WHERE
+      n.notice_num = #{noticeNum}
+   </select>
+   
+      <!-- 조회수 쿼리 -->
+   <update id="updateReadCount" parameterType="int">
+      update tbl_notice
+      set
+      notice_view = notice_view + 1
+      where notice_num =
+      #{noticeNum}
+   </update>
+
 
 </mapper>
