@@ -11,9 +11,17 @@
    href="${pageContext.request.contextPath}/assets/css/notice/notice.css">
    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/header.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/footer.css">
+    		<%@ page import="com.itask.app.dto.UserDTO" %>
 </head>
 <body>
-   <jsp:include page="../basic/userheader.jsp" />
+   <% UserDTO userInfo = (UserDTO)session.getAttribute("userDTO"); %>
+		<% if(userInfo != null){ %>
+		  <jsp:include page="./../basic/userheader.jsp"/>
+		  
+		<% }else{ %>
+		<jsp:include page="./../basic/header.jsp"/>
+		  
+		  <%} %>
    <div class="mjh-notice-main">
       <h2 class="mjh-notice-title">공지사항</h2>
       <div class="mjh-notice-articel-list">
