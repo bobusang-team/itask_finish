@@ -49,7 +49,7 @@
 							class="dropdown-link">명예의 전당</a></li>
 					</ul></li>
 				<li class="nav-item"><a
-					href="${pageContext.request.contextPath}/app/notice/notice.jsp"
+					href="${pageContext.request.contextPath}/app/notice/notice.no"
 					class="nav-link">공지사항</a></li>
 				<li class="nav-item dropdown"><a
 					href="${pageContext.request.contextPath}/dev/listAsk.dev"
