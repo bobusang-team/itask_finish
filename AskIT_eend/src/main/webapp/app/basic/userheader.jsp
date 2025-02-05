@@ -108,6 +108,13 @@
           </ul>
         </li>
         <li class="nav-item dropdown">
+          <a href="#" class="nav-link">보안</a>
+          <ul class="dropdown-menu">
+            <li><a href="#" class="dropdown-link">질문</a></li>
+            <li><a href="#" class="dropdown-link">꿀팁</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
           <a href="${pageContext.request.contextPath}/app/article/qual/guide/infoPro.jsp" class="nav-link">자격증</a>
           <ul class="dropdown-menu">
             <li><a href="#" class="dropdown-link">시험안내</a></li>
