@@ -165,6 +165,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 if (data.success) {
                     checkCheckResult1.textContent = "인증에 성공했습니다.";
                     checkCheckResult1.style.color = "green";
+					checkFlag = true;
                 } else {
                     checkCheckResult1.textContent = "인증번호가 일치하지 않습니다.";
                     checkCheckResult1.style.color = "red";
@@ -211,6 +212,9 @@ document.addEventListener("DOMContentLoaded", function() {
 		}
 		pwCheckAgainResult1.textContent = "비밀번호를 재입력/확인해주십시오." ;
 		pwCheckAgainResult1.style.color = "red";
+		if(pwCheckAgainResult1.style.color == "red"){
+			pwCheckFlag = false;
+		}
 	});
     
 	//비밀번호 재확인 
@@ -283,7 +287,31 @@ document.addEventListener("DOMContentLoaded", function() {
 		}
 	});
 	
-	
+	joinCheckBtn.addEventListener("click", function(event){
+		// 
+		if(!idFinFlag || !idFlag){
+			event.preventDefault();
+			alert("아이디를 확인해주세요");
+			idInput.focus();
+		}else if(!phoneCheckFlag){
+			event.preventDefault();
+			alert("휴대폰 번호를 확인해주세요");
+			phoneInput.focus();
+		}else if(!checkFlag){
+			event.preventDefault();
+			alert("인증번호를 확인해주세요");
+			checkInput.focus();
+		}else if(!pwCheckFlag || !pwFlag){
+			event.preventDefault();
+			alert("비밀번호를 확인해주세요");
+			pwInput.focus();
+		}else if(!nickFlag || !nickFinFlag){
+			event.preventDefault();
+			alert("닉네임을 확인해주세요");
+			nickInput.focus();
+		}else{
+		}
+	});
 
 });
 

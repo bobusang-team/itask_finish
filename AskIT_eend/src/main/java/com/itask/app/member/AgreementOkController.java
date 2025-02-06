@@ -22,6 +22,8 @@ public class AgreementOkController implements Execute{
 		// TODO Auto-generated method stub
 		System.out.println("선택약관 동의 섭컨 ");
 		
+		Result result = new Result();
+		
 		
 		BufferedReader reader = request.getReader(); 
 		String line = reader.readLine(); 
@@ -33,7 +35,12 @@ public class AgreementOkController implements Execute{
 		HttpSession session = request.getSession();
 		session.setAttribute("agreeOption", userAgree);
 		
-		return null;
+		System.out.println(session.getAttribute("agreeOption"));
+		
+		result.setRedirect(false);
+		result.setPath(request.getContextPath()+"/app/member/join.jsp");
+		
+		return result;
 	}
 
 }
