@@ -16,9 +16,26 @@ document.addEventListener("DOMContentLoaded", function() {
 
 	// 전체 클릭시 -> 나머지 모두 동의
 	totalBtn.addEventListener('click', function(){
-	  terms.forEach((term) => {
-	    term.checked = totalBtn.checked;
-	  })
+		terms.forEach((term) => {
+	  		term.checked = totalBtn.checked;
+		});
+		const agreement = agreeOption.checked;
+		
+		fetch("agreeOK.me", {
+			method: "POST",
+			headers : {"Content-Type": "application/json"},
+			body: JSON.stringify({check : agreement})
+		})
+		.then(response =>{
+			if(!response.ok) throw new Error(`HTTP 오류! 상태코드 : ${response.status}`);
+			return response.json();
+		})
+		.then(data =>{
+			console.log("선택 약관 동의 상태 : "+data);
+		})
+		.catch(error =>{
+			console.error("선택 약관 동의 오류", error);
+		})
 	});
 
 	// 전체 제외 모두 클릭시 -> 전체도 체크

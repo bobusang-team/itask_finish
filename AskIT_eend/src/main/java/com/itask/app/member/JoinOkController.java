@@ -1,6 +1,7 @@
 package com.itask.app.member;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +27,7 @@ public class JoinOkController implements Execute{
 		UserDTO userDTO = new UserDTO();
 		Result result = new Result();
 		
-		System.out.println(userDTO);
+		
 //		userMoniter
 		userDTO.setUserMonitor(0);
 		String userId = request.getParameter("userId");
@@ -34,7 +35,9 @@ public class JoinOkController implements Execute{
 		String userNick = request.getParameter("userNick");
 		String userMail = request.getParameter("userMail");
 		
-		String agreeOp = (String) session.getAttribute("agreeOption");
+//		String agreeOp = (String) session.getAttribute("agreeOption");
+		
+		String agreeOp = (String) request.getSession().getAttribute("agreeOption");
 		
 		if(agreeOp == null) {
 			System.out.println("선택약관 동의 세션 받아오지 못함");
@@ -52,16 +55,19 @@ public class JoinOkController implements Execute{
 		userDTO.setUserNick(userNick);
 		userDTO.setUserPhone(request.getParameter("userPhone"));
 		userDTO.setUserMail(userMail);
-		
+		userDTO.setUserJoinDate(new Timestamp(System.currentTimeMillis()));
 		
 		userDAO.join(userDTO);
 		
-		
 		session.setAttribute("userDTO", userDTO);
 		
+		int test = ((UserDTO) request.getSession().getAttribute("userDTO")).getUserNum();
 		
-		result.setRedirect(true);
-		result.setPath(request.getContextPath()+"/app/member/joinfinish.jsp");
+		System.out.println(request.getSession().getAttribute("userDTO"));
+		System.out.println("========="+test+"==========");
+		
+		result.setRedirect(false);
+		result.setPath("/app/member/certOk.me");
 		
 		return result;
 	}

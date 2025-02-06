@@ -95,7 +95,7 @@
 
 			<div class="lsa-join-infoBox-email">
 				<input type="text" name="userMail"
-					class="lsa-join-info-email" placeholder="(선택) 이메일 주소">
+					class="lsa-join-info-email" placeholder="이메일 주소" required>
 				<!-- 아래 p태그 : 이메일 중복확인 실패시 나오는 문구 -> "이미 있는 이메일 주소입니다" -->
 					<p class="lsa-join-info-email-check"></p>
 			</div>
