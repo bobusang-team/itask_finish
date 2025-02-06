@@ -55,9 +55,9 @@ public class DevFrontController extends HttpServlet {
                 result = new DevListAskController().execute(request, response);
                 break;
             
-            case"/dev/listAskJava.dev":
-            	System.out.println("질문게시물 java카테고리 목록 실행");
-            	result = new DevListAskJavaController().execute(request, response);
+            case"/dev/listAskTag.dev":
+            	System.out.println("질문게시물 태그 선택 목록 실행");
+            	result = new DevListAskTagController().execute(request, response);
                 break;
                 
             case "/dev/listTip.dev": // 개발 질문게시물 목록 조회
@@ -103,6 +103,11 @@ public class DevFrontController extends HttpServlet {
             case "/dev/commentupdate.dev":
             	result = new DevCommentUpdateController().execute(request, response);
                 break;
+                
+            case "/dev/monitor.dev": // 추천 기능 처리
+                result = new ArticleMonitorController().execute(request, response);
+                break;
+                
         }
 
         // 결과 처리

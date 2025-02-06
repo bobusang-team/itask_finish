@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.itask.app.Result;
 import com.itask.app.dev.dao.DevDAO;
@@ -25,7 +26,7 @@ public class DevListAskController {
 		System.out.println("DevListAskController DAO 객체");
 		Result result = new Result();
 		ArticleListDTO articleListDTO = new ArticleListDTO();
-		
+//		HttpSession session = .getSession();
 		
 		 String temp = request.getParameter("page");
 	      int page = (temp == null) ? 1 : Integer.valueOf(temp); //페이지번호 기본값 : 1
@@ -69,7 +70,7 @@ public class DevListAskController {
 	      
 	      System.out.println("====페이징 정보확인====");
 	      System.out.println("pageMap : " + pageMap);
-	      System.out.println("boardList : " + devListAsk);
+	      System.out.println("articleList : " + devListAsk);
 	      System.out.println("startPage : " + startPage + ", endPage : " + endPage + ", prev : " + prev + ", next : " + next);
 	      System.out.println("===================");
 	    

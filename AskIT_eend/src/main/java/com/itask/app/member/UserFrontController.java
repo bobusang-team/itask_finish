@@ -67,6 +67,18 @@ public class UserFrontController extends HttpServlet {
 	    	  System.out.println("join checkNickOk");
 	    	  result = new CheckNickDuplicateController().execute(request, response);
 	    	  break;
+	      case "/app/member/sendSMS.me":
+	    	  System.out.println("sendSMS OK");
+	    	  result = new JoinSMSController().execute(request, response);
+	    	  break;
+	      case "/app/member/verifyCode.me":
+	    	  System.out.println("/member/verifyCode.me");
+	    	  result = new VerifyCodeController().execute(request, response);
+	    	  break;
+	      case "/app/member/agreeOK.me":
+	    	  System.out.println("선택약관 동의 프컨");
+	    	  result = new AgreementOkController().execute(request, response);
+	    	  break;
 	      }
 	      
 	  

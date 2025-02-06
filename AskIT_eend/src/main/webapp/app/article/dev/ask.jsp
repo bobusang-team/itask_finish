@@ -35,12 +35,12 @@
 		        </div>
 		      <!-- 자격증 태그 버튼 --> <!-- 나중에 더 추가될 수 있으니 ul > li로 바꾸는 것은 어떤지 초현님과 상의 필요-->
 		      <div class="bjs-ask-tag"> 
-		        <button class="bjs-ask-tag-btn bjs-ask-select">전체</button>
-		        <button class="bjs-ask-tag-btn"><a href="${pageContext.request.contextPath}/dev/listAskJava.dev" class="nav-link">JAVA</a></button>
-		        <button class="bjs-ask-tag-btn">HTML</button>
-		        <button class="bjs-ask-tag-btn">CSS</button>
-		        <button class="bjs-ask-tag-btn">JAVASCRIPT</button>
-		        <button class="bjs-ask-tag-btn">ORACLE</button>
+		         <a href="${pageContext.request.contextPath}/dev/listAsk.dev"><button class="bjs-ask-tag-btn bjs-ask-select">전체</button></a>
+		        <a href="${pageContext.request.contextPath}/dev/listAskTag.dev?tagName=JAVA"><button class="bjs-ask-tag-btn">JAVA</button></a>
+		        <a href="${pageContext.request.contextPath}/dev/listAskTag.dev?tagName=HTML"><button class="bjs-ask-tag-btn">HTML</button></a>
+		        <a href="${pageContext.request.contextPath}/dev/listAskTag.dev?tagName=CSS"><button class="bjs-ask-tag-btn">CSS</button></a>
+		        <a href="${pageContext.request.contextPath}/dev/listAskTag.dev?tagName=JAVASCRIPT"><button class="bjs-ask-tag-btn">JAVASCRIPT</button></a>
+		        <a href="${pageContext.request.contextPath}/dev/listAskTag.dev?tagName=ORACLE"><button class="bjs-ask-tag-btn">ORACLE</button></a>
 		      </div>
 		
 		    </div>
@@ -49,7 +49,8 @@
 				    <section class="bjs-ask-post-list">
 				        <!-- 게시물 반복 -->
 				         <article class="bjs-ask-post-item" data-tag="${dev.articleTagname}">
-				            <div class="bjs-ask-post-header">
+<%-- 				         <input type="text" value="${dev.getUserNum()} readonly" /> --%>	
+			            <div class="bjs-ask-post-header">
 				                <span class="bjs-ask-post-tag">${dev.articleTagname}</span>   
 				                <span class="bjs-ask-post-title">
 				                    <a href="${pageContext.request.contextPath}/dev/detailAsk.dev?articleNum=${dev.articleNum}">
@@ -66,13 +67,13 @@
 				                <div class="bjs-ask-post-info">
 				                    <span class="bjs-ask-post-author">
 				                        ${dev.badge} 
-				                        ${dev.userNick}
+				                        ${dev.getUserNick()}
 				                    </span>
 				                    <span class="bjs-ask-post-views">조회수 ${dev.getArticleView()}</span>
 				                    <span class="bjs-ask-post-replies">답글 0</span>
 				                    <span class="bjs-ask-post-monitor">
 				                        <img src="${pageContext.request.contextPath}/assets/img/monitor.png" alt="사진오류"> 
-				                        ${dev.articleMoniter}
+				                        ${dev.getArticleMonitorNum()}
 				                    </span>
 				                </div>
 				                <span class="bjs-ask-post-date">

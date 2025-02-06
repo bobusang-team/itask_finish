@@ -1,6 +1,7 @@
-  <%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.itask.app.dto.UserDTO" %>
+
 <!-- 로그인 성공 시 헤더 -->
 <!-- 헤더 -->
   <header class="header-box">
@@ -27,35 +28,46 @@
         <ul class="head-container">
           <li class="head-item">
             <!-- 내정보 모니터 -->
-            <%-- <a href="${pageContext.request.contextPath}/app/mypage/mypageMain.jsp" class="head-link"> --%>
+            <%@ page session="true" %>
+			<%
+			    UserDTO userInfo = (UserDTO)session.getAttribute("userDTO");
+				System.out.println(userInfo);
+				String userNick = "";
+				int userMonitor = 0;
+			
+			    if (userInfo != null) {
+			        userNick = userInfo.getUserNick();
+			        userMonitor = userInfo.getUserMonitor();
+			        
+			      	System.out.println(userMonitor);
+			    }else{
+			%>
+			
+			<script>
+				location.href = "${pageContext.request.contextPath}/app/member/login.jsp";
+			</script>
+			<%
+			    }
+			%>
+            
             <a href="${pageContext.request.contextPath}/mypage/mypageMainOk.my" class="head-link">
               <span id="user-name">
-              <%
-            UserDTO userInfo = (UserDTO)session.getAttribute("userDTO");
-                 String userNick = userInfo.getUserNick();
-            out.println(userNick+"님");
-         %>
+				<%= userNick %>님
               </span>
               <div class="monitor-box">
                 <div class="monitor-level" id="monitor-levelup">
-                   <%
-                      int userInch = Integer.parseInt(userInfo.getUserMoniter())/100;
-                      out.println(userInch+" inch");
-                   %>
+                <%= userMonitor/100 %> inch
                 </div>
                 <img src="${pageContext.request.contextPath}/assets/img/monitor.png" alt="monitor" class="monitor-icon">
                 <span id="monitor-level">
-                   <%
-                      int userMonitor = Integer.parseInt(userInfo.getUserMoniter());
-                      out.println(userMonitor%100 + "m");
-                   %>
+				<%= userMonitor%100 %> m
                 </span>
               </div>
             </a>
           </li>
           <li class="head-item">
             <!-- 유저 아이콘 -->
-            <a href="#" class="head-link">
+            <a href="${pageContext.request.contextPath}/mypage/mypageMainOk.my" class="head-link">
               <div class="user-png">
                 <img src="${pageContext.request.contextPath}/assets/img/user.png" alt="user" class="user-icon">
               </div>
@@ -64,18 +76,10 @@
           <li class="head-item">
             <!-- 로그아웃 -->
             <a href="${pageContext.request.contextPath}" class="head-link logout-box">
-               <%
-               /* session.removeAttribute("userDTO"); */
-                  %>
               <img src="${pageContext.request.contextPath}/assets/img/Logout.png" alt="logout" class="logout-top">
-                 <%
-                 /* session.invalidate(); */
-                  %>
-                  <script>
-                     document.getElementsByClass('logout-top').addEventListener('click', ()=>sessionStorage.clear());
-                  
-                  </script>
-              
+           	 	<script>
+           	 		document.getElementsByClass('logout-top').addEventListener('click', ()=>sessionStorage.clear());
+           	 	</script>
             </a>
           </li>
         </ul>
@@ -93,7 +97,8 @@
             <li><a href="${pageContext.request.contextPath}/app/intro/contents.jsp" class="dropdown-link">명예의 전당</a></li>
           </ul>
         </li>
-        <li class="nav-item"><a href="${pageContext.request.contextPath}/app/notice/notice.jsp" class="nav-link">공지사항</a></li>
+        <li class="nav-item"><a href="${pageContext.request.contextPath}/app/notice/notice.no"
+         class="nav-link">공지사항</a></li>
         <li class="nav-item dropdown">
           <a href="${pageContext.request.contextPath}/dev/listAsk.dev" class="nav-link">개발</a>
           <ul class="dropdown-menu">
@@ -109,9 +114,9 @@
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <a href="${pageContext.request.contextPath}/app/article/qual/guide/infoSec.jsp" class="nav-link">자격증</a>
+          <a href="${pageContext.request.contextPath}/app/article/qual/guide/infoPro.jsp" class="nav-link">자격증</a>
           <ul class="dropdown-menu">
-            <li><a href="${pageContext.request.contextPath}/app/article/qual/guide/infoSec.jsp" class="dropdown-link">시험안내</a></li>
+            <li><a href="${pageContext.request.contextPath}/app/article/qual/guide/infoPro.jsp" class="dropdown-link">시험안내</a></li>
             <li><a href="${pageContext.request.contextPath}/app/article/qual/ask.jsp" class="dropdown-link">질문</a></li>
             <li><a href="${pageContext.request.contextPath}/app/article/qual/tip.jsp" class="dropdown-link">꿀팁</a></li>
           </ul>

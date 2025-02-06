@@ -26,6 +26,7 @@ pageEncoding="UTF-8"%>
 		  <%} %>
   <!-- 메인 영역 -->
   <main class="itAskBox">
+  
     <!-- 메인 안에 요소들이 담길 컨테이너 박스 -->
     <article class="bjs-askDetail-elements">
       <!-- 메인 안에 요소들이 담길 컨테이너 박스 -->
@@ -47,7 +48,7 @@ pageEncoding="UTF-8"%>
           <div class="bjs-askDetail-text-title">${dev.articleTitle}</div>
           <div class="bjs-askDetail-text-profile">
             <img src="./../../../assets/img/profile.png" alt="">
-            <span class="bjs-askDetail-text-author"><b><c:out value ="${dev.userMoniter}" />inch</b><br><c:out value ="${dev.userNick}" /><c:out value ="${dev.badge}" /></span>
+            <span class="bjs-askDetail-text-author"><b><c:out value ="${dev.getUserMonitor() / 100}" />inch</b><br><c:out value ="${dev.userNick}" /><c:out value ="${dev.badge}" /></span>
           </div>
           <div class="bjs-askDetail-text-date"><c:out value ="${dev.articleDate}" /></div>
         </div>
@@ -63,21 +64,55 @@ pageEncoding="UTF-8"%>
           <span class="bjs-askDetail-text-bottom-tag"><c:out value ="${dev.articleTagname}" /></span>
           <!-- 본문 모니터, 댓글, 공유수 -->
           <div class="bjs-askDetail-content">
-            <img src="${pageContext.request.contextPath}/assets/img/moniter.png" alt="모니터수" id="Detail-moniter-img">
-            <span id="Detail-monitercount"><c:out value ="${dev.articleMoniter}" /></span>
+			<c:if test="${not empty sessionScope.message}">
+				<script>
+					alert("${sessionScope.message}");
+				</script>
+				<% session.removeAttribute("message"); %> <!-- 메시지 초기화 -->
+			</c:if>
+			<c:choose>
+			    <c:when test="${not empty userNum}">
+			        <a href="${pageContext.request.contextPath}/dev/monitor.dev?articleNum=${dev.articleNum}">
+			            <img src="${pageContext.request.contextPath}/assets/img/moniter.png" alt="모니터수 이미지" id="Detail-moniter-img" style="cursor: pointer;">
+			        </a>
+			    </c:when>
+			    <c:otherwise>
+			        <a href="javascript:alert('로그인 후 이용 가능합니다.');">
+			            <img src="${pageContext.request.contextPath}/assets/img/moniter.png" alt="모니터수 이미지" id="Detail-moniter-img" style="cursor: not-allowed;">
+			        </a>
+			    </c:otherwise>
+			</c:choose>
+			<p id="Detail-monitercount">${dev.getArticleMonitorNum()}</p>
+           <%--  <img src="${pageContext.request.contextPath}/assets/img/moniter.png" alt="모니터수" id="Detail-moniter-img"> --%>
+            <%-- <span id="Detail-monitercount"><c:out value ="${dev.articleMonitor}" /></span> --%>
             <img src="${pageContext.request.contextPath}/assets/img/view.png" alt="조회수" id="Detail-view-img">
             <span id="Detail-viewcount"><c:out value ="${dev.getArticleView()}" /></span>
             <!-- 본문 수정삭제 드롭다운-->
-            <div class="bjs-askDetail-dropdown">
-              <img src="${pageContext.request.contextPath}/assets/img/Container.png" alt="드롭다운 이미지" class="bjs-askDetail-dropdown-img"
-                onclick="Dropdown()">
-              <div class="bjs-askDetail-dropdown-menu" id="dropdownMenu">
-              	<c:if test="${sessionScope.userNum == article.getUserNum()}">
-                	<a href="${pageContext.request.contextPath}/dev/update.dev?articleNum=${dev.articleNum}"><span id = "modifyDeletebtn">수정</span></a>
-                	<a href="${pageContext.request.contextPath}/dev/delete.dev?articleNum=${dev.articleNum}" id="postdelete"><span id = "modifyDeletebtn">삭제</span></a>
-             	</c:if>
-              </div>
-            </div>
+			<div class="bjs-askDetail-dropdown">
+			  <c:choose>
+			    <c:when test="${sessionScope.userNum == dev.getUserNum()}">
+			      <img src="${pageContext.request.contextPath}/assets/img/Container.png" alt="드롭다운 이미지" class="bjs-askDetail-dropdown-img"
+			           onclick="Dropdown()">
+			    </c:when>
+			    <c:otherwise>
+			      <img src="${pageContext.request.contextPath}/assets/img/Container.png" alt="드롭다운 이미지" class="bjs-askDetail-dropdown-img"
+			           onclick="alert('작성자만 수정/삭제가 가능합니다.');">
+			    </c:otherwise>
+			  </c:choose>
+			  
+			  <div class="bjs-askDetail-dropdown-menu" id="dropdownMenu" style="display:none;">
+			    <c:choose>
+			      <c:when test="${sessionScope.userNum == dev.getUserNum()}">
+			        <a href="${pageContext.request.contextPath}/dev/update.dev?articleNum=${dev.articleNum}">
+			          <span id="modifyDeletebtn">수정</span>
+			        </a>
+			        <a href="${pageContext.request.contextPath}/dev/delete.dev?articleNum=${dev.articleNum}" id="postdelete">
+			          <span id="modifyDeletebtn">삭제</span>
+			        </a>
+			      </c:when>
+			    </c:choose>
+			  </div>
+			</div>
           </div>
         </article>
       </article>

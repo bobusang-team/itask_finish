@@ -32,7 +32,7 @@ public class DevDetailAskOkController implements Execute {
 	      if(articleListDTO == null) {
 	         System.out.println("존재하지 않는 게시글 입니다." + articleNum);
 	         result.setPath("/app/article/dev/ask.jsp");
-	         result.setRedirect(true);
+	         result.setRedirect(false);
 	         return result;
 	      }
 	      
