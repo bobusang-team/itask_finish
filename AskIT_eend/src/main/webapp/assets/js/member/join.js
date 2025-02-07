@@ -21,6 +21,8 @@ document.addEventListener("DOMContentLoaded", function() {
 	const checkInput = document.querySelector(".lsa-join-info-certiNumber");
 	// 핸드폰 번호 입력창
 	const phoneInput = document.querySelector(".lsa-join-info-phoneNumber");
+	// 이메일 입력창
+	const mailInput = document.querySelector(".lsa-join-info-email");
 	
 	// 아이디 유효성 검사
 	const idRegex = /^[A-Za-z0-9]{6,15}$/;
@@ -30,6 +32,9 @@ document.addEventListener("DOMContentLoaded", function() {
 	const nickRegex = /^[가-힣a-zA-Z0-9]{2,10}$/;
 	// 핸드폰 번호 유효성 검사
 	const phoneRegex = /^010\d{8}$/;
+	// 이메일 주소 유효성 검사
+	const mailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+;
 	
 	// 아이디 메시지
 	const idCheckResult1 = document.querySelector(".lsa-join-info-id-check1"); 
@@ -51,6 +56,10 @@ document.addEventListener("DOMContentLoaded", function() {
 	//휴대폰 메시지 
 	const phoneCheckResult1 = document.querySelector(".lsa-join-info-phone-check");
 	
+	// 이메일 메시지
+	const mailCheckResult1 = document.querySelector(".lsa-join-info-email-check1");
+	const mailCheckResult2 = document.querySelector(".lsa-join-info-email-check2");
+	
 	let idFlag = false; // 아이디 유효성 체크 플래그
 	let pwFlag = false; // 비밀번호 유효성 체크 플래그
 	let pwCheckFlag = false; // 비밀번호 재확인 체크 플래그
@@ -59,6 +68,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	let nickFinFlag = false;
 	let checkFlag = false;
 	let phoneCheckFlag = false;
+	let mailFlag = false;
 	
 	
 	// 아이디 중복 체크
@@ -287,6 +297,41 @@ document.addEventListener("DOMContentLoaded", function() {
 		}
 	});
 	
+	const mailFinFlag = false;
+	
+	//이메일 유효성 검사, 중복검사
+	mailInput.addEventListener("blur", function(){
+		const mail = mailInput.value.trim();
+		
+		if(mailRegex.test(mail)){
+			fetch("checkMailOk.me", {
+				method:"POST",
+				headers:{"Content-Type":"application/json"},
+				body:  JSON.stringify({mail : mail})
+			})
+			.then(response => {
+				if(!response.ok)throw new Error(`HTTP 오류! 상태 코드 : ${response.status}`);
+				return response.json();
+			})
+			.then(data =>{
+				if(data.exists){
+					mailCheckResult1.textContent = "이미 가입된 이메일 주소입니다";
+					mailCheckResult1.style.color = "red";
+					mailFinFlag = false;
+				}else{
+					mailCheckResult1.textContent = "사용가능한 이메일입니다.";
+					mailCheckResult1.style.color = "#22A309";
+					mailFinFlag = true;
+				}
+			})
+			mailFlag = true;
+		}else{
+			mailCheckResult1.textContent = "유효하지 않은 이메일입니다";
+			mailCheckResult1.style.color = "red";
+			mailFlag = false;
+		}
+	});
+	
 	joinCheckBtn.addEventListener("click", function(event){
 		// 
 		if(!idFinFlag || !idFlag){
@@ -309,6 +354,10 @@ document.addEventListener("DOMContentLoaded", function() {
 			event.preventDefault();
 			alert("닉네임을 확인해주세요");
 			nickInput.focus();
+		}else if(!mailFlag || !mailFinFlag){
+			event.preventDefault();
+			alert("이메일을 확인해주세요");
+			mailInput.focus();
 		}else{
 		}
 	});
