@@ -232,7 +232,6 @@ document.addEventListener("DOMContentLoaded", function() {
 		pwCheckFlag = false;
 		const pw = pwCheck.value.trim();
 		const check = pwInput.value.trim();
-		pwCheckAgainResult1.textContent = "test";
 		if(pw===check){
 			pwCheckAgainResult1.textContent = "비밀번호가 일치합니다.";
 			pwCheckAgainResult1.style.color = "#22A309";
@@ -317,14 +316,13 @@ document.addEventListener("DOMContentLoaded", function() {
 				if(data.exists){
 					mailCheckResult1.textContent = "이미 가입된 이메일 주소입니다";
 					mailCheckResult1.style.color = "red";
-					mailFinFlag = false;
+					mailFlag = false;
 				}else{
 					mailCheckResult1.textContent = "사용가능한 이메일입니다.";
 					mailCheckResult1.style.color = "#22A309";
-					mailFinFlag = true;
+					mailFlag = true;
 				}
 			})
-			mailFlag = true;
 		}else{
 			mailCheckResult1.textContent = "유효하지 않은 이메일입니다";
 			mailCheckResult1.style.color = "red";
@@ -354,14 +352,13 @@ document.addEventListener("DOMContentLoaded", function() {
 			event.preventDefault();
 			alert("닉네임을 확인해주세요");
 			nickInput.focus();
-		}else if(!mailFlag || !mailFinFlag){
+		}else if(!mailFlag){
 			event.preventDefault();
 			alert("이메일을 확인해주세요");
 			mailInput.focus();
 		}else{
 		}
 	});
-
 });
 
 // 눈버튼 누르면 password에서 text박스로 바뀌게 하는 기능
