@@ -17,6 +17,7 @@ public class ArticleDetailDTO {
 	 */	
 	private int articleView;
 	private int articleMonitor;
+
 	public int getUserNick() {
 		return userNick;
 	}
@@ -34,6 +35,7 @@ public class ArticleDetailDTO {
 	}
 	public void setUserMentoCert(String userMentoCert) {
 		this.userMentoCert = userMentoCert;
+
 	}
 	public int getArticleNum() {
 		return articleNum;
@@ -99,6 +101,5 @@ public class ArticleDetailDTO {
 	}
 	
 
-	
 	
 }
