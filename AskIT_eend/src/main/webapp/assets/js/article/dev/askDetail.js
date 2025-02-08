@@ -11,7 +11,7 @@ tagBtns.forEach((tagBtn) => {
 });
 
 //게시글 모니터 버튼 누르면 1증가
-let count = -1;
+/*let count = -1;
 const img = document.getElementById('Detail-moniter-img');
 const countplus = document.getElementById('Detail-monitercount');
 img.addEventListener('click', function () {
@@ -21,7 +21,7 @@ img.addEventListener('click', function () {
     count = -1;
   }
   countplus.textContent = parseInt(countplus.textContent) + count;
-});
+});*/
 
 //수정삭제 드롭다운
 function Dropdown() {

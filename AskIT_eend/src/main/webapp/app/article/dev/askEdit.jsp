@@ -59,8 +59,7 @@
 				</div>
 				<!-- 글상자 -->
 				<div class="mjh-askEdit-modify-content-section">
-					<textarea name="articleText" id="content" rows="30" minlength="20" required>
-							${dev.articleText}</textarea>
+					<textarea name="articleText" id="content" rows="30" required>${dev.articleText}</textarea>
 				</div>
 				<button id="submitbtn" type="submit">글 수정하기</button>
 			</form>

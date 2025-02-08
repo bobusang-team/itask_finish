@@ -79,6 +79,14 @@ public class UserFrontController extends HttpServlet {
 	    	  System.out.println("선택약관 동의 프컨");
 	    	  result = new AgreementOkController().execute(request, response);
 	    	  break;
+	      case "/app/member/certOk.me":
+	    	  System.out.println("자격증 초기화 프컨 ");
+	    	  result = new CertInitController().execute(request, response);
+	    	  break;
+	      case "/app/member/checkMailOk.me":
+	    	  System.out.println("이메일 중복체크 프컨");
+	    	  result = new CheckMailDuplicateController().execute(request, response);
+	    	  break;
 	      }
 	      
 	  

@@ -39,6 +39,7 @@ public class ArticleListDTO {
    private String badge;
    
    
+<<<<<<< HEAD
    public int getArticleNum() {
       return articleNum;
    }
@@ -132,8 +133,4 @@ public class ArticleListDTO {
             + ", articleView=" + articleView + ", articleMonitor=" + articleMonitorNum + ", userMonitor=" + userMonitor
             + ", userMentoCert=" + userMentoCert + ", userNick=" + userNick + ", badge=" + badge + "]";
    }
-
-   
-   
-
 }

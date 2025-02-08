@@ -1,5 +1,7 @@
 package com.itask.app.dto;
 
+import java.sql.Timestamp;
+
 public class UserDTO {
 //	CREATE TABLE TBL_USER (
 //		    USER_NUM NUMBER,
@@ -32,7 +34,7 @@ public class UserDTO {
 	private int userMonitor = 0;
 	private char userAgree = 'F';
 	private String userCareer;
-	private String userJoinDate;
+	private Timestamp userJoinDate;
 	
 	
 	//세터,게터
@@ -108,10 +110,10 @@ public class UserDTO {
 	public void setUserCareer(String userCareer) {
 		this.userCareer = userCareer;
 	}
-	public String getUserJoinDate() {
+	public Timestamp getUserJoinDate() {
 		return userJoinDate;
 	}
-	public void setUserJoinDate(String userJoinDate) {
+	public void setUserJoinDate(Timestamp userJoinDate) {
 		this.userJoinDate = userJoinDate;
 	}
 	
