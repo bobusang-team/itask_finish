@@ -5,7 +5,7 @@ public class MypageMainDTO {
 	private int userNum;
 	private int profileNum;
 	private String userNick;
-	private String userMonitor = "0";
+	private int userMonitor = 0;
 	private String userMentoCert = "F";
 	private String userCareer = "";
 	private int articleCount;
@@ -45,11 +45,11 @@ public class MypageMainDTO {
 		this.userNick = userNick;
 	}
 
-	public String getUserMonitor() {
+	public int getUserMonitor() {
 		return userMonitor;
 	}
 
-	public void setUserMonitor(String userMonitor) {
+	public void setUserMonitor(int userMonitor) {
 		this.userMonitor = userMonitor;
 	}
 
@@ -163,6 +163,20 @@ public class MypageMainDTO {
 
 	public void setCertsLinuxMaster2(String certsLinuxMaster2) {
 		this.certsLinuxMaster2 = certsLinuxMaster2;
+	}
+
+	public String getFormattedMonitor() {
+
+		if (userMonitor == 0) {
+			return "0inch 0m";
+		}
+		try {
+			int inch = userMonitor / 100;
+			int monitor = userMonitor % 100;
+			return inch + "inch " + monitor + "m";
+		} catch (NumberFormatException e) {
+			return "Invalid format";
+		}
 	}
 
 	@Override

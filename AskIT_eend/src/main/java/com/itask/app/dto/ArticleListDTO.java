@@ -38,8 +38,7 @@ public class ArticleListDTO {
    private String userNick; //관리자페이지에서 필요한 DTO
    private String badge;
    
-   
-<<<<<<< HEAD
+
    public int getArticleNum() {
       return articleNum;
    }
@@ -94,10 +93,10 @@ public class ArticleListDTO {
    public void setArticleView(int articleView) {
       this.articleView = articleView;
    }
-   public int getArticleMonitor() {
+   public int getArticleMonitorNum() {
       return articleMonitorNum;
    }
-   public void setArticleMonitor(int articleMonitorNum) {
+   public void setArticleMonitorNum(int articleMonitorNum) {
       this.articleMonitorNum = articleMonitorNum;
    }
    public int getUserMonitor() {

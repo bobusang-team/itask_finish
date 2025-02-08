@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.itask.app.dto.ArticleDetailDTO;
 import com.itask.app.dto.ArticleListDTO;
 import com.itask.app.dto.MypageMainDTO;
 import com.itask.app.dto.UserDTO;
@@ -114,6 +115,14 @@ public class MypageDAO {
 		 System.out.println("userDTO 조회 메소드 실행");
 		 UserDTO userDTO = sqlSession.selectOne("mypage.userSelect", userNum);
 		 return userDTO;
+	 }
+	 
+	 // 내가 작성한 게시글 상세 불러오기
+	 public ArticleListDTO selectArticleDetail(int articleNum) {
+		 System.out.println("selectArticleDetail 메소드 실행");
+		 ArticleListDTO articleListDTO = sqlSession.selectOne("mypage.articleDetail", articleNum);
+		 System.out.println("쿼리 실행 후 게시글 상세 정보 : " + articleListDTO);
+		 return articleListDTO;
 	 }
 }
 
