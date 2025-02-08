@@ -83,7 +83,7 @@
 					  <div class="bjs-ask-post-header">
 						<span class="bjs-ask-post-tag">${myList.articleTagname}</span>   
 						<span class="bjs-ask-post-title">
-						  <a href="${pageContext.request.contextPath}/dev/detailAsk.dev?articleNum=${myList.articleNum}">
+						  <a href="${pageContext.request.contextPath}/mypage/myArticleDetail.my?articleNum=${myList.articleNum}">
 						    ${myList.articleTitle}
 						  </a>
 						</span>
@@ -91,7 +91,7 @@
 					  <div class="bjs-ask-post-body">
 						${myList.articleText}
 						<%--  <c:out value="${fn:length(dev.articleText) > 50 ? fn:substring(dev.articleText, 0, 50) + '...' : dev.articleText}" /> --%>
-						<a href="${pageContext.request.contextPath}/dev/DetailAsk.dev?articleNum=${myList.articleNum}"></a> 
+						<a href="${pageContext.request.contextPath}/mypage/myArticleDetail.my?articleNum=${myList.articleNum}"></a> 
 				      </div>
 					  <div class="bjs-ask-post-footer">
 						<div class="bjs-ask-post-info">
@@ -103,7 +103,7 @@
 						  <span class="bjs-ask-post-replies">답글 100+</span>
 						  <span class="bjs-ask-post-monitor">
 						  <img src="${pageContext.request.contextPath}/assets/img/monitor.png" alt="사진오류"> 
-						    ${myList.articleMonitor}
+						    ${myList.articleMonitorNum}
 						  </span>
 						</div>
 						<span class="bjs-ask-post-date">

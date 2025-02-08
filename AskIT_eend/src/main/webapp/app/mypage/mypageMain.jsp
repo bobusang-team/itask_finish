@@ -49,10 +49,8 @@
                src="${pageContext.request.contextPath}/assets/img/Monitor.png" alt=""> 
                <!-- 인치 표시하는 부분 -->
                <b>
-               <fmt:formatNumber value="${mypageMainDTO.userMonitor / 100}" type="number" maxFractionDigits="0"/>
-               </b>inch 
-               <!-- 모니터 표시하는 부분 -->
-               <b>${mypageMainDTO.userMonitor % 100} </b>m
+               ${mypageMainDTO.getFormattedMonitor()}
+               </b>
             </li>
          </ul>
 
