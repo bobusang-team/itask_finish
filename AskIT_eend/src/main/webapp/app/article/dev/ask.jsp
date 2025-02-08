@@ -24,23 +24,51 @@
 		  
 		  <%} %>
 		  <main class="itAskBox">
+		  
 		    <!-- 메인 안에 요소들이 담길 컨테이너 박스 -->
 		    <div class="bjs-ask-topcontainer">
+		    <c:out value = "${devLsitAsk}" />
 		      <!-- 개발  -->
-		      <span class="bjs-ask-title">개발</span>
+		      <!-- devListAsk 개발/보안/자격증 -> 질문/꿀팁 -->
+		      <span class="bjs-ask-title">${devListAsk[0].getArticleTopcate()}</span>
 		        <!-- 자격증 상위 카테고리 -->
 		        <div class="bjs-ask-category">
 		          <button class="bjs-ask-category-btn bjs-ask-select "><a href="${pageContext.request.contextPath}/dev/listAsk.dev">질문</a></button>
-		          <button class="bjs-ask-category-btn "><a href="${pageContext.request.contextPath}/dev/listTip.dev">꿀팁</a></button>
+		          <button class="bjs-ask-category-btn "><a href="${pageContext.request.contextPath}/dev/listAsk.dev?articleTopcate=개발&articleBotcate=꿀팁">꿀팁</a></button>
 		        </div>
 		      <!-- 자격증 태그 버튼 --> <!-- 나중에 더 추가될 수 있으니 ul > li로 바꾸는 것은 어떤지 초현님과 상의 필요-->
+		      
+		      <!-- 태그 분류하기 위한 jstl -->
+		     <c:choose>
+		      <c:when test="${devListAsk[0].getArticleTopcate() == '개발'}">
+		      	<c:set var="tag1" value="JAVA" />
+		      	<c:set var="tag2" value="HTML" />
+		      	<c:set var="tag3" value="CSS" />
+		      	<c:set var="tag4" value="JAVASCRIPT" />
+		      	<c:set var="tag5" value="ORACLE" />
+		      </c:when>
+		      <c:when test="${devListAsk[0].getArticleTopcate() == '보안'}">
+		      	<c:set var="tag1" value="NETWORK" />
+		      	<c:set var="tag2" value="WEB" />
+		      	<c:set var="tag3" value="MOBILE" />
+		      	<c:set var="tag4" value="포렌식" />
+		      	<c:set var="tag5" value="악성코드" />
+		      </c:when>	 
+		      <c:when test="${devListAsk[0].getArticleTopcate() == '자격증'}">
+		      	<c:set var="tag1" value="정보보안" />
+		      	<c:set var="tag2" value="정보처리" />
+		      	<c:set var="tag3" value="네트워크관리사" />
+		      	<c:set var="tag4" value="SQLD" />
+		      	<c:set var="tag5" value="리눅스마스터" />
+		      </c:when> 
+		     </c:choose>    
 		      <div class="bjs-ask-tag"> 
-		         <a href="${pageContext.request.contextPath}/dev/listAsk.dev"><button class="bjs-ask-tag-btn bjs-ask-select">전체</button></a>
-		        <a href="${pageContext.request.contextPath}/dev/listAskTag.dev?tagName=JAVA"><button class="bjs-ask-tag-btn">JAVA</button></a>
-		        <a href="${pageContext.request.contextPath}/dev/listAskTag.dev?tagName=HTML"><button class="bjs-ask-tag-btn">HTML</button></a>
-		        <a href="${pageContext.request.contextPath}/dev/listAskTag.dev?tagName=CSS"><button class="bjs-ask-tag-btn">CSS</button></a>
-		        <a href="${pageContext.request.contextPath}/dev/listAskTag.dev?tagName=JAVASCRIPT"><button class="bjs-ask-tag-btn">JAVASCRIPT</button></a>
-		        <a href="${pageContext.request.contextPath}/dev/listAskTag.dev?tagName=ORACLE"><button class="bjs-ask-tag-btn">ORACLE</button></a>
+		         <a href="${pageContext.request.contextPath}/dev/listAsk.dev?articleTopcate=${devListAsk[0].getArticleTopcate()}&articleBotcate=${devListAsk[0].getArticleBotcate()}"><button class="bjs-ask-tag-btn bjs-ask-select">전체</button></a>
+		        <a href="${pageContext.request.contextPath}/dev/listAskTag.dev?articleTopcate=${devListAsk[0].getArticleTopcate()}&articleBotcate=${devListAsk[0].getArticleBotcate()}&tagName=${tag1}"><button class="bjs-ask-tag-btn">${tag1}</button></a>
+		        <a href="${pageContext.request.contextPath}/dev/listAskTag.dev?articleTopcate=${devListAsk[0].getArticleTopcate()}&articleBotcate=${devListAsk[0].getArticleBotcate()}&tagName=${tag2}"><button class="bjs-ask-tag-btn">${tag2}</button></a>
+		        <a href="${pageContext.request.contextPath}/dev/listAskTag.dev?articleTopcate=${devListAsk[0].getArticleTopcate()}&articleBotcate=${devListAsk[0].getArticleBotcate()}&tagName=${tag3}"><button class="bjs-ask-tag-btn">${tag3}</button></a>
+		        <a href="${pageContext.request.contextPath}/dev/listAskTag.dev?articleTopcate=${devListAsk[0].getArticleTopcate()}&articleBotcate=${devListAsk[0].getArticleBotcate()}&tagName=${tag4}"><button class="bjs-ask-tag-btn">${tag4}</button></a>
+		        <a href="${pageContext.request.contextPath}/dev/listAskTag.dev?articleTopcate=${devListAsk[0].getArticleTopcate()}&articleBotcate=${devListAsk[0].getArticleBotcate()}&tagName=${tag5}"><button class="bjs-ask-tag-btn">${tag5}</button></a>
 		      </div>
 		
 		    </div>

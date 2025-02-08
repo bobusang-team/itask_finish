@@ -21,7 +21,7 @@ public class DevDAO {
 	}
 		
     //개발 질문 게시글 가져오기
-	public List<ArticleListDTO> selectAllAsk(Map<String, Integer> pageMap) {
+	public List<ArticleListDTO> selectAllAsk(Map pageMap) {
 		System.out.println("모든 게시글 조회" + pageMap);
 		List<ArticleListDTO> list = sqlSession.selectList("dev.selectAllAsk", pageMap);
 		return list;

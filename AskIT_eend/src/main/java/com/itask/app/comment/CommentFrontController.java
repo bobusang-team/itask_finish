@@ -48,15 +48,19 @@ public class CommentFrontController extends HttpServlet {
 	      Result result = new Result();
 
 	      switch (target) {
-	      case "/comment/commentWriteOk.re":
+	      case "/comment/commentWriteOk.co":
 	         System.out.println("댓글 작성 컨트롤러 진입");
 	         result = new CommentWriteOkController().execute(request, response);
 	         break;
 	         
-	      case "/comment/commentListOk.re":
+	      case "/comment/commentListOk.co":
 	         System.out.println("댓글 목록 컨트롤러 진입");
 	         result = new CommentListOkController().execute(request, response);
 	         break;
+	      case "/comment/commentMonitor.co":
+		         System.out.println("댓글 모니터 컨트롤러 진입");
+		         result = new CommentMonitorController().execute(request, response);
+		         break;
 	      }
 	   }
 
