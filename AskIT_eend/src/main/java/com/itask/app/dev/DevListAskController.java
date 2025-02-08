@@ -8,7 +8,6 @@ import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.itask.app.Result;
 import com.itask.app.dev.dao.DevDAO;
@@ -37,11 +36,23 @@ public class DevListAskController {
 	      int startRow = (page - 1) * rowCount + 1; // 
 	      int endRow = startRow + rowCount - 1; // 
 	      
-	      Map<String, Integer> pageMap = new HashMap<>();
+	      String articleTopcate = request.getParameter("articleTopcate");
+	      System.out.println(request.getParameter("articleTopcate"));
+	      
+	      String articleBotcate = request.getParameter("articleBotcate");
+	      System.out.println(request.getParameter("articleBotcate"));
+	      
+
+	      
+	      Map pageMap = new HashMap<>();
 	      pageMap.put("startRow", startRow);
 	      pageMap.put("endRow", endRow);
-		
+	      pageMap.put("articleTopcate", articleTopcate);
+	      pageMap.put("articleBotcate", articleBotcate);
 
+	     
+	     
+	     
 	    // 개발 질문 게시글 목록 조회
 	    List<ArticleListDTO> devListAsk = devDAO.selectAllAsk(pageMap);
 	    request.setAttribute("devListAsk", devListAsk);

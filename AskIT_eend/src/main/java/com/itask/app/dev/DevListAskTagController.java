@@ -36,18 +36,32 @@ public class DevListAskTagController {
 	      int startRow = (page - 1) * rowCount + 1; // 
 	      int endRow = startRow + rowCount - 1; //
 	      
-	      System.out.println(request.getParameter("tagName"));
+	     
 	      
-	      String articleTagname = request.getParameter("tagName");
+	      String articleTopcate = request.getParameter("articleTopcate");
+	      System.out.println(request.getParameter("articleTopcate"));
 	      
-	      Map pageMap = new HashMap();
+	      String articleBotcate = request.getParameter("articleBotcate");
+	      System.out.println(request.getParameter("articleBotcate"));
+	      
+	      String articleTagname = request.getParameter("articleTagname");
+	      System.out.println(request.getParameter("articleTagname"));
+	      
+	      
+	      Map pageMap = new HashMap<>();
 	      pageMap.put("startRow", startRow);
 	      pageMap.put("endRow", endRow);
+	      pageMap.put("articleTopcate", articleTopcate);
+	      pageMap.put("articleBotcate", articleBotcate);
 	      pageMap.put("articleTagname", articleTagname);
-
+	      
+	      
+	      
 	    // 개발 질문 게시글 목록 조회
 	    List<ArticleListDTO> devListAskTag = devDAO.selectAllAskTag(pageMap);
+	    System.out.println(devListAskTag);
 	    request.setAttribute("devListAskTag", devListAskTag);
+
 	    
 	      //페이징 정보 설정
 	      //BoardMapper.xml의 getTotal을 이용하여 전체 게시글 개수 조회
