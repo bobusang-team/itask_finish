@@ -3,14 +3,15 @@
 
 <mapper namespace="comment">
 	<select id="selectAll" parameterType="int" resultType="CommentListDTO">
-		select comment_number, comment_text, comment_date, comment_monitor_num, article_num, c.user_num, user_nick
+		select comment_num, comment_text, comment_date, comment_monitor_num, article_num, c.user_num, user_nick,
+		CASE WHEN USER_MENTO_CERT = 'T' THEN '🏅' END AS badge
 		from tbl_user u join tbl_comment c
-		on article_num = #{commentNum} and u.user_num = c.user_num order by comment_date DESC
+		on article_num = #{articleNum} and u.user_num = c.user_num order by comment_date DESC
 	</select>
 	
 	<insert id="insert" parameterType="CommentDTO">
 		insert into tbl_comment(comment_num, comment_text, article_num, user_num)
-		values(seq_comment.nextVal, #{commentText}, #{articleNum}, #{userNum})
+		values(SEQ_COMMENT.nextVal, #{commentText}, #{articleNum}, #{userNum})
 	</insert>
 	
 	<delete id="delete" parameterType="int">
@@ -22,5 +23,12 @@
 		update tbl_comment
 		set comment_text = #{commentText}
 		where comment_num = #{commentNum}
+	</update>
+	
+	   <!-- 추천수 증가 -->
+   <update id="incrementMonitorNum">
+    UPDATE TBL_comment
+    SET comment_MONITOR_NUM = comment_MONITOR_NUM + 1
+    WHERE comment_NUM = #{commentNum}
 	</update>
 </mapper>

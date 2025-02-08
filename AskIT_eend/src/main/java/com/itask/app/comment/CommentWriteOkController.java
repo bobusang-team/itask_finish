@@ -16,6 +16,7 @@ import com.google.gson.JsonParser;
 import com.itask.app.Execute;
 import com.itask.app.Result;
 import com.itask.app.comment.dao.CommentDAO;
+import com.itask.app.dto.ArticleListDTO;
 import com.itask.app.dto.CommentDTO;
 
 public class CommentWriteOkController implements Execute{
@@ -28,7 +29,7 @@ public class CommentWriteOkController implements Execute{
 		CommentDTO commentDTO = new CommentDTO();
 		CommentDAO commentDAO = new CommentDAO();
 		System.out.println("세션에 저장된 멤버" + session.getAttribute("userNum"));
-		
+   
 		request.setCharacterEncoding("utf-8");
 		
 		//json 응답
@@ -48,10 +49,13 @@ public class CommentWriteOkController implements Execute{
 		
 		//DTO 설정
 		commentDTO.setArticleNum(jsonObject.get("articleNum").getAsInt());
+		System.out.println(jsonObject.get("articleNum").getAsInt());
 		commentDTO.setUserNum(jsonObject.get("userNum").getAsInt());
+		System.out.println(jsonObject.get("userNum").getAsInt());
 		commentDTO.setCommentText(jsonObject.get("commentText").getAsString());
+		System.out.println(jsonObject.get("commentText").getAsString());
 		
-		System.out.println("replyDTO 확인 : " + commentDTO);
+		System.out.println("commentDTO 확인 : " + commentDTO);
 		
 		//DB 저장
 		commentDAO.insert(commentDTO);

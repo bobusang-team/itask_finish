@@ -9,6 +9,7 @@ public class CommentListDTO {
 	private String commentDate;
 	private String commentModifyDate;
 	private String userNick;
+	private String badge;
 	
 	public int getCommentNum() {
 		return commentNum;
@@ -58,13 +59,20 @@ public class CommentListDTO {
 	public void setUserNick(String userNick) {
 		this.userNick = userNick;
 	}
-	
+	public String getBadge() {
+		return badge;
+	}
+	public void setBadge(String badge) {
+		this.badge = badge;
+	}
 	@Override
 	public String toString() {
 		return "CommentListDTO [commentNum=" + commentNum + ", userNum=" + userNum + ", articleNum=" + articleNum
 				+ ", commentMonitorNum=" + commentMonitorNum + ", commentText=" + commentText + ", commentDate="
-				+ commentDate + ", commentModifyDate=" + commentModifyDate + ", userNick=" + userNick + "]";
+				+ commentDate + ", commentModifyDate=" + commentModifyDate + ", userNick=" + userNick + ", badge="
+				+ badge + "]";
 	}
+	
 	
 	
 }

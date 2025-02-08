@@ -26,6 +26,12 @@ public class CommentDAO {
 		return sqlSession.selectList("comment.selectAll", articleNum);
 	}
 	
+	//댓글 추천
+		public void incrementCommentMonitor(int coomentNum) {
+		   int result = sqlSession.update("comment.incrementMonitorNum", coomentNum);
+		}
+	
+	
 	//댓글 삭제
 	public void delete(int commentNum) {
 		sqlSession.delete("comment.delete", commentNum);

@@ -13,6 +13,10 @@ pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/footer.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/article/dev/askDetail.css">
   <script defer src="${pageContext.request.contextPath}/assets/js/article/dev/askDetail.js"></script>
+  	<script>
+    	var articleNum = "<%= request.getParameter("articleNum") %>";
+    	console.log("현재 게시글 번호:", articleNum);
+	</script>
 </head>
 
 <body>
@@ -31,8 +35,9 @@ pageEncoding="UTF-8"%>
     <article class="bjs-askDetail-elements">
       <!-- 메인 안에 요소들이 담길 컨테이너 박스 -->
       <div class="bjs-askDetail-topcontainer">
+      <c:out value = "${articleListDTO}" />
         <!-- 자격증  -->
-        <span class="bjs-askDetail-title">개발</span>
+        <span class="bjs-askDetail-title"><c:out value ="${dev.articleTopcate}" /></span>
         <!-- 자격증 상위 카테고리 -->
         <div class="bjs-askDetail-category">
           <button class="bjs-askDetail-category-btn bjs-askDetail-select"><a href="${pageContext.request.contextPath}/dev/listAsk.dev">질문</a></button>
@@ -46,6 +51,7 @@ pageEncoding="UTF-8"%>
         <div class="askDetail-text-header">
           <span class="bjs-askDetail-text-tag"><c:out value ="${dev.articleTagname}" /></span>
           <div class="bjs-askDetail-text-title">${dev.articleTitle}</div>
+         
           <div class="bjs-askDetail-text-profile">
             <img src="./../../../assets/img/profile.png" alt="">
             <span class="bjs-askDetail-text-author"><b><c:out value ="${dev.getUserMonitor() / 100}" />inch</b><br><c:out value ="${dev.userNick}" /><c:out value ="${dev.badge}" /></span>
@@ -112,6 +118,9 @@ pageEncoding="UTF-8"%>
 			      </c:when>
 			    </c:choose>
 			  </div>
+			  <input type="hidden"  class="list-btn"
+					data-articlenum="${dev.getArticleNum()}">
+				</input>
 			</div>
           </div>
         </article>
@@ -122,15 +131,16 @@ pageEncoding="UTF-8"%>
         <!-- 총 댓글 수 -->
         <div class="bjs-askDetail-comment-count">댓글 <span id="comment-count">1</span></div>
         <!-- 댓글 작성 창 -->
-        <form method="POST"
-				action="${pageContext.request.contextPath}/dev/commentupdate.dev?articleNum=${dev.articleNum}">
-	        <div class="bjs-askDetail-comment-input">
-	          <textarea id="comment-input" name="bjs-askDetail-ask-box" rows="4" cols="50" placeholder="칭찬 댓글은 작성자에게 큰 힘이 됩니다."></textarea>
-	          <button onclick="addComment()" type="submit" class="bjs-askDetail-add-btn">올리기</button>
-	        </div>
-		</form>
+	      <div class="comment-form">
+	      	<form id="comment-form">
+	      		<input type = "hidden" name="articleNum" value="${dev.getArticleNum()}">
+	      		<textarea id="content" name="content" rows="4" cols="50" placeholder="칭찬 댓글은 작성자에게 큰 힘이 됩니다."></textarea>
+	          	<button type="button" class="submit-btn">올리기</button>
+			</form>       
+	      </div>
+
         <!-- 작성된 댓글이 보여지는 리스트 창 -->
-       <c:forEach var="dev" items="${comments}">
+<%--        <c:forEach var="dev" items="${comments}">
         <div id="comment-section">
           <!-- --------------------------여기서부터 댓글 하나당-------------------- -->
           <div class="bjs-askDetail-comment-show">
@@ -146,13 +156,51 @@ pageEncoding="UTF-8"%>
            	</div>
           	</div>
            </div>
-         </c:forEach>
+         </c:forEach> --%>
+         <div class="comment-list">
+				<!-- 리스트 예시 -->
+				<ul id="comment-list">
+					<li>
+						<div class="comment-info">
+							<span class="writer"></span> <span class="date"></span>
+						
+							<div class="comment-content-wrap">
+								<div class="comment-content">
+									<p></p>
+								</div>
+								<div class="comment-btn-group">
+									<button type=button class="comment-modify-ready">수정</button>
+									<button type=button class="comment-delete">삭제</button>
+								</div>
+								<div class="comment-btn-group none">
+									<button type=button class="comment-modify">수정 완료</button>
+								</div>
+							</div>
+							
+						</div>	
+					</li>
+				</ul>
+				<!-- /리스트 예시 -->
+			</div>
+        
+         
           <!-- --------------------------이만큼 추가돼야함^_^~-------------------- -->
        
       </article>
 
     </article>
   </main>
+  	<script>
+   		const contextPath = "${pageContext.request.contextPath}";
+	</script>
+  	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+	<!-- ++++++ -->
+	<script>
+		let userNum = "${sessionScope.userNum}";
+		console.log(userNum + "디테일jsp");
+	</script>
 </body>
 
 </html>

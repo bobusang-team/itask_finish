@@ -29,6 +29,7 @@ public class DevDetailAskController implements Execute {
         }
 
         int articleNum = Integer.parseInt(articleNumStr);
+
         DevDAO devDAO = new DevDAO();
         ArticleListDTO articleListDTO = devDAO.selectOne(articleNum);
         System.out.println(articleListDTO);
@@ -40,6 +41,7 @@ public class DevDetailAskController implements Execute {
             return result;
         }
 
+        
         HttpSession session = request.getSession();
         UserDTO thisUser = null;
         int loginUserNum = -1;
@@ -59,6 +61,8 @@ public class DevDetailAskController implements Execute {
         } catch (Exception e) {
             System.out.println("예외 발생: " + e.getMessage());
         }
+        
+        
 
         // 게시글 정보 가져오기 (JSP에서 사용할 수 있도록 설정)
         request.setAttribute("dev", articleListDTO);
@@ -69,7 +73,20 @@ public class DevDetailAskController implements Execute {
 
         int articleWriterNum = articleListDTO.getUserNum();
         System.out.println("현재 게시글 작성자 번호 : " + articleWriterNum);
+        
+        int detailArticleNum = articleListDTO.getArticleNum();
+        System.out.println("현재 게시글 번호 : " + detailArticleNum);
+        
+        String detailArticleTopcate = articleListDTO.getArticleTopcate();
+        System.out.println("현재 게시글 카테고리 : " + detailArticleNum);
+        
+        response.setContentType("application/json; charset=UTF-8");
+        response.getWriter().write("{\"articleNum\": " + articleNum + "}");
 
+        response.setContentType("application/json; charset=UTF-8");
+        response.getWriter().write("{\"articleWriterNum\": " + articleWriterNum + "}");
+
+        
         if (loginUserNum != -1 && !Objects.equals(loginUserNum, articleWriterNum)) {
             devDAO.increaseView(articleNum);
         }

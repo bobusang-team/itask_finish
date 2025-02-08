@@ -254,21 +254,21 @@
 }
 
 /* 댓글 작성, 댓글 리스트가 담긴 박스 */
-.bjs-askDetail-comment-box {
+/* .bjs-askDetail-comment-box {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
-}
+} */
 
 /* 총 댓글 수 표시 */
-.bjs-askDetail-comment-count {
+/* .bjs-askDetail-comment-count {
   font-size: 25px;
   margin: 10px;
 }
 
-/* 댓글 입력칸, 올리기 버튼이 담긴 박스 */
-.bjs-askDetail-comment-input {
+댓글 입력칸, 올리기 버튼이 담긴 박스
+.comment-form {
   width: 100%;
   height: 100%;
   border: 1px solid #606060;
@@ -278,8 +278,8 @@
   margin: 0px 0px 20px 0px;
 }
 
-/* 댓글 작성 창 */
-#comment-input {
+댓글 작성 창
+#content {
   width: 100%;
   height: 50px;
   margin: 20px;
@@ -287,8 +287,8 @@
   resize: none;
 }
 
-/* 댓글 올리기 버튼 */
-.bjs-askDetail-add-btn {
+댓글 올리기 버튼
+.submit-btn {
   width: 80px;
   height: 100%;
   font-size: 20px;
@@ -298,8 +298,8 @@
   color: #D96073;
 }
 
-/* 작성자, 작성된 댓글, 시간, 조회수, 모니터가 담긴 박스 */
-.bjs-askDetail-comment-show {
+작성자, 작성된 댓글, 시간, 조회수, 모니터가 담긴 박스
+.comment-info {
   width: 100%;
   height: 100%;
   border: 1px solid #606060;
@@ -309,7 +309,7 @@
   margin: 5px 0px;
 }
 
-/* 작성자 */
+작성자
 .bjs-askDetail-commnet-author {
   padding: 20px;
   color: #606060;
@@ -317,30 +317,144 @@
   font-size: 15px;
 }
 
-/* 작성된 댓글 */
-.bjs-askDetail-comment-section {
+작성된 댓글
+.comment-list {
   padding: 10px 30px;
   color: #606060;
   font-size: 18px;
 }
 
-/* 삭제된 댓글  */
+삭제된 댓글 
 .bjs-askDetail-delete-comment-style{
   color: red;
-}
+} */
 
 /* 작성된 시간, 조회수, 모니터가 담긴 박스 */
-.bjs-askDetail-comment-info {
+/* .bjs-askDetail-comment-info {
   font-size: 15px;
   color: #606060;
   margin: 0px 0px 20px 15px;
 }
 
-/* 작성된 시간 */
-/* 조회수 */
-/* 모니터 */
+작성된 시간
+조회수
+모니터
 .bjs-askDetail-comment-date,
 .bjs-askDetail-comment-views,
 .bjs-askDetail-comment-monitor {
   padding: 10px;
+} */
+/* 댓글 스타일 */
+.comment-wrap {
+	margin-top: 20px;
+}
+
+.comment-form {
+	margin : 50px 0 70px 0;
+}
+
+.comment-form textarea {
+	width: 100%;
+	height: 100px;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	resize: none;
+}
+
+.comment-form button {
+	margin-top: 10px;
+	padding: 5px 10px;
+	border: none;
+	border-radius: 5px;
+	background-color: #333;
+	color: #fff;
+	cursor: pointer;
+}
+
+.comment-form button:hover {
+	background-color: rgb(255, 87, 87);
+}
+
+.form-group>label {
+	margin-right: 10px;
+	font-size: 12px;
+}
+
+#comment-list {
+	list-style: none;
+}
+
+.comment-item {
+	margin-bottom: 20px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	padding: 10px;
+}
+
+.comment-writer {
+	font-weight: bold;
+}
+
+.comment-date {
+	margin-left: 10px;
+	font-size: 12px;
+	color: #999;
+}
+
+.comment-content {
+	margin-top: 5px;
+}
+
+.comment-list li {
+	border-bottom: 1px solid #e0e0e0;
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+}
+
+.comment-info {
+	font-size: 14px;
+	color: #999;
+}
+
+.comment-info .writer {
+	margin-right: 10px;
+}
+
+.comment-content p {
+	font-size: 16px;
+	line-height: 1.5;
+	margin-top: 10px;
+}
+
+.comment-content-wrap{
+	display : flex;
+	justify-content: space-between;
+}
+
+.comment-btn-group button {
+	margin-top: 10px;
+	padding: 5px 10px;
+	border: none;
+	border-radius: 5px;
+	background-color: #333;
+	color: #fff;
+	cursor: pointer;
+}
+
+.comment-btn-group button:hover{
+	background-color: rgb(255, 87, 87);
+}
+
+.none{
+	display : none;
+}
+
+.comment-list textarea {
+	width: 900px;
+	height: 40px;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	resize: none;
 }

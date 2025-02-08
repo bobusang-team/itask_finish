@@ -20,6 +20,7 @@
       <typeAlias type="com.itask.app.dto.ArticleDetailDTO" alias="ArticleDetailDTO"></typeAlias>
       <typeAlias type="com.itask.app.dto.AttachedFileDTO" alias="AttachFileDTO"></typeAlias>
       <typeAlias type="com.itask.app.dto.CommentDTO" alias="CommentDTO"></typeAlias>
+      <typeAlias type="com.itask.app.dto.CommentListDTO" alias="CommentListDTO"></typeAlias>
       <typeAlias type="com.itask.app.dto.AdminDTO" alias="AdminDTO"></typeAlias>   
         <typeAlias type="com.itask.app.dto.MypageMainDTO" alias="MypageMainDTO"></typeAlias>
         <typeAlias type="com.itask.app.dto.NoticeDTO" alias="NoticeDTO"></typeAlias>
@@ -47,6 +48,7 @@
       <mapper resource="com/mybatis/mapper/WriteMapper.xml" />
       <mapper resource="com/mybatis/mapper/AdminMapper.xml" />
       <mapper resource="com/mybatis/mapper/NoticeMapper.xml" />
+      <mapper resource="com/mybatis/mapper/CommentMapper.xml" />
    </mappers>
    
 </configuration>

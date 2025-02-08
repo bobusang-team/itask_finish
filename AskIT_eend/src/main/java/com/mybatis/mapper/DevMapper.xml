@@ -4,30 +4,33 @@
  
       <!-- 개발 질문 전체 게시물 리스트  조회 -->
    <select id = "selectAllAsk" resultType = "ArticleListDTO">
-<![CDATA[
-SELECT * FROM (
-     SELECT ROWNUM AS rnum, subquery.*
-     FROM (
-		SELECT 
-			A.ARTICLE_NUM, 
-			A.ARTICLE_TITLE, 
-			A.ARTICLE_TEXT, 
-			A.ARTICLE_DATE, 
-			A.ARTICLE_VIEW, 
-			A.ARTICLE_MONITOR_NUM, 
-			A.ARTICLE_TOPCATE, 
-			A.ARTICLE_BOTCATE, 
-			A.ARTICLE_TAGNAME, 
-			A.USER_NUM,
-			U.USER_MONITOR,
-			U.USER_NICK,
-			CASE WHEN USER_MENTO_CERT = 'T' THEN '🏅' END AS badge
-		FROM TBL_ARTICLE A
-		JOIN TBL_USER U ON A.USER_NUM = U.USER_NUM
-		WHERE ((A.ARTICLE_TOPCATE) = '개발' AND (A.ARTICLE_BOTCATE) = '질문')
-		ORDER BY A.ARTICLE_DATE DESC
-	) subquery
-   ) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+	<![CDATA[
+		SELECT * 
+		FROM (
+		    SELECT 
+		        A.ARTICLE_NUM, 
+		        A.ARTICLE_TITLE, 
+		        A.ARTICLE_TEXT, 
+		        A.ARTICLE_DATE, 
+		        A.ARTICLE_VIEW, 
+		        A.ARTICLE_MONITOR_NUM, 
+		        A.ARTICLE_TOPCATE, 
+		        A.ARTICLE_BOTCATE, 
+		        A.ARTICLE_TAGNAME, 
+		        A.USER_NUM,
+		        U.USER_MONITOR,
+		        U.USER_NICK,
+		        CASE 
+		            WHEN U.USER_MENTO_CERT = 'T' THEN '🏅' 
+		            ELSE NULL 
+		        END AS badge,
+		        ROW_NUMBER() OVER (ORDER BY A.ARTICLE_DATE DESC) AS rnum
+		    FROM TBL_ARTICLE A
+		    INNER JOIN TBL_USER U ON A.USER_NUM = U.USER_NUM
+		    WHERE A.ARTICLE_TOPCATE = #{articleTopcate} 
+		      AND A.ARTICLE_BOTCATE = #{articleBotcate} 
+		) 
+		WHERE rnum BETWEEN #{startRow} AND #{endRow}
     ]]>
   </select>
    
@@ -35,42 +38,49 @@ SELECT * FROM (
    <select id="getTotalDevAsk" resultType="int">
         SELECT COUNT(ARTICLE_NUM) 
         FROM TBL_ARTICLE
-        WHERE ((ARTICLE_TOPCATE) = '개발' AND (ARTICLE_BOTCATE) = '질문')
+       WHERE ((ARTICLE_TOPCATE) = #{articleTopcate} AND (ARTICLE_BOTCATE) = #{articleBotcate})
    </select>
-   
+   																													
    
     <!-- 개발 질문 태그선택 게시물 리스트  조회 -->
       <select id = "selectAllAskTag" resultType = "ArticleListDTO">
-<![CDATA[
-SELECT * FROM (
-     SELECT ROWNUM AS rnum, subquery.*
-     FROM (
-		SELECT 
-			A.ARTICLE_NUM, 
-			A.ARTICLE_TITLE, 
-			A.ARTICLE_TEXT, 
-			A.ARTICLE_DATE, 
-			A.ARTICLE_VIEW, 
-			A.ARTICLE_MONITOR_NUM, 
-			A.ARTICLE_TOPCATE, 
-			A.ARTICLE_BOTCATE, 
-			A.ARTICLE_TAGNAME, 
-			U.USER_NICK,
-			CASE WHEN USER_MENTO_CERT = 'T' THEN '🏅' END AS badge
-		FROM TBL_ARTICLE A
-		JOIN TBL_USER U ON A.USER_NUM = U.USER_NUM
-		WHERE ((A.ARTICLE_TOPCATE) = '개발' AND (A.ARTICLE_BOTCATE) = '질문' AND (A.ARTICLE_TAGNAME) = #{articleTagname})
-		ORDER BY A.ARTICLE_DATE DESC
-	) subquery
-   ) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+	<![CDATA[
+		SELECT * 
+		FROM (
+		    SELECT 
+		        A.ARTICLE_NUM, 
+		        A.ARTICLE_TITLE, 
+		        A.ARTICLE_TEXT, 
+		        A.ARTICLE_DATE, 
+		        A.ARTICLE_VIEW, 
+		        A.ARTICLE_MONITOR_NUM, 
+		        A.ARTICLE_TOPCATE, 
+		        A.ARTICLE_BOTCATE, 
+		        A.ARTICLE_TAGNAME, 
+		        A.USER_NUM,
+		        U.USER_MONITOR,
+		        U.USER_NICK,
+		        CASE 
+		            WHEN U.USER_MENTO_CERT = 'T' THEN '🏅' 
+		            ELSE NULL 
+		        END AS badge,
+		        ROW_NUMBER() OVER (ORDER BY A.ARTICLE_DATE DESC) AS rnum
+		    FROM TBL_ARTICLE A
+		    INNER JOIN TBL_USER U ON A.USER_NUM = U.USER_NUM
+		    WHERE A.ARTICLE_TOPCATE = #{articleTopcate} 
+		      AND A.ARTICLE_BOTCATE = #{articleBotcate} 
+		      AND A.ARTICLE_TAGNAME = #{articleTagname}
+		) 
+		WHERE rnum BETWEEN #{startRow} AND #{endRow}
     ]]>
-   </select>
+  </select>
+   
    
           <!-- 개발 질문 태그 선택 게시글 총 개수 -->
    <select id="getTotalDevAskTag" resultType="int">
         SELECT COUNT(ARTICLE_NUM) 
         FROM TBL_ARTICLE
-        WHERE ((ARTICLE_TOPCATE) = '개발' AND (ARTICLE_BOTCATE) = '질문' AND (ARTICLE_TAGNAME) = #{articleTagname})
+        WHERE ((ARTICLE_TOPCATE) = #{articleTopcate} AND (ARTICLE_BOTCATE) = #{articleBotcate} AND (ARTICLE_TAGNAME) = #{articleTagname})
    </select>
    
    
