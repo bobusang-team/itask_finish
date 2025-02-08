@@ -77,9 +77,9 @@
             <!-- 로그아웃 -->
             <a href="${pageContext.request.contextPath}" class="head-link logout-box">
               <img src="${pageContext.request.contextPath}/assets/img/Logout.png" alt="logout" class="logout-top">
-           	 	<script>
-           	 		document.getElementsByClass('logout-top').addEventListener('click', ()=>sessionStorage.clear());
-           	 	</script>
+           	 	<!-- <script>
+           	 		document.getElementsByClassName('logout-top').addEventListener('click', ()=>sessionStorage.clear());
+           	 	</script> -->
             </a>
           </li>
         </ul>

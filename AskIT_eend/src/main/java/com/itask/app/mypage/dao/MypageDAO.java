@@ -1,7 +1,11 @@
 package com.itask.app.mypage.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 
+import com.itask.app.dto.ArticleListDTO;
 import com.itask.app.dto.MypageMainDTO;
 import com.itask.app.dto.UserDTO;
 import com.mybatis.config.MyBatisConfig;
@@ -54,8 +58,8 @@ public class MypageDAO {
 		return (Integer)sqlSession.delete("mypage.delete", userId) == 0;
 	}
 	
-	// 마이페이지 메인 해야함
-	public MypageMainDTO mainPage(String userId) {
+	// 마이페이지 메인에 출력해야할 정보를 받아오는 쿼리
+	public MypageMainDTO mainPageSelect(String userId) {
 		MypageMainDTO mypageMainDTO = new MypageMainDTO();
 		
 		mypageMainDTO = sqlSession.selectOne("mypage.main", userId);
@@ -69,6 +73,47 @@ public class MypageDAO {
 		   int cnt = sqlSession.selectOne("mypage.nickCnt", userNick);
 		   return cnt>0;
 	   }
+	   
+	 //해당 유저가 작성한 게시글 모두 가져오기
+	 public List<ArticleListDTO> selectAllMy(Map<String, Integer> pageMap){
+		 System.out.println("========selectAll : 유저가 작성한 게시글 가져오기");
+		 List<ArticleListDTO> myList = sqlSession.selectList("mypage.selectAllMy", pageMap);
+		 System.out.println("가져온 목록 : " + myList);
+		 return myList;
+	 }
+	 
+	 //해당 유저가 작성한 게시글 총 수
+	 public int getTotal(int userNum) {
+		 return sqlSession.selectOne("mypage.getTotal", userNum);
+	 }
+	 
+//	 fetch 사용시 주석해제
+//	 public List<ArticleListDTO> selectArticlesByCategory(Map myMap){
+//		 System.out.println("====selectArticlesByCategory 메소드 실행");
+//		 List<ArticleListDTO> myList = sqlSession.selectList("mypage.selectCateList", myMap);
+//		 return myList;
+//	 }
+	 
+	 // 유저가 선택한 프로필 번호의 파일명 가져오기
+	 public String profileSelect(int profileNum) {
+		System.out.println("=====profileSelect 메소드 실행");
+		String profileName = sqlSession.selectOne("mypage.profileSelect", profileNum);
+		System.out.println("=====profileName 명 " + profileName);
+		return profileName;
+	 }
+	 
+	 // 유저 테이블에 프로필 이미지 변경
+	 public int UserProfileNumUpdate(Map<String, Integer> map) {
+		int checkResult = sqlSession.update("mypage.userProfileUpdate", map);
+		System.out.println("checkResult 값 : " + checkResult);
+		return checkResult;
+	 }
 	
+	 // 해당 유저 DTO 불러오기
+	 public UserDTO selectUser(int userNum) {
+		 System.out.println("userDTO 조회 메소드 실행");
+		 UserDTO userDTO = sqlSession.selectOne("mypage.userSelect", userNum);
+		 return userDTO;
+	 }
 }
 
