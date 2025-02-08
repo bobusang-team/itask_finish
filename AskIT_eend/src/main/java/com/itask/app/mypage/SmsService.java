@@ -25,7 +25,7 @@ public class SmsService {
 		String checkNumberCode = generateVerificationCode();
 		
 		HashMap<String, String> params = new HashMap<>();
-		params.put("to", to); // 
+		params.put("to", to);
 		params.put("from", FROM_NUMBER);
 		params.put("type", "SMS");
 		params.put("text", "인증번호는 [" + checkNumberCode + "] 입니다.");

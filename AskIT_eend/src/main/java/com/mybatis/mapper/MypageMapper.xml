@@ -130,32 +130,8 @@
         WHERE USER_NUM = #{userNum}
 	</select>
 	
-	
-	<!-- 내가 쓴 게시글 목록 불러오기 -->
-<!-- 	<select id="selectAllMy" parameterType="map" resultType="ArticleListDTO">
-	SELECT 
-		A.ARTICLE_NUM,
-		A.ARTICLE_TITLE,
-		A.ARTICLE_TEXT,
-		A.ARTICLE_DATE,
-		A.ARTICLE_VIEW,
-		A.ARTICLE_MONITOR_NUM,
-		A.ARTICLE_TOPCATE,
-		A.ARTICLE_BOTCATE,
-		A.ARTICLE_TAGNAME,
-		U.USER_NICK,
-		U.USER_NUM,
-		U.USER_MENTO_CERT,
-		U.USER_MONITOR,
-		CASE WHEN USER_MENTO_CERT = 'T' THEN '🏅' END AS badge
-	FROM TBL_ARTICLE A
-		JOIN TBL_USER U
-			ON A.USER_NUM = U.USER_NUM 
-	WHERE U.USER_NUM = #{userNum}
-	ORDER BY A.ARTICLE_DATE DESC	
-	</select> -->
-	
-	<select id="selectCateList" parameterType="map" resultType="ArticleListDTO">
+	<!-- fetch 사용시 주석해제 -->
+	<!-- <select id="selectCateList" parameterType="map" resultType="ArticleListDTO">
 	SELECT 
 	A.ARTICLE_NUM,
 	A.ARTICLE_TITLE,
@@ -173,7 +149,7 @@
 		ON A.USER_NUM = U.USER_NUM 
 	WHERE U.USER_NUM = #{userNum} AND A.ARTICLE_BOTCATE = #{category}
 	ORDER BY A.ARTICLE_DATE DESC;
-	</select>
+	</select> -->
 	
 	<!-- 프로필 이미지명 가져오기 -->
 	<select id="profileSelect" parameterType="int" resultType="String">
@@ -182,16 +158,39 @@
 		WHERE PROFILE_NUM = #{profileNum}
 	</select>
 	
+	<!--  유저 테이블의 프로필Num 업데이트 -->
 	<update id="userProfileUpdate" parameterType="int" >
 		UPDATE TBL_USER
 		SET PROFILE_NUM = #{profileNum}
 		WHERE USER_NUM = #{userNum}
 	</update>
 	
+	<!--  유저 테이블 조회 -->
 	<select id="userSelect" parameterType="int" resultType="UserDTO">
 		SELECT *
 		FROM TBL_USER
 		WHERE USER_NUM = #{userNum}
 	</select>
+	
+	<!--  해당 유저가 작성한 게시글 상세페이지 조회 -->
+	<select id = "articleDetail" parameterType="int" resultType = "ArticleListDTO" >
+		SELECT 
+		A.ARTICLE_NUM, 
+		U.USER_NICK,
+		A.ARTICLE_TITLE, 
+		A.ARTICLE_TEXT, 
+		A.ARTICLE_DATE, 
+		A.ARTICLE_VIEW, 
+		A.ARTICLE_MONITOR_NUM, 
+		A.ARTICLE_TOPCATE, 
+		A.ARTICLE_BOTCATE, 
+		A.ARTICLE_TAGNAME,
+		A.USER_NUM,
+		U.USER_MONITOR,
+		CASE WHEN USER_MENTO_CERT = 'T' THEN '🏅' END AS badge
+		FROM TBL_ARTICLE A
+		JOIN TBL_USER U ON A.USER_NUM = U.USER_NUM
+		AND A.ARTICLE_NUM = #{articleNum}
+   </select>
 	
 </mapper>

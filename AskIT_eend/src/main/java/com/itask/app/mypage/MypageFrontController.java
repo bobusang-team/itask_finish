@@ -152,6 +152,10 @@ public class MypageFrontController extends HttpServlet {
 			System.out.println("myProfileImgChange 실행!");
 			result = new myProfileImgChangOkController().execute(request, response);
 			break;
+		case "/mypage/myArticleDetail.my":
+			System.out.println("myArticleDetailOk 실행!");
+			result = new myArticleDetailOkController().execute(request, response);
+			break;
 //		fetch 사용시 주석해제
 //		case "/mypage/myTotalArticleCate.my":
 //			System.out.println("myTotalArticleCate 실행!");
