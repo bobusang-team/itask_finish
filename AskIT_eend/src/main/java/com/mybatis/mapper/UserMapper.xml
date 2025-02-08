@@ -18,7 +18,7 @@
    
    <!-- 유저 로그인 -->
    <select id = 'login' parameterType="UserDTO" resultType="UserDTO">
-      select user_num, user_id, user_pw, user_name, user_nick, user_phone, user_mail, USER_MENTO_CERT, user_monitor, user_agree, user_career
+      select user_num, profile_num, user_id, user_pw, user_name, user_nick, user_phone, user_mail, USER_MENTO_CERT, user_monitor, user_agree, user_career
       from tbl_user
       where user_id = #{userId} and user_pw = #{userPw}
    </select>

@@ -61,23 +61,137 @@
 	<!-- 마이페이지 메인 진입시 -->
 	<!-- 해당 회원의 닉네임, 모니터, 작성한 게시글 수, 작성한 댓글 수, 뱃지수, 회원의 경력 조회 -->
 	<select id="main" parameterType="String" resultType="MypageMainDTO">
-		SELECT U.USER_NUM, U.USER_NICK, U.USER_MONITER, U.USER_CAREER,
+		SELECT U.USER_NUM, U.PROFILE_NUM, U.USER_NICK, U.USER_MONITOR, U.USER_MENTO_CERT, U.USER_CAREER,
+		T.CERTS_IPE, T.CERTS_IPIE, T.CERTS_IPT, T.CERTS_ISE, T.CERTS_ISIE, T.CERTS_NETMANAGER1, T.CERTS_NETMANAGER2,
+		T.CERTS_SQLD, T.CERTS_LINUXMASTER1, T.CERTS_LINUXMASTER2,
 		COUNT(DISTINCT A.ARTICLE_NUM) AS ARTICLE_COUNT,
-		COUNT(DISTINCT C.COMMENT_NUM) AS COMMENT_COUNT,
-		COUNT(DISTINCT B.BADGE_NUM) AS BADGE_COUNT
+		COUNT(DISTINCT C.COMMENT_NUM) AS COMMENT_COUNT
 		FROM TBL_USER U
 		LEFT JOIN TBL_ARTICLE A
 		ON U.USER_NUM = A.USER_NUM
 		LEFT JOIN TBL_COMMENT C
 		ON U.USER_NUM = C.USER_NUM
-		LEFT JOIN TBL_OWN B
-		ON U.USER_NUM = B.USER_NUM
+		LEFT JOIN TBL_CERTS T
+		ON U.USER_NUM = T.USER_NUM
 		WHERE U.USER_ID = #{userId}
 		GROUP BY
 		U.USER_NUM,
+		U.PROFILE_NUM,
 		U.USER_NICK,
-		U.USER_MONITER,
-		U.USER_CAREER
+		U.USER_MONITOR,
+		U.USER_MENTO_CERT,
+		U.USER_CAREER,
+		T.CERTS_IPE,
+		T.CERTS_IPIE,
+		T.CERTS_IPT,
+		T.CERTS_ISE,
+		T.CERTS_ISIE,
+		T.CERTS_NETMANAGER1,
+		T.CERTS_NETMANAGER2,
+		T.CERTS_SQLD,
+		T.CERTS_LINUXMASTER1,
+		T.CERTS_LINUXMASTER2
 	</select>
-
+	
+	<!-- 내가 쓴 게시글 목록 불러오기 -->
+	<select id = "selectAllMy" resultType = "ArticleListDTO">
+	<![CDATA[
+	SELECT * FROM (
+	     SELECT ROWNUM AS rnum, subquery.*
+	     FROM (
+	      SELECT 
+	         A.ARTICLE_NUM, 
+	         A.ARTICLE_TITLE, 
+	         A.ARTICLE_TEXT, 
+	         A.ARTICLE_DATE, 
+	         A.ARTICLE_VIEW, 
+	         A.ARTICLE_MONITOR_NUM, 
+	         A.ARTICLE_TOPCATE, 
+	         A.ARTICLE_BOTCATE, 
+	         A.ARTICLE_TAGNAME, 
+	         A.USER_NUM,
+	         U.USER_MENTO_CERT,
+	         U.USER_MONITOR,
+	         U.USER_NICK,
+	         CASE WHEN USER_MENTO_CERT = 'T' THEN '🏅' END AS badge
+	      FROM TBL_ARTICLE A
+	      JOIN TBL_USER U ON A.USER_NUM = U.USER_NUM
+	      WHERE A.USER_NUM = #{userNum}
+	      ORDER BY A.ARTICLE_DATE DESC
+	   ) subquery
+	   ) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+	    ]]>
+  </select>
+  
+  <!-- 내가 쓴 게시글 수 가져오기 -->
+	<select id="getTotal" resultType="int">
+		SELECT COUNT(ARTICLE_NUM) 
+        FROM TBL_ARTICLE
+        WHERE USER_NUM = #{userNum}
+	</select>
+	
+	
+	<!-- 내가 쓴 게시글 목록 불러오기 -->
+<!-- 	<select id="selectAllMy" parameterType="map" resultType="ArticleListDTO">
+	SELECT 
+		A.ARTICLE_NUM,
+		A.ARTICLE_TITLE,
+		A.ARTICLE_TEXT,
+		A.ARTICLE_DATE,
+		A.ARTICLE_VIEW,
+		A.ARTICLE_MONITOR_NUM,
+		A.ARTICLE_TOPCATE,
+		A.ARTICLE_BOTCATE,
+		A.ARTICLE_TAGNAME,
+		U.USER_NICK,
+		U.USER_NUM,
+		U.USER_MENTO_CERT,
+		U.USER_MONITOR,
+		CASE WHEN USER_MENTO_CERT = 'T' THEN '🏅' END AS badge
+	FROM TBL_ARTICLE A
+		JOIN TBL_USER U
+			ON A.USER_NUM = U.USER_NUM 
+	WHERE U.USER_NUM = #{userNum}
+	ORDER BY A.ARTICLE_DATE DESC	
+	</select> -->
+	
+	<select id="selectCateList" parameterType="map" resultType="ArticleListDTO">
+	SELECT 
+	A.ARTICLE_NUM,
+	A.ARTICLE_TITLE,
+	A.ARTICLE_TEXT,
+	A.ARTICLE_DATE,
+	A.ARTICLE_VIEW,
+	A.ARTICLE_MONITOR_NUM,
+	A.ARTICLE_TOPCATE,
+	A.ARTICLE_BOTCATE,
+	A.ARTICLE_TAGNAME,
+	U.USER_NICK,
+	CASE WHEN USER_MENTO_CERT = 'T' THEN '🏅' END AS badge
+	FROM TBL_ARTICLE A
+	JOIN TBL_USER U
+		ON A.USER_NUM = U.USER_NUM 
+	WHERE U.USER_NUM = #{userNum} AND A.ARTICLE_BOTCATE = #{category}
+	ORDER BY A.ARTICLE_DATE DESC;
+	</select>
+	
+	<!-- 프로필 이미지명 가져오기 -->
+	<select id="profileSelect" parameterType="int" resultType="String">
+	 	SELECT PROFILE_PHOTO 
+		FROM TBL_PROFILE
+		WHERE PROFILE_NUM = #{profileNum}
+	</select>
+	
+	<update id="userProfileUpdate" parameterType="int" >
+		UPDATE TBL_USER
+		SET PROFILE_NUM = #{profileNum}
+		WHERE USER_NUM = #{userNum}
+	</update>
+	
+	<select id="userSelect" parameterType="int" resultType="UserDTO">
+		SELECT *
+		FROM TBL_USER
+		WHERE USER_NUM = #{userNum}
+	</select>
+	
 </mapper>
