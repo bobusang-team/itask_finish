@@ -67,9 +67,7 @@
 		        ROW_NUMBER() OVER (ORDER BY A.ARTICLE_DATE DESC) AS rnum
 		    FROM TBL_ARTICLE A
 		    INNER JOIN TBL_USER U ON A.USER_NUM = U.USER_NUM
-		    WHERE A.ARTICLE_TOPCATE = #{articleTopcate} 
-		      AND A.ARTICLE_BOTCATE = #{articleBotcate} 
-		      AND A.ARTICLE_TAGNAME = #{articleTagname}
+			WHERE ((ARTICLE_TOPCATE) = #{articleTopcate} AND (ARTICLE_BOTCATE) = #{articleBotcate} AND (ARTICLE_TAGNAME) = #{articleTagname})
 		) 
 		WHERE rnum BETWEEN #{startRow} AND #{endRow}
     ]]>
@@ -178,8 +176,9 @@
 	    C.ARTICLE_NUM = #{articleNum}                  
 	ORDER BY 
 	    C.COMMENT_DATE DESC       
-
     </select> 
+    
+ 
 	
     
 	<insert id="commmentUpdate" parameterType="CommentDTO">
