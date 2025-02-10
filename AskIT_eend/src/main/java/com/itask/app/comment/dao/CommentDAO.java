@@ -30,7 +30,10 @@ public class CommentDAO {
 		public void incrementCommentMonitor(int coomentNum) {
 		   int result = sqlSession.update("comment.incrementMonitorNum", coomentNum);
 		}
-	
+	//댓글 수 세기
+		public int getTotalComment() {
+			return sqlSession.selectOne("comment.countComment");
+		}
 	
 	//댓글 삭제
 	public void delete(int commentNum) {

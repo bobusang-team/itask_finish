@@ -33,6 +33,11 @@ public class CommentListOkController implements Execute{
       commentDAO.selectAll(articleNum).stream().map(gson::toJson).map(JsonParser::parseString).forEach(comments::add);
       System.out.println("댓글 목록 불러오기 메소드 실행");
       
+      int countComment = commentDAO.getTotalComment();
+      System.out.println("댓글 수 : " + countComment);
+      
+      request.setAttribute("countComment", countComment);
+      
       System.out.println(comments.toString());
       
       response.setContentType("application/json; charset=utf-8");
