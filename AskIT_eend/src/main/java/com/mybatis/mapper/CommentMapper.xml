@@ -31,4 +31,12 @@
     SET comment_MONITOR_NUM = comment_MONITOR_NUM + 1
     WHERE comment_NUM = #{commentNum}
 	</update>
+	
+	 <!-- 댓글수 세기 -->
+	   <select id="countComment" resultType="int">
+		SELECT COUNT(C.COMMENT_NUM)
+		FROM TBL_COMMENT C
+		JOIN TBL_ARTICLE A ON C.ARTICLE_NUM = A.ARTICLE_NUM
+		WHERE C.ARTICLE_NUM = #{articleNum}
+   	 </select>
 </mapper>

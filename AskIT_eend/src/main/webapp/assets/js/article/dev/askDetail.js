@@ -19,6 +19,8 @@ function Dropdown() {
 	menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
 }
 
+
+
 //게시물 삭제
 /*const postDeletebtn = document.getElementById('postdelete');
 postDeletebtn.addEventListener('click', function () {

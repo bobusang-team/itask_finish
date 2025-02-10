@@ -27,8 +27,8 @@ public class DevDAO {
 		return list;
 	}
 	  // 개발 질문 게시글 총 개수 가져오기
-		public int getTotalDevAsk() {
-			return sqlSession.selectOne("dev.getTotalDevAsk");
+		public int getTotalDevAsk(Map pageMap) {
+			return sqlSession.selectOne("dev.getTotalDevAsk", pageMap);
 		}
 	
 	// 개발 질문 태그 선택 게시글 가져오기

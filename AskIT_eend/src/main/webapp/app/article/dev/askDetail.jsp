@@ -118,9 +118,9 @@ pageEncoding="UTF-8"%>
 			      </c:when>
 			    </c:choose>
 			  </div>
-			  <input type="hidden"  class="list-btn"
+			  <button type="button"  class="list-btn"
 					data-articlenum="${dev.getArticleNum()}">
-				</input>
+				</button>
 			</div>
           </div>
         </article>
@@ -129,7 +129,7 @@ pageEncoding="UTF-8"%>
       <article class="bjs-askDetail-comment-box">
 
         <!-- 총 댓글 수 -->
-        <div class="bjs-askDetail-comment-count">댓글 <span id="comment-count">1</span></div>
+        <div class="bjs-askDetail-comment-count">댓글 <span id="comment-count">${countComment}</span></div>
         <!-- 댓글 작성 창 -->
 	      <div class="comment-form">
 	      	<form id="comment-form">
