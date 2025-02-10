@@ -19,7 +19,7 @@
           </button>
         </div>
         <!-- 검색상자 -->
-        <a href="${pageContext.request.contextPath }/write/write.wr" class="write-box">
+        <a href="${pageContext.request.contextPath }/app/write/write.wr" class="write-box">
           <img src="${pageContext.request.contextPath}/assets/img/File Plus 02.png" alt="fileplus2" class="icon"> 글쓰기
         </a>
       </div>

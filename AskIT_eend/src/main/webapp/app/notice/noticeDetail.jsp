@@ -1,47 +1,70 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ page import="com.itask.app.dto.UserDTO" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ page import="com.itask.app.dto.UserDTO" %>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>공지사항게시글화면</title>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/notice/noticeDetail.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/header.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/footer.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/footer.css">
 </head>
 
 <body>
-<jsp:include page="../basic/userheader.jsp" />
-  <div class="mjh-noticeDetail-main">
+<% UserDTO userInfo = (UserDTO)session.getAttribute("userDTO"); %>
+<% if(userInfo != null){ %>
+<jsp:include page="./../basic/userheader.jsp"/>		  
+<% }else{ %>
+<jsp:include page="./../basic/header.jsp"/> 
+<%} %>
+
+	<div class="mjh-noticeDetail-main">
     <div class="mjh-noticeDetail-title">공지사항</div>
-    <span id="main-notice-id"></span>
+    
     <div class="mjh-noticeDetail-articel-header">
-      <div class="mjh-noticeDetail-articel-category" id="notice-category">보안</div>
-      <div class="mjh-noticeDetail-articel-title" id="notice-title">악성코드 경고</div>
-      <div class="mjh-noticeDetail-profile">
-        <img src="./../../assets/img/profile.png" id="mjh-noticeDtail-profile-img" alt="">
-        <span class="mjh-noticeDetail-text-author"><b>**inch</b> 관리자</span>
-      </div>
-      <span class="mjh-noticeDetail-date" id="notice-data">2025-01-09 00:00 </span>
-    </div>
+    	<!-- 카테고리 -->
+     	<div class="mjh-noticeDetail-articel-category" id="notice-category">
+   	    <c:out value="${noticeList.getNoticeCategory()}" /></div>
+      
+    	<!-- 글제목 -->
+     	<div class="mjh-noticeDetail-articel-title">
+      	<c:out value="${noticeList.getNoticeTitle()}" /></div>
+      
+      	<div class = "textInfo">
+      	<!-- 작성자 -->
+      		작성자 <Strong><c:out value="${noticeList.getAdminNick()}" /></Strong>
+     
+      	<!-- 작성일 -->
+      		&nbsp;&nbsp;작성일 <Strong>
+	  		<c:out value="${fn:substring(noticeList.getNoticeDate(), 0 ,10) }" /></Strong>
+	  	  
+	  	<!-- 조회수 -->
+	  		&nbsp;&nbsp;조회수 <Strong><c:out value="${noticeList.getNoticeView()}" /></Strong>
+     	</div>
+    </div> 
+        
     <hr class="mjh-noticeDetail-articel-line">
-    <div class="mjh-noticeDetail-articel-text" id="notice-text">최근 악성코드가 발견되어 보안 패치를 권장합니다. 사용자 여러분은 즉시 업데이트를 완료해 주세요.</div>
-    <div class="mjh-noticeDetail-content">
-      <img src="./../../assets/img/moniter.png" alt="모니터" id="Detail-moniter-img">
-      <span id="Detail-monitercount">0</span>
-      <img src="./../../assets/img/view.png" alt="조회수" id="Detail-view-img">
-      <span id="Detail-viewcount">0</span>
-      <img src="./../../assets/img/share.png" alt="공유수" id="Detail-share-img">
-      <span id="Detail-sharecount">0</span>
-    </div>
-    <hr class="mjh-noticeDetail-articel-line">
-    <span class="mjh-noticeDetail-listbutton"><a href="./notice.jsp">목록</a></span>
+    
+    <!-- 글내용 -->
+    <div class="mjh-noticeDetail-articel-text" id="notice-text">
+    <c:out value="${noticeList.getNoticeText()}" /></div>
+ 
+    <hr class="mjh-noticeDetail-articel-line2">
+    
+   	<!-- 목록버튼 -->
+    <span class="mjh-noticeDetail-listbutton"><a href="${pageContext.request.contextPath}/app/notice/notice.no">목록</a></span>
   </div>
-  <jsp:include page="../basic/footer.jsp" /></body>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <jsp:include page="../basic/footer.jsp" />
   
 </body>
-
 </html>

@@ -9,10 +9,14 @@
         FROM (
             SELECT 
                 a.admin_num,
+                a.admin_nick,
                 n.notice_num,
                 n.notice_title,
                 n.notice_date,
-                n.notice_view
+                n.notice_view,
+                n.notice_category,
+                n.notice_text,
+                n.notice_modify_date
             FROM tbl_admin a
             JOIN tbl_notice n ON a.admin_num = n.admin_num
             ORDER BY n.notice_date DESC
@@ -32,13 +36,29 @@
       select
       a.admin_num, a.admin_id, n.notice_num,
       n.notice_title ,
-      n.notice_content , n.notice_date , n.notice_view
+      n.notice_text , n.notice_date , n.notice_view, n.notice_modify_date
       from tbl_admin a
       join tbl_notice n
       on notice_num = #{noticeNum} and
       a.admin_num =
       n.admin_num
    </select>
+ 
+   
+      <!-- 공지사항 글 한개씩 불러오는 쿼리2 -->
+ <select id="selectDetail" parameterType="int"
+      resultType="NoticeListDTO">
+      select
+      a.admin_num, a.admin_id, a.admin_nick, n.notice_num,
+      n.notice_title , n.notice_category,
+      n.notice_text , n.notice_date , n.notice_view, n.notice_modify_date
+      from tbl_admin a
+      join tbl_notice n
+      on notice_num = #{noticeNum} and
+      a.admin_num =
+      n.admin_num
+   </select> 
+
    
      <select id="selectOne" parameterType="int"
       resultType="NoticeDTO">

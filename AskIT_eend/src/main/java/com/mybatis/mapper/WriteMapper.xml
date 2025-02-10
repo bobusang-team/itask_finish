@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="write">
+
+   <insert id="insertArticle" parameterType="ArticleDTO">
+      INSERT INTO TBL_ARTICLE (
+      article_num, USER_NUM, ARTICLE_TOPCATE, ARTICLE_BOTCATE, ARTICLE_TAGNAME,
+      ARTICLE_TITLE, ARTICLE_TEXT, ARTICLE_DATE
+      )
+      VALUES (
+      SEQ_ARTICLE.nextVal, #{userNum}, #{articleTopCate}, #{articleBotCate}, #{articleTagName},
+      #{articleTitle}, #{articleText}, SYSDATE)
+   </insert>
+   
+   <!-- 글쓰기 버튼 클릭시 회원/비회원 체크용 -->
+   	<select id="getUserId" parameterType="int" resultType="string">
+		select user_id from tbl_user where user_num = #{userNum}
+	</select>
+
 </mapper>

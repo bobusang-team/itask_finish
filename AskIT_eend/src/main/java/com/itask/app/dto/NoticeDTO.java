@@ -1,3 +1,7 @@
+
+
+
+
 package com.itask.app.dto;
 
 public class NoticeDTO {
