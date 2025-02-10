@@ -10,29 +10,31 @@ public class AttachedFileDTO {
 	
    //필드
    private int AttachedFileNum;
-   private int AticleNum;
+   private int ArticleNum;
    private String  AttachedFileName;
-   
-   //세터,게터
-   public int getAttachedFileNum() {
-      return AttachedFileNum;
-   }
-   public void setAttachedFileNum(int attachedFileNum) {
-      AttachedFileNum = attachedFileNum;
-   }
-   public int getAticleNum() {
-      return AticleNum;
-   }
-   public void setAticleNum(int aticleNum) {
-      AticleNum = aticleNum;
-   }
-   public String getAttachedFileName() {
-      return AttachedFileName;
-   }
-   public void setAttachedFileName(String attachedFileName) {
-      AttachedFileName = attachedFileName;
-   }
-   
+public int getAttachedFileNum() {
+	return AttachedFileNum;
+}
+public void setAttachedFileNum(int attachedFileNum) {
+	AttachedFileNum = attachedFileNum;
+}
+public int getArticleNum() {
+	return ArticleNum;
+}
+public void setArticleNum(int articleNum) {
+	ArticleNum = articleNum;
+}
+public String getAttachedFileName() {
+	return AttachedFileName;
+}
+public void setAttachedFileName(String attachedFileName) {
+	AttachedFileName = attachedFileName;
+}
+@Override
+public String toString() {
+	return "AttachedFileDTO [AttachedFileNum=" + AttachedFileNum + ", ArticleNum=" + ArticleNum + ", AttachedFileName="
+			+ AttachedFileName + "]";
+}
    
    
 }

@@ -2,44 +2,59 @@
 body{
     margin: 0;
     padding: 0;
-    background-color: white;
   }
   .mjh-noticeDetail-main{
-    width: 1200px;
+    width: 1000px;
     margin: auto;
   }
   .mjh-noticeDetail-title {
     padding: 40px;
     text-align: center;
-    font-size: 35px;
+    font-size: 24px;
+    font-weight:bold;
+    color: #333;
+    border-bottom:1px solid #dfdfdf;
+    margin-bottom : 30px;
   }
   .mjh-noticeDetail-articel-title{
     display: flex;
     flex-direction: column;
   }
-  img{
-    overflow-clip-margin: content-box;
+  .mjh-noticeDetail-articel-title>span{
+  color : #606060;
+  font-size:16px;
+  display:inline-block;
   }
+  
   .mjh-noticeDetail-articel-text{
-    padding: 80px;
-    font-size: 24px;
+    font-size: 20px;
   }
   .mjh-noticeDetail-articel-line{
-    margin: 50px;
-    border: 1px solid black;
+    margin:30px auto 70px;
+    border: 1px solid #dfdfdf;
   }
-  .mjh-noticeDetail-listbutton a{
-    width: 120px;
-    display: flex;
+  
+  .mjh-noticeDetail-articel-line2{
+    margin:100px auto 50px;
+    border: 1px solid #dfdfdf;
+  }
+  .mjh-noticeDetail-listbutton>a{
+	width: 100px;
+    height: 33px;
+    cursor: pointer;
+    color: #333;
     margin: auto;
-    margin-top: 120px;
-    padding: 20px;
-    justify-content: center;
-    background-color: #a2a2a2;
-    font-size: 25px;
-    text-decoration: none;
-    color: black;
+    background-color: #dfdfdf;
+    display: block;
+    text-align: center;
+    padding-top: 10px;
+    border-radius:50px;
   }
+.mjh-noticeDetail-listbutton>a:hover{
+	color:white;
+	background-color: #D96073;
+	transition:.5s;
+}
   .mjh-noticeDetail-profile{
     padding-top: 20px;
     padding-bottom: 20px;
@@ -57,17 +72,22 @@ body{
 
   .mjh-noticeDetail-articel-category{
     color: #D96073;
+    padding-bottom:5px;
   }
   .mjh-noticeDetail-articel-title{
     font-size: 24px;
     font-weight: bold;
+  }
+  .textInfo{
+  padding:10px 0px;
+  color:#606060;
   }
   .mjh-noticeDetail-content{
     display: flex;
     margin: auto;
     align-items: center;
     justify-content: center;
-    background-color: #a2a2a2;
+    background-color:#dfdfdf;
     padding: 20px;
     width: 800px;
     margin-top: 200px;
