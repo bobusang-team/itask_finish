@@ -61,7 +61,8 @@ public class DevListAskController {
 	      //BoardMapper.xml의 getTotal을 이용하여 전체 게시글 개수 조회
 	      //실제 마지막 페이지 번호(realEndPage)를 계산함
 	      
-	      int total = devDAO.getTotalDevAsk();
+	      int total = devDAO.getTotalDevAsk(pageMap);
+	      System.out.println("해당 게시글 총 개수 : " + total );
 	      int realEndPage = (int) Math.ceil(total / (double) rowCount); //실제 마지막 페이지 (전체게시글 기준으로 계산)
 	      int endPage = (int) (Math.ceil(page / (double) pageCount) * pageCount); // 현제 페이지 그룹에서의 마지막 페이지
 	      int startPage = endPage - (pageCount - 1); //현재 페이지 그룹에서의 첫 페이지

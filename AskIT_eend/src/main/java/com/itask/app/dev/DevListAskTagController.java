@@ -68,6 +68,7 @@ public class DevListAskTagController {
 	      //실제 마지막 페이지 번호(realEndPage)를 계산함
 	      
 	      int total = devDAO.getTotalDevAskTag(pageMap);
+	      System.out.println("태그 선택후 개시물 갯수 : " + total );
 	      int realEndPage = (int) Math.ceil(total / (double) rowCount); //실제 마지막 페이지 (전체게시글 기준으로 계산)
 	      
 	      int endPage = (int) (Math.ceil(page / (double) pageCount) * pageCount); // 현제 페이지 그룹에서의 마지막 페이지

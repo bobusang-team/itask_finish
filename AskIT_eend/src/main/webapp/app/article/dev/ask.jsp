@@ -33,7 +33,7 @@
 		      <span class="bjs-ask-title">${devListAsk[0].getArticleTopcate()}</span>
 		        <!-- 자격증 상위 카테고리 -->
 		        <div class="bjs-ask-category">
-		          <button class="bjs-ask-category-btn bjs-ask-select "><a href="${pageContext.request.contextPath}/dev/listAsk.dev">질문</a></button>
+		          <button class="bjs-ask-category-btn bjs-ask-select "><a href="${pageContext.request.contextPath}/dev/listAsk.dev?articleTopcate=개발&articleBotcate=질문">질문</a></button>
 		          <button class="bjs-ask-category-btn "><a href="${pageContext.request.contextPath}/dev/listAsk.dev?articleTopcate=개발&articleBotcate=꿀팁">꿀팁</a></button>
 		        </div>
 		      <!-- 자격증 태그 버튼 --> <!-- 나중에 더 추가될 수 있으니 ul > li로 바꾸는 것은 어떤지 초현님과 상의 필요-->
@@ -63,12 +63,35 @@
 		      </c:when> 
 		     </c:choose>    
 		      <div class="bjs-ask-tag"> 
-		         <a href="${pageContext.request.contextPath}/dev/listAsk.dev?articleTopcate=${devListAsk[0].getArticleTopcate()}&articleBotcate=${devListAsk[0].getArticleBotcate()}"><button class="bjs-ask-tag-btn bjs-ask-select">전체</button></a>
-		        <a href="${pageContext.request.contextPath}/dev/listAskTag.dev?articleTopcate=${devListAsk[0].getArticleTopcate()}&articleBotcate=${devListAsk[0].getArticleBotcate()}&tagName=${tag1}"><button class="bjs-ask-tag-btn">${tag1}</button></a>
-		        <a href="${pageContext.request.contextPath}/dev/listAskTag.dev?articleTopcate=${devListAsk[0].getArticleTopcate()}&articleBotcate=${devListAsk[0].getArticleBotcate()}&tagName=${tag2}"><button class="bjs-ask-tag-btn">${tag2}</button></a>
-		        <a href="${pageContext.request.contextPath}/dev/listAskTag.dev?articleTopcate=${devListAsk[0].getArticleTopcate()}&articleBotcate=${devListAsk[0].getArticleBotcate()}&tagName=${tag3}"><button class="bjs-ask-tag-btn">${tag3}</button></a>
-		        <a href="${pageContext.request.contextPath}/dev/listAskTag.dev?articleTopcate=${devListAsk[0].getArticleTopcate()}&articleBotcate=${devListAsk[0].getArticleBotcate()}&tagName=${tag4}"><button class="bjs-ask-tag-btn">${tag4}</button></a>
-		        <a href="${pageContext.request.contextPath}/dev/listAskTag.dev?articleTopcate=${devListAsk[0].getArticleTopcate()}&articleBotcate=${devListAsk[0].getArticleBotcate()}&tagName=${tag5}"><button class="bjs-ask-tag-btn">${tag5}</button></a>
+		        <a class="bjs-ask-tag1 bjs-ask-tag-btn bjs-ask-select" 
+				   href="${pageContext.request.contextPath}/dev/listAsk.dev?articleTopcate=${devListAsk[0].getArticleTopcate()}&articleBotcate=${devListAsk[0].getArticleBotcate()}">
+				   전체
+				</a>
+				
+				<a class="bjs-ask-tag1 bjs-ask-tag-btn" 
+				   href="${pageContext.request.contextPath}/dev/listAskTag.dev?articleTopcate=${devListAsk[0].getArticleTopcate()}&articleBotcate=${devListAsk[0].getArticleBotcate()}&articleTagname=${tag1}">
+				   ${tag1}
+				</a>
+				
+				<a class="bjs-ask-tag1 bjs-ask-tag-btn" 
+				   href="${pageContext.request.contextPath}/dev/listAskTag.dev?articleTopcate=${devListAsk[0].getArticleTopcate()}&articleBotcate=${devListAsk[0].getArticleBotcate()}&articleTagname=${tag2}">
+				   ${tag2}
+				</a>
+				
+				<a class="bjs-ask-tag1 bjs-ask-tag-btn" 
+				   href="${pageContext.request.contextPath}/dev/listAskTag.dev?articleTopcate=${devListAsk[0].getArticleTopcate()}&articleBotcate=${devListAsk[0].getArticleBotcate()}&articleTagname=${tag3}">
+				   ${tag3}
+				</a>
+				
+				<a class="bjs-ask-tag1 bjs-ask-tag-btn" 
+				   href="${pageContext.request.contextPath}/dev/listAskTag.dev?articleTopcate=${devListAsk[0].getArticleTopcate()}&articleBotcate=${devListAsk[0].getArticleBotcate()}&articleTagname=${tag4}">
+				   ${tag4}
+				</a>
+				
+				<a class="bjs-ask-tag1 bjs-ask-tag-btn" 
+				   href="${pageContext.request.contextPath}/dev/listAskTag.dev?articleTopcate=${devListAsk[0].getArticleTopcate()}&articleBotcate=${devListAsk[0].getArticleBotcate()}&articleTagname=${tag5}">
+				   ${tag5}
+				</a>
 		      </div>
 		
 		    </div>
@@ -123,7 +146,7 @@
             <li><a href="#" class="next">&gt;</a></li> -->
             <c:if test="${prev}">
                <li><a
-                  href="${pageContext.request.contextPath}/dev/listAsk.dev?page=${startPage - 1}"
+                  href="${pageContext.request.contextPath}/dev/listAsk.dev?articleTopcate=개발&articleBotcate=질문&page=${startPage - 1}"
                   class="prev">&lt;</a></li>
             </c:if>
             <c:set var="realStartPage" value="${startPage < 0 ? 0:startPage }" />
@@ -131,7 +154,7 @@
                <c:choose>
                   <c:when test="${!(i == page)}">
                      <li><a
-                        href="${pageContext.request.contextPath}/dev/listAsk.dev?page=${i}">
+                        href="${pageContext.request.contextPath}/dev/listAsk.dev?articleTopcate=개발&articleBotcate=질문&page=${i}">
                            <c:out value="${i}" />
                      </a></li>
                   </c:when>
@@ -144,7 +167,7 @@
             </c:forEach>
             <c:if test="${next}">
                <li><a
-                  href="${pageContext.request.contextPath}/dev/listAsk.dev?page=${endPage + 1}"
+                  href="${pageContext.request.contextPath}/dev/listAsk.dev?articleTopcate=개발&articleBotcate=질문&page=${endPage + 1}"
                   class="next">&gt;</a></li>
             </c:if>
             <!-- ========== /페이징 처리 예시 ============ -->
