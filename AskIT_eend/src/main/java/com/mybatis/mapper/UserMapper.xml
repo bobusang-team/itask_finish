@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="user">
+	<!-- 회원가입 성공 시 자격증 DB값 초기화  -->
+	<insert id ="cert" parameterType="int">
+		INSERT INTO TBL_CERTS (USER_NUM, CERTS_IPE, CERTS_IPIE, CERTS_IPT, CERTS_ISE, CERTS_ISIE, CERTS_NETMANAGER1, CERTS_NETMANAGER2, CERTS_SQLD, CERTS_LINUXMASTER1, CERTS_LINUXMASTER2)
+		VALUES (#{userNum}, 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F')
+	</insert>
+
    <!-- 유저 회원가입 -->
-   <insert id="join" parameterType="UserDTO">
-      insert into tbl_user(user_num, user_id, user_pw, user_name, user_nick, user_phone, user_mail, USER_MENTO_CERT, user_monitor, user_agree, user_career)
-      values(seq_user.nextVal, #{userId}, #{userPw}, #{userName}, #{userNick}, #{userPhone}, #{userMail}, #{userCert}, #{userMonitor}, #{userAgree}, #{userCareer})
+    <insert id="join" parameterType="UserDTO">
+		<selectKey keyProperty="userNum" resultType = "int" order="BEFORE">
+			select seq_user.nextVal from dual
+		</selectKey>
+		insert into tbl_user(user_num, user_id, user_pw, user_name, user_nick, user_phone, user_mail, USER_MENTO_CERT, user_monitor, user_agree, user_career, user_join_date)
+		values(#{userNum}, #{userId}, #{userPw}, #{userName}, #{userNick}, #{userPhone}, #{userMail}, #{userMentoCert}, #{userMonitor}, #{userAgree}, #{userCareer}, #{userJoinDate})
    </insert>
    
    <!-- 유저 로그인 -->
    <select id = 'login' parameterType="UserDTO" resultType="UserDTO">
-      select user_num, user_id, user_pw, user_name, user_nick, user_phone, user_mail, USER_MENTO_CERT, user_monitor, user_agree, user_career
+      select user_num, profile_num, user_id, user_pw, user_name, user_nick, user_phone, user_mail, USER_MENTO_CERT, user_monitor, user_agree, user_career
       from tbl_user
       where user_id = #{userId} and user_pw = #{userPw}
    </select>

@@ -11,6 +11,10 @@ public class UserDAO {
    public UserDAO() {
       sqlSession = MyBatisConfig.getSqlSessionFactory().openSession(true);
    }
+   //자격증 초기화
+   public void cert(int userNum) {
+	   sqlSession.insert("user.cert", userNum);
+   }
    
    // 회원가입
    public void join(UserDTO userDTO) {

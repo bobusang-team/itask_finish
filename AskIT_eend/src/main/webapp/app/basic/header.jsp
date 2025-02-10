@@ -51,38 +51,28 @@
 				<li class="nav-item"><a
 					href="${pageContext.request.contextPath}/app/notice/notice.no"
 					class="nav-link">공지사항</a></li>
-				<li class="nav-item dropdown"><a
-					href="${pageContext.request.contextPath}/dev/listAsk.dev"
-					class="nav-link">개발</a>
-					<ul class="dropdown-menu">
-					<li><a href="${pageContext.request.contextPath}/dev/listAsk.dev"class="dropdown-link">질문</a></li>
-						<li><a href="${pageContext.request.contextPath}/dev/listTip.dev"class="dropdown-link">꿀팁</a></li>
-					</ul></li>
-				<li class="nav-item dropdown"><a
-					href="${pageContext.request.contextPath}/app/article/sec/ask.jsp"
-					class="nav-link">보안</a>
-					<ul class="dropdown-menu">
-						<li><a
-							href="${pageContext.request.contextPath}/app/article/sec/ask.jsp"
-							class="dropdown-link">질문</a></li>
-						<li><a
-							href="${pageContext.request.contextPath}/app/article/sec/tip.jsp"
-							class="dropdown-link">꿀팁</a></li>
-					</ul></li>
-				<li class="nav-item dropdown"><a
-					href="${pageContext.request.contextPath}/app/article/qual/guide/infoSec.jsp"
-					class="nav-link">자격증</a>
-					<ul class="dropdown-menu">
-						<li><a
-							href="${pageContext.request.contextPath}/app/article/qual/guide/infoSec.jsp"
-							class="dropdown-link">시험안내</a></li>
-						<li><a
-							href="${pageContext.request.contextPath}/app/article/qual/ask.jsp"
-							class="dropdown-link">질문</a></li>
-						<li><a
-							href="${pageContext.request.contextPath}/app/article/qual/tip.jsp"
-							class="dropdown-link">꿀팁</a></li>
-					</ul></li>
+				<li class="nav-item dropdown">
+          			<a href="${pageContext.request.contextPath}/dev/listAsk.dev?articleTopcate=개발&articleBotcate=질문" class="nav-link">개발</a>
+          			<ul class="dropdown-menu">
+            			<li><a href="${pageContext.request.contextPath}/dev/listAsk.dev?articleTopcate=개발&articleBotcate=질문" class="dropdown-link">질문</a></li>
+            			<li><a href="${pageContext.request.contextPath}/dev/listAsk.dev?articleTopcate=개발&articleBotcate=꿀팁" class="dropdown-link">꿀팁</a></li>
+          			</ul>
+        		</li>
+       			<li class="nav-item dropdown">
+         		<a href="${pageContext.request.contextPath}/dev/listAsk.dev?articleTopcate=보안&articleBotcate=질문" class="nav-link">보안</a>
+          			<ul class="dropdown-menu">
+            			<li><a href="${pageContext.request.contextPath}/dev/listAsk.dev?articleTopcate=보안&articleBotcate=질문" class="dropdown-link">질문</a></li>
+            			<li><a href="${pageContext.request.contextPath}/dev/listAsk.dev?articleTopcate=보안&articleBotcate=꿀팁" class="dropdown-link">꿀팁</a></li>
+          			</ul>
+       			</li>
+       			<li class="nav-item dropdown">
+          		<a href="${pageContext.request.contextPath}/app/article/qual/guide/infoPro.jsp" class="nav-link">자격증</a>
+          			<ul class="dropdown-menu">
+            			<li><a href="${pageContext.request.contextPath}/app/article/qual/guide/infoPro.jsp" class="dropdown-link">시험안내</a></li>
+           				<li><a href="${pageContext.request.contextPath}/dev/listAsk.dev?articleTopcate=자격증&articleBotcate=질문" class="dropdown-link">질문</a></li>
+            			<li><a href="${pageContext.request.contextPath}/dev/listAsk.dev?articleTopcate=자격증&articleBotcate=꿀팁" class="dropdown-link">꿀팁</a></li>
+          			</ul>
+        		</li>
 			</ul>
 		</div>
 	</nav>

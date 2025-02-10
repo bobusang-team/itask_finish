@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/mypage/editPhoneNum.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/header.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/footer.css">
-    <script defer src="${pageContext.request.contextPath }/assets/js/mypage/editPhoneNum.js"></script>
+    <script src="${pageContext.request.contextPath }/assets/js/mypage/editPhoneNum.js"></script>
   </head>
   <jsp:include page="./../basic/userheader.jsp"/>
   <body>
@@ -43,13 +43,14 @@
         
         <!-- 아래 p태그 안에 인증번호가 확인되었습니다 문구가 들어가야합니다.
         default값은 아무 문자 없으며 글씨가 들어가면 자동으로 그린이 적용됩니다 -->
-        <p class="keh-editPhoneNum-checkInfo">인증번호가 확인되었습니다.</p>
+        <p class="keh-editPhoneNum-checkInfo"></p>
         <input type="submit" name="keh-editPhoneNum-submit-btn" class="keh-editPhoneNum-submit-btn" value="변경된 정보 저장하기">
       </form>
       
       
     </main>
     <jsp:include page="../basic/footer.jsp" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </body>
 </html>
 

@@ -21,13 +21,26 @@ public class DevDAO {
 	}
 		
     //개발 질문 게시글 가져오기
-	public List<ArticleListDTO> selectAllAsk() {
-	    System.out.println("DAO selectAllAsk 실행");
-//	    System.out.println("pageMap: " + pageMap);
-		List<ArticleListDTO> list = sqlSession.selectList("dev.selectAllAsk");
-		System.out.println("조회 결과: " + list);
+	public List<ArticleListDTO> selectAllAsk(Map pageMap) {
+		System.out.println("모든 게시글 조회" + pageMap);
+		List<ArticleListDTO> list = sqlSession.selectList("dev.selectAllAsk", pageMap);
 		return list;
 	}
+	  // 개발 질문 게시글 총 개수 가져오기
+		public int getTotalDevAsk() {
+			return sqlSession.selectOne("dev.getTotalDevAsk");
+		}
+	
+	// 개발 질문 태그 선택 게시글 가져오기
+		public List<ArticleListDTO> selectAllAskTag(Map pageMap) {
+			System.out.println("해당 태그 게시글 조회" + pageMap);
+			List<ArticleListDTO> list = sqlSession.selectList("dev.selectAllAskTag", pageMap);
+			return list;
+		}
+	// 개발 질문 태그 선택 총 개수 가져오기
+		public int getTotalDevAskTag(Map pageMap) {
+			return sqlSession.selectOne("dev.getTotalDevAskTag", pageMap);
+		}
 
 	//개발 꾸팁 게시글 가져오기
 		public List<ArticleListDTO> selectAllTip() {
@@ -42,15 +55,22 @@ public class DevDAO {
 		       return sqlSession.selectList("dev.comment", articleNum);
 		   }
 	
-    // 게시글 총 개수 가져오기
-	public int getTotal() {
-		return sqlSession.selectOne("dev.getTotal");
-	}
+  
 	
     //조회수 증가
 	public void increaseView(int articleNum) {
-		sqlSession.update("dev.increaseView", articleNum);
+		int result = sqlSession.update("dev.increaseView", articleNum);
 	}
+	
+	//추천
+	public void incrementArticleMonitor(int articleNum) {
+	   int result = sqlSession.update("dev.incrementMonitorNum", articleNum);
+	}
+	
+	//추천하면 유저 모니터 증가
+	public void incrementUserMonitor(int articleNum) {
+		   int result = sqlSession.update("dev.incrementUserMonitor", articleNum);
+		}
 	
 	//게시글 삭제
 	public void delete(int articleNum) {

@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/member/agreement.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/header.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/footer.css">
-  <script defer src="${pageContext.request.contextPath}/assets/js/member/agreement.js"></script>
+  <script defer src="../../assets/js/member/agreement.js"></script>
   <title>약관동의</title>
 </head>
 

@@ -1,8 +1,6 @@
 package com.itask.app.dto;
 
-//댓글
 public class CommentDTO {
-   
 //   CREATE TABLE TBL_COMMENT (
 //          COMMENT_NUM NUMBER NOT NULL,          
 //          USER_NUM NUMBER NOT NULL,              
@@ -15,17 +13,14 @@ public class CommentDTO {
 //          CONSTRAINT FK_USER_NUM FOREIGN KEY (USER_NUM) REFERENCES TBL_USER(USER_NUM) ON DELETE CASCADE,
 //          CONSTRAINT FK_ARTICLE_NUM FOREIGN KEY (ARTICLE_NUM) REFERENCES TBL_ARTICLE(ARTICLE_NUM) ON DELETE CASCADE
 //      );
-   
-   //댓글 필드   
    private int commentNum;
    private int userNum;
    private int articleNum;
-   private int commentMonitorNum = 0;
+   private int commentMonitorNum;
    private String commentText;
    private String commentDate;
    private String commentModifyDate;
    
-   //getter/setter
    public int getCommentNum() {
       return commentNum;
    }
@@ -69,12 +64,13 @@ public class CommentDTO {
       this.commentModifyDate = commentModifyDate;
    }
    
-   
    @Override
    public String toString() {
       return "CommentDTO [commentNum=" + commentNum + ", userNum=" + userNum + ", articleNum=" + articleNum
             + ", commentMonitorNum=" + commentMonitorNum + ", commentText=" + commentText + ", commentDate="
             + commentDate + ", commentModifyDate=" + commentModifyDate + "]";
    }
-      
+
+   
+   
 }

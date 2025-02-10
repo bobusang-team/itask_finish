@@ -113,5 +113,15 @@
      <url-pattern>*.ad</url-pattern>
   </servlet-mapping>
   
+  <!-- 댓글 -->
+  <servlet>
+     <servlet-name>Comment</servlet-name>
+     <servlet-class>com.itask.app.comment.CommentFrontController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+     <servlet-name>Comment</servlet-name>
+     <url-pattern>*.co</url-pattern>
+  </servlet-mapping>
+  
   
 </web-app>

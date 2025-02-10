@@ -32,13 +32,13 @@ public class ArticleListDTO {
     * private String articleModifyDate;
     */   
    private int articleView;
-   private int articleMonitor;
+   private int articleMonitorNum;
    private int userMonitor;
    private String userMentoCert;
    private String userNick; //관리자페이지에서 필요한 DTO
    private String badge;
    
-   
+
    public int getArticleNum() {
       return articleNum;
    }
@@ -93,11 +93,11 @@ public class ArticleListDTO {
    public void setArticleView(int articleView) {
       this.articleView = articleView;
    }
-   public int getArticleMonitor() {
-      return articleMonitor;
+   public int getArticleMonitorNum() {
+      return articleMonitorNum;
    }
-   public void setArticleMonitor(int articleMonitor) {
-      this.articleMonitor = articleMonitor;
+   public void setArticleMonitorNum(int articleMonitorNum) {
+      this.articleMonitorNum = articleMonitorNum;
    }
    public int getUserMonitor() {
       return userMonitor;
@@ -129,11 +129,7 @@ public class ArticleListDTO {
       return "ArticleListDTO [articleNum=" + articleNum + ", userNum=" + userNum + ", articleTopcate="
             + articleTopcate + ", articleBotcate=" + articleBotcate + ", articleTagname=" + articleTagname
             + ", articleTitle=" + articleTitle + ", articleText=" + articleText + ", articleDate=" + articleDate
-            + ", articleView=" + articleView + ", articleMonitor=" + articleMonitor + ", userMonitor=" + userMonitor
+            + ", articleView=" + articleView + ", articleMonitor=" + articleMonitorNum + ", userMonitor=" + userMonitor
             + ", userMentoCert=" + userMentoCert + ", userNick=" + userNick + ", badge=" + badge + "]";
    }
-
-   
-   
-
 }

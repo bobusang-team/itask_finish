@@ -92,64 +92,75 @@ public class MypageFrontController extends HttpServlet {
 		case "/mypage/mypageMainOk.my":
 			System.out.println("mypageMainOk 실행!");
 			result = new mypageMainOkController().execute(request, response);
-			
 			break;
-		// +++++
-			
 		case "/mypage/mentoCheck.my": // 자격/멘토 뱃지 추가하기 클릭시 -> 해당 jsp로 이동
 			System.out.println("mentoCheck 실행!");
-			result.setPath("/app/mypage/mentoCheck.jsp");
-			result.setRedirect(false);
+			result = new mentoCheckOkController().execute(request, response);
 			break;
-			
 		case "/mypage/pwCheck.my": // 내정보 수정하기 클릭 -> 해당 jsp 이동
 			System.out.println("pwCheck 실행!");
 			result.setPath("/app/mypage/pwCheck.jsp");
 			result.setRedirect(false); //forward 방식
 			break;
-			
 		case "/mypage/pwCheckOk.my": // 내정보 수정하기 클릭 후 비밀번호 입력하고 클릭시
 			System.out.println("pwCheckOk 실행!");
 			result = new pwCheckOkController().execute(request, response); // 여기 구현해야함 처리할 컨트롤러생성 
 			break;
-			
 		case "/mypage/editInfoOk.my": // 닉네임 변경하기 클릭시 -> 업데이트
 			System.out.println("editInfoOk 실행!");
 			result = new editInfoOkController().execute(request, response); // 여기 구현해야함 처리할 컨트롤러 생성
 			break;
-			
 		case "/mypage/editPw.my": // 비밀번호 수정하기 클릭시 -> 해당 jsp 이동
 			System.out.println("editPw 실행!");
 			result.setPath("/app/mypage/editPw.jsp");
 			result.setRedirect(false);
 			break;
-			
 		case "/mypage/editPwOk.my":
 			System.out.println("editPwOk 실행!"); // 비밀번호 변경하기 클릭시 -> 업데이트
 			result = new editPwOkController().execute(request, response);
 			break;
-			
 		case "/mypage/editPhoneNum.my": // 핸드폰 번호 수정하기 클릭시 -> 업데이트
 			System.out.println("editPhoneNum 실행!");
 			result.setPath("/app/mypage/editPhoneNum.jsp");
 			result.setRedirect(false);
 			break;
-			
+		case "/mypage/sendSMS.me":
+			System.out.println("핸드폰 인증 요청!");
+			result = new editPhoneNumSMSController().execute(request, response);
+			break;
+		case "/mypage/verifyCode.my":
+			System.out.println("인증번호 확인 요청!");
+			result = new VerifyCodeController().execute(request, response);
+			break;
 		case "/mypage/editPhoneNumOk.my":
 			System.out.println("editPhoneNumOk 실행!"); // 핸드폰번호 변경하기 클릭시 -> 업데이트
 			result = new editPhoneNumOkController().execute(request, response);
 			break;
-			
-			// 회원탈퇴하기는 고려해봐야한다..
 		case "/mypage/userDeleteOk.my":
 			System.out.println("userDeleteOk 실행!"); // 회원탈퇴하기 클릭시 -> 삭제
 			result = new userDeleteOkController().execute(request, response);
 			break;
-			
 		case "/mypage/checkNickOk.my":
 			System.out.println("checkNickOk 실행!"); // 닉네임 중복검사
 			result = new CheckNickDuplicateController().execute(request, response);
 			break;
+		case "/mypage/myTotalArticle.my":
+			System.out.println("myTotalArticle 실행!");
+			result = new myTotalArticleOkController().execute(request, response);
+			break;
+		case "/mypage/myProfileImgChange.my":
+			System.out.println("myProfileImgChange 실행!");
+			result = new myProfileImgChangOkController().execute(request, response);
+			break;
+		case "/mypage/myArticleDetail.my":
+			System.out.println("myArticleDetailOk 실행!");
+			result = new myArticleDetailOkController().execute(request, response);
+			break;
+//		fetch 사용시 주석해제
+//		case "/mypage/myTotalArticleCate.my":
+//			System.out.println("myTotalArticleCate 실행!");
+//			result = new myTotalArticleCateOkController().execute(request, response);
+//			break;
 		}
 	
 	// 다음 동작 처리
