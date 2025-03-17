@@ -29,7 +29,7 @@
 <%} %>		  
   
  <main class="itAskBox">
-  <form action="${pageContext.request.contextPath}/app/write/writeOk.wr" method="post">
+  <form action="${pageContext.request.contextPath}/app/write/writeOk.wr" method="post" enctype="multipart/form-data" >
     <div class="write-click">
       <h3>카테고리 선택</h3>
       <!-- 카테고리선택 시작 -->
@@ -78,7 +78,7 @@
         </div>
         <!-- 자격증태그네임 -->
         <div class="tagQual">
-          <input type="radio" id="INFOPROCE" name="tagQual" value="정보보안" >
+          <input type="radio" id="INFOSEC" name="tagQual" value="정보보안" >
           <label for="INFOSEC">정보보안</label>
           <input type="radio" id="INFOPROCE" name="tagQual" value="정보처리" >
           <label for="INFOPROCE">정보처리</label>
@@ -125,14 +125,14 @@
 								이미지 업로드(<span class="cnt">0</span>/1)
 							</div>
 						</div>
-						<div class="upload-text">최대 1개까지 업로드 가능, 파일 형식 : jpg, png ※ 이미지를 등록하면 즉시 반영됩니다.</div>
-						<!-- <div class="upload-text">파일 형식 : jpg, png</div>
-						<div class="upload-text">※ 이미지를 등록하면 즉시 반영됩니다.</div> -->
+						<div class="upload-text">최대 1개까지 업로드 가능</div>
+						<div class="upload-text">파일 형식 : jpg, png</div>
+						<div class="upload-text">※ 이미지를 등록하면 즉시 반영됩니다.</div>
 					</div>
 				</div>
 				<div class="img-controller-box">
 					<ul class="file-list">
-
+						
 					</ul>
 				</div>
 			</div>
