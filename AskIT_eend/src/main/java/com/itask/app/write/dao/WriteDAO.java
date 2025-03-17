@@ -20,9 +20,17 @@ public class WriteDAO {
 	}
 
     // 글쓰기 메소드
-    public void insertArticle(ArticleDTO articleDTO) {
+    public int insertArticle(ArticleDTO articleDTO) {
     	System.out.println("글쓰기 DAO 실행");
         sqlSession.insert("write.insertArticle", articleDTO);
+		System.out.println(articleDTO + "출력 ==");
+		System.out.println("게시글제목 : " + articleDTO.getArticleTitle());
+		System.out.println("게시글내용 : " + articleDTO.getArticleText());
+		
+		System.out.println("== 게시글 작성 DAO ==");
+		System.out.println("생성된 articleNumber : " + articleDTO.getArticleNum());
+		System.out.println("== 게시글 작성 DAO 끝 ==");
+		return articleDTO.getArticleNum();
     }
     
 

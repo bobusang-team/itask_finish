@@ -32,6 +32,33 @@ public class WriteController implements Execute {
 		UserDTO userDTO = (UserDTO) session.getAttribute("userDTO");
 		System.out.println("Session UserDTO: " + userDTO); // 디버깅용
 
+		///
+		
+//        UserDTO thisUser = null;
+//        int loginUserNum = -1;
+//        boolean isLoggedIn = false;
+//
+//        try {
+//            thisUser = (UserDTO) session.getAttribute("userDTO");
+//
+//            if (thisUser != null) {
+//                loginUserNum = thisUser.getUserNum();
+//                isLoggedIn = true;
+//                System.out.println("로그인한 멤버 번호 : " + loginUserNum);
+//                session.setAttribute("userNum", loginUserNum);
+//            } else {
+//                System.out.println("로그인하지 않은 사용자입니다.");
+//            }
+//        } catch (Exception e) {
+//            System.out.println("예외 발생: " + e.getMessage());
+//        }
+        
+        
+        
+        /////
+        
+        
+        
 		// 선택한 카테고리에 따라 글 작성 완료후 경로 설정을 다 따로 해줘야 해서 path 변수 미리 선언
 		String path = null;
 
@@ -40,52 +67,35 @@ public class WriteController implements Execute {
 		}
 
 		// 첨부파일 업로드
-//		final String UPLOAD_PATH = "C:/kdt/TEAM_boboosang/itask_finish/AskIT_eend/src/main/webapp/assets/upload";
-////		final String UPLOAD_PATH = request.getSession().getServletContext().getRealPath("/") + "app/assets/upload/";
-//		final int FILE_SIZE = 1024 * 1024 * 5; // 5mb
-//		System.out.println("파일 업로드 경로 : " + UPLOAD_PATH);
-//
-//		MultipartRequest multipartRequest = new MultipartRequest(request, UPLOAD_PATH, FILE_SIZE, "utf-8",
-//				new DefaultFileRenamePolicy());
-		// 이 부분을 설정하니까 안보이던 게시글 제목이 보이게 되었다.
+		final String UPLOAD_PATH = "C:/kdt/TEAM_boboosang/itask_finish/AskIT_eend/src/main/webapp/assets/upload";
+//		final String UPLOAD_PATH = request.getServletContext().getRealPath("/") + "app/assets/upload/";
+		final int FILE_SIZE = 1024 * 1024 * 5; // 5mb
+		System.out.println("파일 업로드 경로 : " + UPLOAD_PATH);
 
-		String topCate = request.getParameter("topCate");
-		String botCate = request.getParameter("botCate");
-		String tagDev = request.getParameter("tagDev");
-		String tagSec = request.getParameter("tagSec");
-		String tagQual = request.getParameter("tagQual");
+		MultipartRequest multipartRequest = new MultipartRequest(request, UPLOAD_PATH, FILE_SIZE, "utf-8",
+				new DefaultFileRenamePolicy());
+//		 이 부분을 설정하니까 안보이던 게시글 제목이 보이게 되었다.
+
+		String topCate = multipartRequest.getParameter("topCate");
+	    String botCate = multipartRequest.getParameter("botCate");
+	    String tagDev = multipartRequest.getParameter("tagDev");
+	    String tagSec = multipartRequest.getParameter("tagSec");
+	    String tagQual = multipartRequest.getParameter("tagQual");
 
 		//글쓰기시 잘 작동함
-		articleDTO.setUserNum(userDTO.getUserNum());
-		articleDTO.setArticleTopCate(request.getParameter("topCate"));
-		articleDTO.setArticleBotCate(request.getParameter("botCate"));
-		articleDTO.setArticleTitle(request.getParameter("title"));
-		articleDTO.setArticleText(request.getParameter("content"));
-		
-//		multipartRequest를 써서 글쓰기 실행
-		
 //		articleDTO.setUserNum(userDTO.getUserNum());
-//		articleDTO.setArticleTopCate(multipartRequest.getParameter("topCate"));
-//		articleDTO.setArticleBotCate(multipartRequest.getParameter("botCate"));
-//		articleDTO.setArticleTitle(multipartRequest.getParameter("title"));
-//		articleDTO.setArticleText(multipartRequest.getParameter("content"));
-		
+//		articleDTO.setArticleTopCate(request.getParameter("topCate"));
+//		articleDTO.setArticleBotCate(request.getParameter("botCate"));
+//		articleDTO.setArticleTitle(request.getParameter("title"));
+//		articleDTO.setArticleText(request.getParameter("content"));
+	    
+	    articleDTO.setUserNum(userDTO.getUserNum());
+	    articleDTO.setArticleTopCate(topCate);
+	    articleDTO.setArticleBotCate(botCate);
+	    articleDTO.setArticleTitle(multipartRequest.getParameter("title"));
+	    articleDTO.setArticleText(multipartRequest.getParameter("content"));
 
-		// 대분류/중분류 별 경로 설정
-		if (topCate.equals("개발") && botCate.equals("질문")) { // 개발-질문
-			path = "/app/article/dev/ask.jsp";
-		} else if (topCate.equals("개발") && botCate.equals("꿀팁")) {// 개발-꿀팁
-			path = "/app/article/dev/tip.jsp";
-		} else if (topCate.equals("보안") && botCate.equals("질문")) { // 보안-질문
-			path = "/app/article/sec/ask.jsp";
-		} else if (topCate.equals("보안") && botCate.equals("꿀팁")) {// 보안-꿀팁
-			path = "/app/article/sec/tip.jsp";
-		} else if (topCate.equals("자격증") && botCate.equals("질문")) { // 자격증-질문
-			path = "/app/article/qual/ask.jsp";
-		} else if (topCate.equals("자격증") && botCate.equals("꿀팁")) {// 자격증-꿀팁
-			path = "/app/article/qual/tip.jsp";
-		}
-
+	    
 		// 태그네임 선택된것만 넣기
 		if (topCate.equals("개발") && tagDev != null) {
 			articleDTO.setArticleTagName(tagDev);
@@ -100,41 +110,34 @@ public class WriteController implements Execute {
 		System.out.println("카테고리 확인용 : " + topCate + botCate + tagDev + tagSec + tagQual);
 		System.out.println(articleDTO);
 
-		// 글쓰기 실행
-		writeDAO.insertArticle(articleDTO);
+	    // 글쓰기 실행
+	    writeDAO.insertArticle(articleDTO);
+	    int articleNum = articleDTO.getArticleNum();
+		System.out.println("생성된 게시글 번호 : " + articleNum);
 
-//		첨부파일코드 작성시 여기도 주석해제
-//		int articleNum = articleDTO.getArticleNum();
-//		System.out.println("생성된 게시글 번호 : " + articleNum);
-		
-		AttachedFileDTO attachedFileDTO = new AttachedFileDTO();
+		AttachedFileDTO attachedFileDTO = new AttachedFileDTO();		
 
-//		만약 첨부파일이 있다면 첨부파일 업로드 처리하기
-//		if(//조건식 어떻게 써야함?) {
-//			
-//			// 파일업로드 처리
-//			// Enumeration : java.util 패키지에 포함된 인터페이스, Iterator와 비슷한 역할
-//
-//			Enumeration<String> fileNames = multipartRequest.getFileNames();
-//			while (fileNames.hasMoreElements()) { // 하나씩 꺼내오자~
-//				String name = fileNames.nextElement();
-//				String attachedfileName = multipartRequest.getFilesystemName(name); // 네임을 매개변수로 넣어줌
-//				
-//				if (attachedfileName == null) {
-//					continue;
-//				}
-//				
-//				attachedFileDTO.setArticleNum(articleNum);
-//				attachedFileDTO.setAttachedFileName(attachedfileName);
-//
-//				System.out.println("업로드된 파일 정보 : " + attachedFileDTO);
-//				AttachedFileDAO attachedFileDAO = new AttachedFileDAO();
-//				attachedFileDAO.insert(attachedFileDTO);
-//
-//			}
-//			// 파일업로드 처리끝			
-//		}
+
+		// 첨부파일 있다면 첨부파일 처리
+		Enumeration<String> fileNames = multipartRequest.getFileNames();
+		while (fileNames.hasMoreElements()) {
+		    String name = fileNames.nextElement();
+		    String attachedfileName = multipartRequest.getFilesystemName(name);
+
+		    if (attachedfileName != null) {
+		        attachedFileDTO.setArticleNum(articleNum);
+		        attachedFileDTO.setAttachedFileName(attachedfileName);
+
+		        System.out.println("업로드된 파일 정보 : " + attachedFileDTO);
+
+		        AttachedFileDAO attachedFileDAO = new AttachedFileDAO();
+		        int attachedFileNum = attachedFileDAO.insert(attachedFileDTO);//첨부파일 번호 받아오기
+		        System.out.println("생성된 첨부파일 번호: " + attachedFileNum); 
+		    }
+		}
 		
+		// 글쓰기 완료 후 본인이 쓴 게시물 상세보기로 바로 넘어간다
+		path = "/dev/detailAsk.dev?articleNum=" + articleNum;
 
 		// 결과 설정
 		result.setRedirect(true);
