@@ -1,7 +1,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
+<<<<<<< HEAD
 <%@ page import="com.itask.app.dto.UserDTO" %>
+=======
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,13 +12,17 @@ pageEncoding="UTF-8"%>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+<<<<<<< HEAD
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/header.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/footer.css">
+=======
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/article/dev/askDetail.css">
   <script defer src="${pageContext.request.contextPath}/assets/js/article/dev/askDetail.js"></script>
 </head>
 
 <body>
+<<<<<<< HEAD
 		<% UserDTO userInfo = (UserDTO)session.getAttribute("userDTO"); %>
 		<% if(userInfo != null){ %>
 		  <jsp:include page="./../../basic/userheader.jsp"/>
@@ -27,6 +34,12 @@ pageEncoding="UTF-8"%>
   <!-- 메인 영역 -->
   <main class="itAskBox">
   
+=======
+  <!-- 헤더 영역 -->
+  <header>header area</header>
+  <!-- 메인 영역 -->
+  <main class="itAskBox">
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
     <!-- 메인 안에 요소들이 담길 컨테이너 박스 -->
     <article class="bjs-askDetail-elements">
       <!-- 메인 안에 요소들이 담길 컨테이너 박스 -->
@@ -48,7 +61,11 @@ pageEncoding="UTF-8"%>
           <div class="bjs-askDetail-text-title">${dev.articleTitle}</div>
           <div class="bjs-askDetail-text-profile">
             <img src="./../../../assets/img/profile.png" alt="">
+<<<<<<< HEAD
             <span class="bjs-askDetail-text-author"><b><c:out value ="${dev.getUserMonitor() / 100}" />inch</b><br><c:out value ="${dev.userNick}" /><c:out value ="${dev.badge}" /></span>
+=======
+            <span class="bjs-askDetail-text-author"><b>27inch</b><c:out value ="${dev.userNick}" /><c:out value ="${dev.badge}" /></span>
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
           </div>
           <div class="bjs-askDetail-text-date"><c:out value ="${dev.articleDate}" /></div>
         </div>
@@ -64,6 +81,7 @@ pageEncoding="UTF-8"%>
           <span class="bjs-askDetail-text-bottom-tag"><c:out value ="${dev.articleTagname}" /></span>
           <!-- 본문 모니터, 댓글, 공유수 -->
           <div class="bjs-askDetail-content">
+<<<<<<< HEAD
 			<c:if test="${not empty sessionScope.message}">
 				<script>
 					alert("${sessionScope.message}");
@@ -113,6 +131,23 @@ pageEncoding="UTF-8"%>
 			    </c:choose>
 			  </div>
 			</div>
+=======
+            <img src="${pageContext.request.contextPath}/assets/img/moniter.png" alt="모니터수" id="Detail-moniter-img">
+            <span id="Detail-monitercount"><c:out value ="${dev.articleMoniter}" /></span>
+            <img src="${pageContext.request.contextPath}/assets/img/view.png" alt="조회수" id="Detail-view-img">
+            <span id="Detail-viewcount"><c:out value ="${dev.articleView}" /></span>
+            <img src="${pageContext.request.contextPath}/assets/img/share.png" alt="공유수" id="Detail-share-img">
+            <span id="Detail-sharecount">0</span>
+            <!-- 본문 수정삭제 드롭다운-->
+            <div class="bjs-askDetail-dropdown">
+              <img src="${pageContext.request.contextPath}/assets/img/Container.png" alt="드롭다운 이미지" class="bjs-askDetail-dropdown-img"
+                onclick="Dropdown()">
+              <div class="bjs-askDetail-dropdown-menu" id="dropdownMenu">
+                <a href="${pageContext.request.contextPath}/dev/update.dev?articleNum=${dev.articleNum}">수정</a>
+                <a href="${pageContext.request.contextPath}/dev/delete.dev?articleNum=${dev.articleNum}" id="postdelete">삭제</a>
+              </div>
+            </div>
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
           </div>
         </article>
       </article>

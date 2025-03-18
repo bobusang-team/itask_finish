@@ -11,10 +11,13 @@
   </welcome-file-list>
   
   
+<<<<<<< HEAD
   <error-page>
     <error-code>404</error-code>
     <location>/error/404.jsp</location>
 </error-page>
+=======
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
   
   <servlet>
   	<servlet-name>User</servlet-name>
@@ -29,7 +32,11 @@
     <!-- 메인 -->
   <servlet>
      <servlet-name>main</servlet-name>
+<<<<<<< HEAD
      <servlet-class>com.itask.app.main.MainFrontController</servlet-class>
+=======
+     <servlet-class>com.itask.app.dev.MainFrontController</servlet-class>
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
   </servlet>
   <servlet-mapping>
      <servlet-name>main</servlet-name>

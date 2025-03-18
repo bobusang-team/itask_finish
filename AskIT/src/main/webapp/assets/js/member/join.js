@@ -28,6 +28,11 @@ document.addEventListener("DOMContentLoaded", function() {
 	const pwRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,20}$/;
 	// 닉네임 유효성 검사
 	const nickRegex = /^[가-힣a-zA-Z0-9]{2,10}$/;
+<<<<<<< HEAD
+=======
+	// 인증번호 고정값
+	const checkNum = "0316";
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 	// 핸드폰 번호 유효성 검사
 	const phoneRegex = /^010\d{8}$/;
 	
@@ -96,7 +101,11 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 	
 	//인증번호 받기 버튼 
+<<<<<<< HEAD
 	phoneCheckBtn.addEventListener("click", function(event){
+=======
+	phoneCheckBtn.addEventListener("click", function(){
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 		event.preventDefault(); // 폼 제출 방지
 		const phone = phoneInput.value;
 		phoneCheckFlag = false;
@@ -105,6 +114,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			phoneCheckFlag = true;
 			phoneCheckResult1.textContent = "인증번호가 전송되었습니다.";
 			phoneCheckResult1.style.color = "#22A309";
+<<<<<<< HEAD
 			
 			/*인증번호 보내는 fetch 시작 */
 			const phoneNumber = phoneInput.value.trim();
@@ -130,6 +140,8 @@ document.addEventListener("DOMContentLoaded", function() {
 	            });
 			/*인증번호 보내는 fetch 끝 */
 			
+=======
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 		}else if(phone === ""){
 			phoneCheckResult1.textContent = "핸드폰 번호를 입력해주세요 (-없이 입력)";
 			phoneCheckResult1.style.color = "red";
@@ -141,6 +153,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	});
 	
 	// 인증번호 확인
+<<<<<<< HEAD
     checkCheckBtn.addEventListener("click", function(event) {
 		event.preventDefault(); // 폼 제출 방지
 		checkFlag = false;
@@ -177,6 +190,30 @@ document.addEventListener("DOMContentLoaded", function() {
                 checkCheckResult1.style.color = "red";
             });
     });
+=======
+	checkCheckBtn.addEventListener("click", function(){
+		event.preventDefault(); // 폼 제출 방지
+		const check = checkInput.value;
+		checkFlag = false;
+		if(phoneCheckFlag){
+			if(check===checkNum){
+				checkCheckResult1.textContent = "인증번호가 일치합니다";
+				checkCheckResult1.style.color = "#22A309";
+				checkFlag = true;
+			}else if(check===""){
+				checkCheckResult1.textContent = "인증번호를 입력해주세요";
+				checkCheckResult1.style.color = "red";
+			}else{
+				checkCheckResult1.textContent = "인증번호가 일치하지 않습니다";
+				checkCheckResult1.style.color = "red";
+				checkFlag = false;
+			}
+		}else{
+			checkCheckResult1.textContent = "인증번호를 먼저 받아주세요";
+			checkCheckResult1.style.color = "red";
+		}
+	});
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 	
 	// 아이디 유효성 검사
 	idInput.addEventListener("blur", function(){
@@ -212,9 +249,12 @@ document.addEventListener("DOMContentLoaded", function() {
 		}
 		pwCheckAgainResult1.textContent = "비밀번호를 재입력/확인해주십시오." ;
 		pwCheckAgainResult1.style.color = "red";
+<<<<<<< HEAD
 		if(pwCheckAgainResult1.style.color == "red"){
 			pwCheckFlag = false;
 		}
+=======
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 	});
     
 	//비밀번호 재확인 
@@ -287,6 +327,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		}
 	});
 	
+<<<<<<< HEAD
 	joinCheckBtn.addEventListener("click", function(event){
 		// 
 		if(!idFinFlag || !idFlag){
@@ -312,6 +353,8 @@ document.addEventListener("DOMContentLoaded", function() {
 		}else{
 		}
 	});
+=======
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 
 });
 
@@ -347,3 +390,7 @@ mark2.addEventListener("click", () => {
 });
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d

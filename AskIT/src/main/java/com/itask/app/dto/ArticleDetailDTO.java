@@ -3,8 +3,13 @@ package com.itask.app.dto;
 public class ArticleDetailDTO {
 
 	private int userNick;
+<<<<<<< HEAD
 	private int userMonitor;
 	private String userMentoCert; 
+=======
+	private int userMoniter;
+	private String userCert; 
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 	private int articleNum;
 	private String articleTopcate;
 	private String articleBotcate;
@@ -16,14 +21,20 @@ public class ArticleDetailDTO {
 	 * private String articleModifyDate;
 	 */	
 	private int articleView;
+<<<<<<< HEAD
 	private int articleMonitor;
 
+=======
+	private int articleMoniter;
+	
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 	public int getUserNick() {
 		return userNick;
 	}
 	public void setUserNick(int userNick) {
 		this.userNick = userNick;
 	}
+<<<<<<< HEAD
 	public int getUserMonitor() {
 		return userMonitor;
 	}
@@ -36,6 +47,19 @@ public class ArticleDetailDTO {
 	public void setUserMentoCert(String userMentoCert) {
 		this.userMentoCert = userMentoCert;
 
+=======
+	public int getUserMoniter() {
+		return userMoniter;
+	}
+	public void setUserMoniter(int userMoniter) {
+		this.userMoniter = userMoniter;
+	}
+	public String getUserCert() {
+		return userCert;
+	}
+	public void setUserCert(String userCert) {
+		this.userCert = userCert;
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 	}
 	public int getArticleNum() {
 		return articleNum;
@@ -85,6 +109,7 @@ public class ArticleDetailDTO {
 	public void setArticleView(int articleView) {
 		this.articleView = articleView;
 	}
+<<<<<<< HEAD
 	public int getArticleMonitor() {
 		return articleMonitor;
 	}
@@ -101,5 +126,22 @@ public class ArticleDetailDTO {
 	}
 	
 
+=======
+	public int getArticleMoniter() {
+		return articleMoniter;
+	}
+	public void setArticleMoniter(int articleMoniter) {
+		this.articleMoniter = articleMoniter;
+	}
+	@Override
+	public String toString() {
+		return "ArticleDetailDTO [userNick=" + userNick + ", userMoniter=" + userMoniter + ", userCert=" + userCert
+				+ ", articleNum=" + articleNum + ", articleTopcate=" + articleTopcate + ", articleBotcate="
+				+ articleBotcate + ", articleTagname=" + articleTagname + ", articleTitle=" + articleTitle
+				+ ", articleText=" + articleText + ", articleDate=" + articleDate + ", articleView=" + articleView
+				+ ", articleMoniter=" + articleMoniter + "]";
+	}
+	
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 	
 }

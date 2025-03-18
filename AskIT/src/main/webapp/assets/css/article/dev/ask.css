@@ -50,10 +50,13 @@
   margin: 20px 20px;
   cursor: pointer;
 }
+<<<<<<< HEAD
 .bjs-ask-tag-btn a{
   color: #D96073;
 
 }
+=======
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 
 .bjs-ask-tag-btn:hover {
   background-color: #e7d4d7;
@@ -195,6 +198,7 @@
 .bjs-ask-post-author {
   cursor: pointer;
 }
+<<<<<<< HEAD
 /* 페이징 스타일 */
 .pagination {
   display: flex;
@@ -230,4 +234,31 @@
   background-color: #333;
   border-color: #333;
   color: #fff;
+=======
+/* 페이지네이션 */
+.pagination {
+  text-align: center;
+  margin: 50px auto;
+  height: 100px;
+}
+
+.pagination a {
+  align-content: center;
+  width: 35px;
+  height: 35px;
+  display: inline-block;
+  border-radius: 30px;
+  margin: 0 5px;
+  text-decoration: none;
+  color: #606060;
+  border: 1px solid #DFDFDF;
+  cursor: pointer;
+}
+.pagination a:hover {
+  font-weight: bold;
+  background-color: #D96073;
+  color: white;
+  border: 1px solid white;
+  transition: .3s;
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 }

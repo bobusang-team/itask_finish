@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<<<<<<< HEAD
 
 
 <script defer
 	src="${pageContext.request.contextPath }/assets/js/main/headerVisitor.js"></script>
+=======
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 <!-- 헤더 -->
 <header class="header-box">
 	<div class="header-container">
@@ -31,7 +34,10 @@
 				<li class="head-item"><a
 					href="${pageContext.request.contextPath }/app/member/login.jsp"
 					class="head-link"> 로그인 </a></li>
+<<<<<<< HEAD
 					
+=======
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 				<li class="head-item"><a
 					href="${pageContext.request.contextPath }/app/member/agreement.jsp"
 					class="head-link"> 회원가입 </a></li>
@@ -54,7 +60,11 @@
 							class="dropdown-link">명예의 전당</a></li>
 					</ul></li>
 				<li class="nav-item"><a
+<<<<<<< HEAD
 					href="${pageContext.request.contextPath}/app/notice/notice.no"
+=======
+					href="${pageContext.request.contextPath}/app/notice/notice.jsp"
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 					class="nav-link">공지사항</a></li>
 				<li class="nav-item dropdown"><a
 					href="${pageContext.request.contextPath}/dev/listAsk.dev"
@@ -75,11 +85,19 @@
 							class="dropdown-link">꿀팁</a></li>
 					</ul></li>
 				<li class="nav-item dropdown"><a
+<<<<<<< HEAD
 					href="${pageContext.request.contextPath}/app/article/qual/guide/infoSec.jsp"
 					class="nav-link">자격증</a>
 					<ul class="dropdown-menu">
 						<li><a
 							href="${pageContext.request.contextPath}/app/article/qual/guide/infoSec.jsp"
+=======
+					href="${pageContext.request.contextPath}/app/article/qual/guide/infoPro.jsp"
+					class="nav-link">자격증</a>
+					<ul class="dropdown-menu">
+						<li><a
+							href="${pageContext.request.contextPath}/app/article/qual/guide/infoPro.jsp"
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 							class="dropdown-link">시험안내</a></li>
 						<li><a
 							href="${pageContext.request.contextPath}/app/article/qual/ask.jsp"

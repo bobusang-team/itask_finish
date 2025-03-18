@@ -5,6 +5,7 @@
 <mapper namespace="main">
 
 
+<<<<<<< HEAD
 	<!-- BEST 게시글 (질문/꿀팁) -->
 	<select id="selectBestArticle" parameterType="String"
 		resultType="ArticleDTO">
@@ -160,6 +161,55 @@
 	<select id="getTotalCountByTag" resultType="int">
 		SELECT COUNT(*) FROM articles WHERE tag = #{tag}
 	</select>
+=======
+<!-- BEST 질문 -->
+<select id="selectBestMoon " parameterType="ArticleDTO" resultType="ArticleDTO">
+
+SELECT * FROM TBL_ARTICLE
+WHERE ARTICLE_BOTCATE = '질문'
+AND ARTICLE_MONITER_NUM = (
+	SELECT MAX(ARTICLE_MONITER_NUM)
+	FROM TBL_ARTICLE
+	WHERE ARTICLE_BOTCATE = '질문'
+)
+</select>
+
+
+<!-- BEST 꿀팁  -->
+<select id="selectBestTip" parameterType="ArticleDTO" resultType="ArticleDTO">
+
+SELECT * FROM TBL_ARTICLE
+WHERE TBL_ATRTICLE_BOTCATE ='꿀팁'
+AND ARTICLE_MONITER_NUM = (
+	SELECT MAX(ARTICLE_MONITE R_NUM)
+	FROM TBL_ARTICLE
+	WHERE ARTICLE_BOTACTE = '꿀팁'
+)
+
+</select>
+
+<select id="selectRanking" resultType="userDTO">
+
+SELECT
+	USER_NUM,
+	USER_ID,
+	USER_NAME,
+	USER_NICK,
+	USER_PW,
+	USER_PHONE,
+	USER_MAIL,
+	USER_CERT,
+	TO_NUMBER_(USER_MONITER) AS USER_MONITER,
+	USER_AGREE,
+	USER_CAREER,
+	USER_JOIN_DATE
+FROM TBL_USER
+ORDER BY TO_NUMBER(USER_MONITER) DESC
+FETCH FIRST 5 ROWS ONLY
+	
+
+</select>
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 
 
 </mapper>

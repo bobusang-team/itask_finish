@@ -1,7 +1,10 @@
 package com.itask.app.member;
 
 import java.io.IOException;
+<<<<<<< HEAD
 import java.sql.Timestamp;
+=======
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -21,20 +24,30 @@ public class JoinOkController implements Execute{
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
 		
+<<<<<<< HEAD
 		HttpSession session = request.getSession();
 		
+=======
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 		UserDAO userDAO = new UserDAO();
 		UserDTO userDTO = new UserDTO();
 		Result result = new Result();
 		
+<<<<<<< HEAD
 		
 //		userMoniter
 		userDTO.setUserMonitor(0);
+=======
+		System.out.println(userDTO);
+//		userMoniter
+		userDTO.setUserMoniter("0");
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 		String userId = request.getParameter("userId");
 		
 		String userNick = request.getParameter("userNick");
 		String userMail = request.getParameter("userMail");
 		
+<<<<<<< HEAD
 //		String agreeOp = (String) session.getAttribute("agreeOption");
 		
 		String agreeOp = (String) request.getSession().getAttribute("agreeOption");
@@ -48,6 +61,9 @@ public class JoinOkController implements Execute{
 			System.out.println("선택약관 미동의");
 			userDTO.setUserAgree('F');
 		}
+=======
+		
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 		
 		userDTO.setUserId(userId);
 		userDTO.setUserPw(request.getParameter("userPw"));
@@ -55,6 +71,7 @@ public class JoinOkController implements Execute{
 		userDTO.setUserNick(userNick);
 		userDTO.setUserPhone(request.getParameter("userPhone"));
 		userDTO.setUserMail(userMail);
+<<<<<<< HEAD
 		userDTO.setUserJoinDate(new Timestamp(System.currentTimeMillis()));
 		
 		userDAO.join(userDTO);
@@ -68,6 +85,17 @@ public class JoinOkController implements Execute{
 		
 		result.setRedirect(false);
 		result.setPath("/app/member/certOk.me");
+=======
+		
+		
+		userDAO.join(userDTO);
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("userDTO", userDTO);
+		
+		result.setRedirect(true);
+		result.setPath(request.getContextPath()+"/app/member/joinfinish.jsp");
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 		
 		return result;
 	}

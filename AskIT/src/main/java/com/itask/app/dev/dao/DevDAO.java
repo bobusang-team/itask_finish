@@ -21,6 +21,7 @@ public class DevDAO {
 	}
 		
     //개발 질문 게시글 가져오기
+<<<<<<< HEAD
 	public List<ArticleListDTO> selectAllAsk(Map<String, Integer> pageMap) {
 		System.out.println("모든 게시글 조회" + pageMap);
 		List<ArticleListDTO> list = sqlSession.selectList("dev.selectAllAsk", pageMap);
@@ -41,6 +42,15 @@ public class DevDAO {
 		public int getTotalDevAskTag(Map pageMap) {
 			return sqlSession.selectOne("dev.getTotalDevAskTag", pageMap);
 		}
+=======
+	public List<ArticleListDTO> selectAllAsk() {
+	    System.out.println("DAO selectAllAsk 실행");
+//	    System.out.println("pageMap: " + pageMap);
+		List<ArticleListDTO> list = sqlSession.selectList("dev.selectAllAsk");
+		System.out.println("조회 결과: " + list);
+		return list;
+	}
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 
 	//개발 꾸팁 게시글 가져오기
 		public List<ArticleListDTO> selectAllTip() {
@@ -55,6 +65,7 @@ public class DevDAO {
 		       return sqlSession.selectList("dev.comment", articleNum);
 		   }
 	
+<<<<<<< HEAD
   
 	
     //조회수 증가
@@ -72,6 +83,18 @@ public class DevDAO {
 		   int result = sqlSession.update("dev.incrementUserMonitor", articleNum);
 		}
 	
+=======
+    // 게시글 총 개수 가져오기
+	public int getTotal() {
+		return sqlSession.selectOne("dev.getTotal");
+	}
+	
+    //조회수 증가
+	public void increaseView(int articleNum) {
+		sqlSession.update("dev.increaseView", articleNum);
+	}
+	
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 	//게시글 삭제
 	public void delete(int articleNum) {
 		System.out.println("DAO delete 실행");

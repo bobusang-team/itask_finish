@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dev">
  
+<<<<<<< HEAD
       <!-- 개발 질문 전체 게시물 리스트  조회 -->
    <select id = "selectAllAsk" resultType = "ArticleListDTO">
 <![CDATA[
@@ -79,6 +80,54 @@ SELECT * FROM (
    
       <!--게시물 상세페이지  조회-->
    <select id = "selectOne" resultType = "ArticleListDTO" parameterType="int">
+=======
+      <!-- 게시물 리스트  조회 -->
+   <select id = "selectAllAsk" resultType = "ArticleListDTO" parameterType="ArticleListDTO">
+	<!-- 댓글 포함하지않은 게시글 목록페이지 -->
+		SELECT 
+		A.ARTICLE_NUM, 
+		A.ARTICLE_TITLE, 
+		A.ARTICLE_TEXT, 
+		A.ARTICLE_DATE, 
+		A.ARTICLE_VIEW, 
+		A.ARTICLE_MONITER_NUM, 
+		A.ARTICLE_TOPCATE, 
+		A.ARTICLE_BOTCATE, 
+		A.ARTICLE_TAGNAME, 
+		U.USER_NICK,
+		CASE WHEN USER_CERT = 'T' THEN '🏅' END AS badge
+		FROM TBL_ARTICLE A
+		JOIN TBL_USER U ON A.USER_NUM = U.USER_NUM
+		WHERE ((A.ARTICLE_TOPCATE) = '개발'AND (A.ARTICLE_BOTCATE) = '질문')
+		ORDER BY A.ARTICLE_DATE DESC
+   </select>
+   
+         <!-- 게시물 리스트  조회 -->
+   <select id = "selectAllTip" resultType = "ArticleListDTO" parameterType="ArticleListDTO">
+	<!-- 댓글 포함하지않은 게시글 목록페이지 -->
+		
+		SELECT 
+		A.ARTICLE_NUM, 
+		A.ARTICLE_TITLE, 
+		A.ARTICLE_TEXT, 
+		A.ARTICLE_DATE, 
+		A.ARTICLE_VIEW, 
+		A.ARTICLE_MONITER_NUM, 
+		A.ARTICLE_TOPCATE, 
+		A.ARTICLE_BOTCATE, 
+		A.ARTICLE_TAGNAME, 
+		U.USER_NICK,
+		CASE WHEN USER_CERT = 'T' THEN '🏅' END AS badge
+		FROM TBL_ARTICLE A
+		JOIN TBL_USER U ON A.USER_NUM = U.USER_NUM
+		WHERE ((A.ARTICLE_TOPCATE) = '개발'AND (A.ARTICLE_BOTCATE) = '꿀팁')
+		ORDER BY A.ARTICLE_DATE DESC
+   </select>
+   
+      <!--게시물 상세페이지  조회-->
+   <select id = "selectOne" resultType = "ArticleListDTO" parameterType="int">
+		<!-- 댓글 포함하지않은 게시글 목록페이지 -->
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 		SELECT 
 		A.ARTICLE_NUM, 
 		U.USER_NICK,
@@ -86,6 +135,7 @@ SELECT * FROM (
 		A.ARTICLE_TEXT, 
 		A.ARTICLE_DATE, 
 		A.ARTICLE_VIEW, 
+<<<<<<< HEAD
 		A.ARTICLE_MONITOR_NUM, 
 		A.ARTICLE_TOPCATE, 
 		A.ARTICLE_BOTCATE, 
@@ -93,16 +143,26 @@ SELECT * FROM (
 		A.USER_NUM,
 		U.USER_MONITOR,
 		CASE WHEN USER_MENTO_CERT = 'T' THEN '🏅' END AS badge
+=======
+		A.ARTICLE_MONITER_NUM, 
+		A.ARTICLE_TOPCATE, 
+		A.ARTICLE_BOTCATE, 
+		A.ARTICLE_TAGNAME,
+		CASE WHEN USER_CERT = 'T' THEN '🏅' END AS badge
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 		FROM TBL_ARTICLE A
 		JOIN TBL_USER U ON A.USER_NUM = U.USER_NUM
 		AND A.ARTICLE_NUM = #{articleNum}
    </select>
    
+<<<<<<< HEAD
    <!-- BoardMapper.xml에 total을 가져오기 위한 쿼리 작성 -->
 
    
    
    
+=======
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
    <!--   게시물 삭제 -->
     <delete id ="delete" parameterType = "int">
      DELETE 
@@ -127,6 +187,7 @@ SELECT * FROM (
     WHERE article_num = #{articleNum}
    </update> 
    
+<<<<<<< HEAD
    <!-- 추천수 증가 -->
    <update id="incrementMonitorNum">
     UPDATE TBL_ARTICLE
@@ -148,6 +209,8 @@ SELECT * FROM (
     WHERE ARTICLE_NUM = #{articleNum}
 </select>
    
+=======
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
    
     <select id="comment" parameterType="int" resultType="CommentDTO">
 	SELECT 
@@ -158,7 +221,11 @@ SELECT * FROM (
     C.COMMENT_TEXT,                 
     C.COMMENT_MONITOR_NUM,         
     C.COMMENT_DATE,             
+<<<<<<< HEAD
     U.USER_MONITOR AS USER_MONITOR,
+=======
+    U.USER_MONITER AS USER_MONITER,
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
     U.user_nick 
 	FROM 
 	    TBL_COMMENT C

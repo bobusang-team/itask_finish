@@ -1,7 +1,10 @@
 package com.itask.app.dev;
 
 import java.io.IOException;
+<<<<<<< HEAD
 import java.util.Objects;
+=======
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +20,7 @@ public class DevDetailAskOkController implements Execute {
 	public Result execute(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 		
+<<<<<<< HEAD
 		Result result = new Result();
 		
 		response.setCharacterEncoding("UTF-8");
@@ -48,6 +52,18 @@ public class DevDetailAskOkController implements Execute {
 	      if(!Objects.equals(loginUserNum, articleWriterNum)) {
 	         devDAO.increaseView(articleNum);
 	      }
+=======
+		response.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
+		int articleNum = Integer.valueOf(request.getParameter("articleNum"));
+		DevDAO devDAO = new DevDAO();
+		ArticleListDTO articleListDTO = devDAO.select(articleNum); 
+		Result result = new Result();
+
+		 devDAO.increaseView(articleNum);
+		 System.out.println("조회수 증가 성공!");// 조회수 증가
+		 request.setAttribute("dev", articleListDTO); 
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 
 		result.setPath("/app/article/dev/askDetail.jsp");
 		result.setRedirect(false);

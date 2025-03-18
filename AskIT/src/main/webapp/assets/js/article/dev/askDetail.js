@@ -11,7 +11,11 @@ tagBtns.forEach((tagBtn) => {
 });
 
 //게시글 모니터 버튼 누르면 1증가
+<<<<<<< HEAD
 /*let count = -1;
+=======
+let count = -1;
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 const img = document.getElementById('Detail-moniter-img');
 const countplus = document.getElementById('Detail-monitercount');
 img.addEventListener('click', function () {
@@ -21,7 +25,11 @@ img.addEventListener('click', function () {
     count = -1;
   }
   countplus.textContent = parseInt(countplus.textContent) + count;
+<<<<<<< HEAD
 });*/
+=======
+});
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 
 //수정삭제 드롭다운
 function Dropdown() {

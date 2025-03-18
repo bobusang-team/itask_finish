@@ -19,19 +19,28 @@ public class mypageMainOkController implements Execute{
 	public Result execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+<<<<<<< HEAD
 		
 		
 		
+=======
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		
 		Result result = new Result();
 		MypageDAO mypageDAO = new MypageDAO();
+<<<<<<< HEAD
+=======
+		
+		// 원하는 값을 저장할 DTO를 생성해야함
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 		MypageMainDTO mypageMainDTO = new MypageMainDTO();
 		
 		// 해당 사용자의 세션을 통해 정보 받아오기
 		HttpSession session = request.getSession();
 		UserDTO thisUser = (UserDTO) session.getAttribute("userDTO");
+<<<<<<< HEAD
 		String path = null;
 		
 		System.out.println("========해당 유저 DTO : " + thisUser); // 확인용
@@ -72,6 +81,32 @@ public class mypageMainOkController implements Execute{
 //			result.setPath("/usermain.jsp");
 //			result.setRedirect(true);
 //		}
+=======
+		
+		System.out.println(thisUser); // 확인용
+		
+		// 사용자의 아이디
+		String userId = thisUser.getUserId();
+		System.out.println("userId확인용================" + userId);
+		
+		
+		//쿼리 실행
+		mypageMainDTO = mypageDAO.mainPage(userId);
+		System.out.println(mypageMainDTO); // 확인용
+		
+		//사용자의 세션에 저장
+		session.setAttribute("MypageMainDTO", mypageMainDTO);
+		
+		//생성된다면
+		if(mypageMainDTO != null) {
+			result.setPath("/app/mypage/mypageMain.jsp");
+			result.setRedirect(false);
+		}else {
+			//실패시 메인화면으로
+			result.setPath("/usermain.jsp");
+			result.setRedirect(true);
+		}
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 		
 		return result;
 	}

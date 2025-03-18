@@ -35,8 +35,11 @@
                <%
                UserDTO userInfo = (UserDTO) session.getAttribute("userDTO");
                MypageMainDTO userInfo2 = (MypageMainDTO) session.getAttribute("MypageMainDTO");
+<<<<<<< HEAD
                
                
+=======
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
                if (userInfo == null) {
                    // 세션에 유저 정보가 없는 경우 -> 로그인 페이지
                    response.sendRedirect(request.getContextPath() + "/app/member/login.jsp");
@@ -47,10 +50,17 @@
                System.out.println(session);
                System.out.println(userInfo);
              
+<<<<<<< HEAD
                char userCert = userInfo.getUserCert();
                if (userCert == 'T') {
                   out.println("멘토회원🏅");
                } else if (userCert == 'F') {
+=======
+               boolean userCert = userInfo.isUserCert();
+               if (userCert == true) {
+                  out.println("멘토회원🏅");
+               } else if (userCert == false) {
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
                   out.println("일반회원");
                }
                
@@ -179,7 +189,11 @@
                <!-- 세션이 있으면 -->
                <%
                		/* 멘토회원이면 */
+<<<<<<< HEAD
                		if(userInfo.getUserCert() == 'T'){
+=======
+               		if(userInfo.isUserCert() == true){
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
                			String career = userInfo.getUserCareer();
                			/* ,단위로 라인을 바꿔가며 출력 */
                			career = career.replace(",", "<br>");
@@ -191,7 +205,11 @@
                			}
                			
                			
+<<<<<<< HEAD
                		}else if(userInfo.getUserCert() == 'F'){
+=======
+               		}else if(userInfo.isUserCert() == false){
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
                			out.println("현재 등록된 경력사항이 없습니다");
                		}
                %>

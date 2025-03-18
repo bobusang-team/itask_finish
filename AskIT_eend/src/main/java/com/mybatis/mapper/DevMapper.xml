@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dev">
+ 
+      <!-- 개발 질문 전체 게시물 리스트  조회 -->
+   <select id = "selectAllAsk" resultType = "ArticleListDTO">
+	<![CDATA[
+		SELECT * 
+		FROM (
+		    SELECT 
+		        A.ARTICLE_NUM, 
+		        A.ARTICLE_TITLE, 
+		        A.ARTICLE_TEXT, 
+		        A.ARTICLE_DATE, 
+		        A.ARTICLE_VIEW, 
+		        A.ARTICLE_MONITOR_NUM, 
+		        A.ARTICLE_TOPCATE, 
+		        A.ARTICLE_BOTCATE, 
+		        A.ARTICLE_TAGNAME, 
+		        A.USER_NUM,
+		        U.USER_MONITOR,
+		        U.USER_NICK,
+		        CASE 
+		            WHEN U.USER_MENTO_CERT = 'T' THEN '🏅' 
+		            ELSE NULL 
+		        END AS badge,
+		        ROW_NUMBER() OVER (ORDER BY A.ARTICLE_DATE DESC) AS rnum
+		    FROM TBL_ARTICLE A
+		    INNER JOIN TBL_USER U ON A.USER_NUM = U.USER_NUM
+		    WHERE A.ARTICLE_TOPCATE = #{articleTopcate} 
+		      AND A.ARTICLE_BOTCATE = #{articleBotcate} 
+		) 
+		WHERE rnum BETWEEN #{startRow} AND #{endRow}
+    ]]>
+  </select>
+   
+       <!-- 개발 질문 게시글 총 개수 -->
+   <select id="getTotalDevAsk" resultType="int">
+        SELECT COUNT(ARTICLE_NUM) 
+        FROM TBL_ARTICLE
+       WHERE ((ARTICLE_TOPCATE) = #{articleTopcate} AND (ARTICLE_BOTCATE) = #{articleBotcate})
+   </select>
+   																													
+   
+    <!-- 개발 질문 태그선택 게시물 리스트  조회 -->
+      <select id = "selectAllAskTag" resultType = "ArticleListDTO">
+	<![CDATA[
+		SELECT * 
+		FROM (
+		    SELECT 
+		        A.ARTICLE_NUM, 
+		        A.ARTICLE_TITLE, 
+		        A.ARTICLE_TEXT, 
+		        A.ARTICLE_DATE, 
+		        A.ARTICLE_VIEW, 
+		        A.ARTICLE_MONITOR_NUM, 
+		        A.ARTICLE_TOPCATE, 
+		        A.ARTICLE_BOTCATE, 
+		        A.ARTICLE_TAGNAME, 
+		        A.USER_NUM,
+		        U.USER_MONITOR,
+		        U.USER_NICK,
+		        CASE 
+		            WHEN U.USER_MENTO_CERT = 'T' THEN '🏅' 
+		            ELSE NULL 
+		        END AS badge,
+		        ROW_NUMBER() OVER (ORDER BY A.ARTICLE_DATE DESC) AS rnum
+		    FROM TBL_ARTICLE A
+		    INNER JOIN TBL_USER U ON A.USER_NUM = U.USER_NUM
+			WHERE ((ARTICLE_TOPCATE) = #{articleTopcate} AND (ARTICLE_BOTCATE) = #{articleBotcate} AND (ARTICLE_TAGNAME) = #{articleTagname})
+		) 
+		WHERE rnum BETWEEN #{startRow} AND #{endRow}
+    ]]>
+  </select>
+   
+   
+          <!-- 개발 질문 태그 선택 게시글 총 개수 -->
+   <select id="getTotalDevAskTag" resultType="int">
+        SELECT COUNT(ARTICLE_NUM) 
+        FROM TBL_ARTICLE
+        WHERE ((ARTICLE_TOPCATE) = #{articleTopcate} AND (ARTICLE_BOTCATE) = #{articleBotcate} AND (ARTICLE_TAGNAME) = #{articleTagname})
+   </select>
+   
+   
+   
+  
+   
+      <!--게시물 상세페이지  조회-->
+   <select id = "selectOne" resultType = "ArticleListDTO" parameterType="int">
+		SELECT 
+		A.ARTICLE_NUM, 
+		U.USER_NICK,
+		A.ARTICLE_TITLE, 
+		A.ARTICLE_TEXT, 
+		A.ARTICLE_DATE, 
+		A.ARTICLE_VIEW, 
+		A.ARTICLE_MONITOR_NUM, 
+		A.ARTICLE_TOPCATE, 
+		A.ARTICLE_BOTCATE, 
+		A.ARTICLE_TAGNAME,
+		A.USER_NUM,
+		U.USER_MONITOR,
+		CASE WHEN USER_MENTO_CERT = 'T' THEN '🏅' END AS badge
+		FROM TBL_ARTICLE A
+		JOIN TBL_USER U ON A.USER_NUM = U.USER_NUM
+		AND A.ARTICLE_NUM = #{articleNum}
+   </select>
+   
+   <!-- BoardMapper.xml에 total을 가져오기 위한 쿼리 작성 -->
+
+   
+   
+   
+   <!--   게시물 삭제 -->
+    <delete id ="delete" parameterType = "int">
+     DELETE 
+     FROM TBL_ARTICLE
+     WHERE article_num = #{articleNum}
+    </delete>
+  
+   <!--  게시물 수정 -->
+    <update id="update" parameterType = "ArticleDetailDTO">
+      UPDATE 
+      TBL_ARTICLE
+      SET
+	  article_title = #{articleTitle},	
+      ARTICLE_TEXT = #{articleText} 
+      WHERE article_num = #{articleNum} 
+    </update>
+   
+    <!-- 조회수 증가 -->
+   <update id="increaseView" parameterType = "int">
+    UPDATE tbl_article 
+    SET  article_view = article_view + 1 
+    WHERE article_num = #{articleNum}
+   </update> 
+   
+   <!-- 추천수 증가 -->
+   <update id="incrementMonitorNum">
+    UPDATE TBL_ARTICLE
+    SET ARTICLE_MONITOR_NUM = ARTICLE_MONITOR_NUM + 1
+    WHERE ARTICLE_NUM = #{articleNum}
+	</update>
+
+	<!-- 게시글 추천수 증가할시 유저 모니터 증가  -->
+	<update id="incrementUserMonitor">
+	UPDATE TBL_USER
+    SET USER_MONITOR = USER_MONITOR + 1
+    WHERE USER_NUM = #{userNum}
+	</update>
+
+
+<select id="getMonitorNum" resultType="int">
+    SELECT ARTICLE_MONITOR_NUM
+    FROM TBL_ARTICLE
+    WHERE ARTICLE_NUM = #{articleNum}
+</select>
+   
+   
+    <select id="comment" parameterType="int" resultType="CommentDTO">
+	SELECT 
+    C.COMMENT_NUM,                     
+    C.USER_NUM,                    
+    U.USER_NAME,                     
+    U.USER_NICK,                   
+    C.COMMENT_TEXT,                 
+    C.COMMENT_MONITOR_NUM,         
+    C.COMMENT_DATE,             
+    U.USER_MONITOR AS USER_MONITOR,
+    U.user_nick 
+	FROM 
+	    TBL_COMMENT C
+	JOIN 
+	    TBL_USER U ON C.USER_NUM = U.USER_NUM  
+	WHERE 
+	    C.ARTICLE_NUM = #{articleNum}                  
+	ORDER BY 
+	    C.COMMENT_DATE DESC       
+    </select> 
+    
+ 
+	
+    
+	<insert id="commmentUpdate" parameterType="CommentDTO">
+        INSERT INTO TBL_comment (comment_num, comment_text, user_num, comment_date)
+        VALUES (#{commentNum}, #{commentText}, #{userNum}, #{commentDate})
+    </insert>
+	
+</mapper>
+   
+
+   
+
+
+   
+ 
+
+
+   
+   
+

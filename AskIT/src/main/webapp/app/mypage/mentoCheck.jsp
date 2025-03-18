@@ -31,10 +31,17 @@
                UserDTO userInfo = (UserDTO) session.getAttribute("userDTO");
                System.out.println(userInfo);
                if (userInfo != null) {
+<<<<<<< HEAD
                   char userCert = userInfo.getUserCert();
                   if (userCert == 'T') {
                      out.println("멘토회원🏅");
                   } else if (userCert == 'F') {
+=======
+                  boolean userCert = userInfo.isUserCert();
+                  if (userCert == true) {
+                     out.println("멘토회원");
+                  } else if (userCert == false) {
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
                      out.println("일반회원");
                   }
                } else {

@@ -54,11 +54,14 @@ public class DevFrontController extends HttpServlet {
                 System.out.println("질문게시물 목록 실행!");
                 result = new DevListAskController().execute(request, response);
                 break;
+<<<<<<< HEAD
             
             case"/dev/listAskTag.dev":
             	System.out.println("질문게시물 태그 선택 목록 실행");
             	result = new DevListAskTagController().execute(request, response);
                 break;
+=======
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
                 
             case "/dev/listTip.dev": // 개발 질문게시물 목록 조회
                 System.out.println("꿀팁게시물 목록 실행!");
@@ -103,11 +106,14 @@ public class DevFrontController extends HttpServlet {
             case "/dev/commentupdate.dev":
             	result = new DevCommentUpdateController().execute(request, response);
                 break;
+<<<<<<< HEAD
                 
             case "/dev/monitor.dev": // 추천 기능 처리
                 result = new ArticleMonitorController().execute(request, response);
                 break;
                 
+=======
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
         }
 
         // 결과 처리

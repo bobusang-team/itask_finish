@@ -4,15 +4,22 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<<<<<<< HEAD
 <!--문자인증 API_KEY, API_SECRET, PHONE 값 빼고 넘기 -->
 
+=======
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/member/agreement.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/header.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/footer.css">
+<<<<<<< HEAD
   <script defer src="../../assets/js/member/agreement.js"></script>
+=======
+  <script defer src="${pageContext.request.contextPath}/assets/js/member/agreement.js"></script>
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
   <title>약관동의</title>
 </head>
 
@@ -32,7 +39,11 @@
 
       <!-- 필수약관 1. itask 이용약관동의 -->
       <article>
+<<<<<<< HEAD
         <input type="checkbox" name="keh-agreement-terms01" id="keh-agreement-require-term01" class="keh-agreement-terms" required>
+=======
+        <input type="checkbox" name="keh-agreement-terms01" id="keh-agreement-terms01" class="keh-agreement-terms">
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
         <label for="keh-agreement-terms01">[필수] ITASK 이용약관 동의</label>
         <p>
           더미 텍스트입니다 뜻이 없는 아무 내용을 적었습니다. 
@@ -52,7 +63,11 @@
 
       <!-- 필수약관 2. 개인정보 수집 및 이용 -->
       <article>
+<<<<<<< HEAD
         <input type="checkbox" name="keh-agreement-terms02" id="keh-agreement-require-term02" class="keh-agreement-terms" required>
+=======
+        <input type="checkbox" name="keh-agreement-terms02" id="keh-agreement-terms02" class="keh-agreement-terms">
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
         <label for="keh-agreement-terms02">[필수] 개인정보 수집 및 이용</label>
         <p>
           더미 텍스트입니다 뜻이 없는 아무 내용을 적었습니다. 
@@ -72,7 +87,11 @@
 
       <!-- 선택약관 이벤트,혜택 정보 수신 동의 -->
       <article>
+<<<<<<< HEAD
         <input type="checkbox" name="keh-agreement-terms03" id="keh-agreement-terms03" class="keh-agreement-terms" required>
+=======
+        <input type="checkbox" name="keh-agreement-terms03" id="keh-agreement-terms03" class="keh-agreement-terms">
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
         <label for="keh-agreement-terms03">[선택] 이벤트·혜택 정보 수신 동의</label>
         <p>
           더미 텍스트입니다 뜻이 없는 아무 내용을 적었습니다. 

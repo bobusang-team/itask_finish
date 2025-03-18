@@ -58,6 +58,7 @@ public class MypageFrontController extends HttpServlet {
 //        }
 		
 		// 해당 회원의 세션에 접근하여 정보 가져오기
+<<<<<<< HEAD
 //		HttpSession session = request.getSession();
 		
 //		UserDTO userDTO = (UserDTO) session.getAttribute("userDTO");
@@ -68,6 +69,18 @@ public class MypageFrontController extends HttpServlet {
 //            response.sendRedirect(request.getContextPath() + "/app/member/login.jsp");
 //            return;
 //        }
+=======
+		HttpSession session = request.getSession();
+		
+		UserDTO userDTO = (UserDTO) session.getAttribute("userDTO");
+//		System.out.println(userDTO);
+		
+		if (userDTO == null) {
+            // 세션에 유저 정보가 없는 경우 -> 로그인 페이지
+            response.sendRedirect(request.getContextPath() + "/app/member/login.jsp");
+            return;
+        }
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 		
 		
 		//필요한 Path만 남기기

@@ -16,7 +16,11 @@
 
 <body>
  <!-- 헤더 영역 -->
+<<<<<<< HEAD
 	<jsp:include page="./../../basic/userheader.jsp" />
+=======
+	<jsp:include page="./../../basic/header.jsp" />
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
   <main class="itAskBox">
     <!-- 메인 -->
     <!-- 카테고리 선택 -->

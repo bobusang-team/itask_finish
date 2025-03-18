@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="write">
+ <!-- useGeneratedKeys와 keyProperty 활용 MyBatis의 useGeneratedKeys 속성과 CURRVAL을 
+      조합해 자동으로 시퀀스 값을 객체 필드에 매핑가능 -->
+<!--    <insert id="insertArticle" parameterType="ArticleDTO">
+      insert into tbl_article (
+      article_num, user_num, article_topcate, article_botcate, article_tagname,
+      article_title, article_text, article_date
+      )
+      values (
+      seq_article.nextVal, #{userNum}, #{articleTopCate}, #{articleBotCate}, #{articleTagName},
+      #{articleTitle}, #{articleText}, sysdate)
+   </insert> -->
+   
+   <insert id="insertArticle" parameterType="ArticleDTO">
+      <selectKey keyProperty="articleNum" resultType="int" order="BEFORE">
+         SELECT seq_article.nextVal from dual
+      </selectKey>
+      INSERT INTO tbl_article
+      (article_num, user_num, article_topcate, article_botcate, article_tagname,
+      article_title, article_text, article_date)
+      VALUES
+      (#{articleNum}, #{userNum}, #{articleTopCate}, #{articleBotCate}, #{articleTagName},
+      #{articleTitle}, #{articleText}, sysdate)
+   </insert>
+   
+   <!-- 글쓰기 버튼 클릭시 회원/비회원 체크용 -->
+   	<select id="getUserId" parameterType="int" resultType="string">
+		select user_id from tbl_user where user_num = #{userNum}
+	</select>
+
+</mapper>

@@ -1,16 +1,27 @@
 package com.itask.app.member;
 
+<<<<<<< HEAD
 import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+=======
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 import com.google.gson.Gson;
 import com.itask.app.Execute;
 import com.itask.app.Result;
 import com.itask.app.member.dao.UserDAO;
 
+<<<<<<< HEAD
+=======
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 public class CheckIdDuplicateController implements Execute {
 
     private UserDAO userDAO = new UserDAO();

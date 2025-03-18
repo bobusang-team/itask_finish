@@ -67,6 +67,7 @@ public class UserFrontController extends HttpServlet {
 	    	  System.out.println("join checkNickOk");
 	    	  result = new CheckNickDuplicateController().execute(request, response);
 	    	  break;
+<<<<<<< HEAD
 	      case "/app/member/sendSMS.me":
 	    	  System.out.println("sendSMS OK");
 	    	  result = new JoinSMSController().execute(request, response);
@@ -83,6 +84,8 @@ public class UserFrontController extends HttpServlet {
 	    	  System.out.println("자격증 초기화 프컨 ");
 	    	  result = new CertInitController().execute(request, response);
 	    	  break;
+=======
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
 	      }
 	      
 	  

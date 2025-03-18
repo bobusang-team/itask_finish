@@ -13,7 +13,11 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/footer.css">
 </head>
 <body>
+<<<<<<< HEAD
    <jsp:include page="../basic/userheader.jsp" />
+=======
+   <jsp:include page="../basic/header.jsp" />
+>>>>>>> 22696a287004b177852cb532813ae6a882a5f99d
    <div class="mjh-notice-main">
       <h2 class="mjh-notice-title">공지사항</h2>
       <div class="mjh-notice-articel-list">
