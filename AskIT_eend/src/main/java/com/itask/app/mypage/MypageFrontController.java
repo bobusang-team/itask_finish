@@ -148,6 +148,10 @@ public class MypageFrontController extends HttpServlet {
 			System.out.println("myTotalArticle 실행!");
 			result = new myTotalArticleOkController().execute(request, response);
 			break;
+		case "/mypage/myTotalComment.my":
+			System.out.println("myTotalComment 실행!");
+			result = new myTotalCommentOkController().execute(request, response);
+			break;
 		case "/mypage/myProfileImgChange.my":
 			System.out.println("myProfileImgChange 실행!");
 			result = new myProfileImgChangOkController().execute(request, response);

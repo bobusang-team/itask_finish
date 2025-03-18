@@ -22,8 +22,9 @@
       <typeAlias type="com.itask.app.dto.CommentDTO" alias="CommentDTO"></typeAlias>
       <typeAlias type="com.itask.app.dto.CommentListDTO" alias="CommentListDTO"></typeAlias>
       <typeAlias type="com.itask.app.dto.AdminDTO" alias="AdminDTO"></typeAlias>   
-        <typeAlias type="com.itask.app.dto.MypageMainDTO" alias="MypageMainDTO"></typeAlias>
-        <typeAlias type="com.itask.app.dto.NoticeDTO" alias="NoticeDTO"></typeAlias>
+      <typeAlias type="com.itask.app.dto.MypageMainDTO" alias="MypageMainDTO"></typeAlias>
+      <typeAlias type="com.itask.app.dto.NoticeDTO" alias="NoticeDTO"></typeAlias>
+      <typeAlias type="com.itask.app.dto.MyTotalCommentDTO" alias="MyTotalCommentDTO"></typeAlias>
    </typeAliases>
 
    <environments default="oracle">

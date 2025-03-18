@@ -94,7 +94,7 @@
 	</select>
 	
 	<!-- 내가 쓴 게시글 목록 불러오기 -->
-	<select id = "selectAllMy" resultType = "ArticleListDTO">
+	<select id = "selectAllMyArticle" resultType = "ArticleListDTO">
 	<![CDATA[
 	SELECT * FROM (
 	     SELECT ROWNUM AS rnum, subquery.*
@@ -124,12 +124,51 @@
   </select>
   
   <!-- 내가 쓴 게시글 수 가져오기 -->
-	<select id="getTotal" resultType="int">
+	<select id="getTotalArticleNum" resultType="int">
 		SELECT COUNT(ARTICLE_NUM) 
         FROM TBL_ARTICLE
         WHERE USER_NUM = #{userNum}
 	</select>
 	
+  <!--  내가 쓴 댓글 수 가져오기 -->
+   	<select id="getTotalCommentNum" resultType="int">
+		SELECT COUNT(COMMENT_NUM) 
+        FROM TBL_COMMENT
+        WHERE USER_NUM = #{userNum}
+	</select>
+	
+  <!--  내가 쓴 댓글 목록 가져오기 -->
+	<select id = "selectAllMyComment" resultType = "MyTotalCommentDTO">
+	<![CDATA[
+	SELECT * FROM (
+	     SELECT ROWNUM AS rnum, subquery.*
+	     FROM (
+	      SELECT 
+	         A.ARTICLE_NUM, 
+	         A.ARTICLE_TITLE,     
+	         A.ARTICLE_TOPCATE, 
+	         A.ARTICLE_BOTCATE, 
+	         A.ARTICLE_TAGNAME,
+	         A.USER_NUM AS ARTICLE_USER_NUM,
+	         U.USER_MENTO_CERT,
+	         U.USER_NICK AS ARTICLE_USER_NICK,
+	         C.COMMENT_NUM,
+	         C.COMMENT_MONITOR_NUM,
+	         C.COMMENT_TEXT,
+	         C.COMMENT_DATE,
+	         C.COMMENT_MODIFY_DATE,
+	         CASE WHEN U.USER_MENTO_CERT = 'T' THEN '🏅' END AS badge,
+	         UC.USER_NICK AS COMMENT_USER_NICK
+	      FROM TBL_ARTICLE A
+	      JOIN TBL_USER U ON A.USER_NUM = U.USER_NUM
+	      JOIN TBL_COMMENT C ON A.ARTICLE_NUM = C.ARTICLE_NUM
+	      JOIN TBL_USER UC ON C.USER_NUM = UC.USER_NUM
+	      WHERE C.USER_NUM = #{userNum}
+	      ORDER BY C.COMMENT_DATE DESC
+	   ) subquery
+	   ) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+	    ]]>
+  </select>
 	<!-- fetch 사용시 주석해제 -->
 	<!-- <select id="selectCateList" parameterType="map" resultType="ArticleListDTO">
 	SELECT 
