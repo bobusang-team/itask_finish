@@ -50,6 +50,7 @@
       <mapper resource="com/mybatis/mapper/AdminMapper.xml" />
       <mapper resource="com/mybatis/mapper/NoticeMapper.xml" />
       <mapper resource="com/mybatis/mapper/CommentMapper.xml" />
+      <mapper resource="com/mybatis/mapper/AttachedFileMapper.xml" />
    </mappers>
    
 </configuration>
