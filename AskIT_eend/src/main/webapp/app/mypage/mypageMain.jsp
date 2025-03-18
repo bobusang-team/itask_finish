@@ -63,6 +63,7 @@
             <li><a href="${pageContext.request.contextPath}/mypage/pwCheck.my">내 정보 수정하기</a></li>
             <li><a href="${pageContext.request.contextPath}/mypage/mentoCheck.my">자격/멘토 뱃지 추가하기</a></li>
             <li><a href="${pageContext.request.contextPath}/mypage/myTotalArticle.my">내가 쓴 전체 게시글 보기</a></li>
+            <li><a href="${pageContext.request.contextPath}/mypage/myTotalComment.my">내가 쓴 전체 댓글 보기</a></li>
          </ul>
       </section>
 
@@ -72,10 +73,10 @@
          <div class="keh-mypageMain-article">
             <ul>
                <li>내가 쓴 게시글
-                  <p>${mypageMainDTO.articleCount}개</p>
+                  <p><a href="${pageContext.request.contextPath}/mypage/myTotalArticle.my">${mypageMainDTO.articleCount}개</a></p>
                </li>
                <li>내가 쓴 댓글
-                  <p>${mypageMainDTO.commentCount}개</p>
+                  <p><a href="${pageContext.request.contextPath}/mypage/myTotalComment.my">${mypageMainDTO.commentCount}개</a></p>
                </li>
             </ul>
          </div>
