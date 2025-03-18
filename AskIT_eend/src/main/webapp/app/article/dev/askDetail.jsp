@@ -40,8 +40,8 @@ pageEncoding="UTF-8"%>
         <span class="bjs-askDetail-title"><c:out value ="${dev.articleTopcate}" /></span>
         <!-- 자격증 상위 카테고리 -->
         <div class="bjs-askDetail-category">
-          <button class="bjs-askDetail-category-btn bjs-askDetail-select"><a href="${pageContext.request.contextPath}/dev/listAsk.dev">질문</a></button>
-          <button class="bjs-askDetail-category-btn"><a href="${pageContext.request.contextPath}/dev/listTip.dev">꿀팁</a></button>
+          <button class="bjs-askDetail-category-btn bjs-askDetail-select"><a href="${pageContext.request.contextPath}/dev/listAsk.dev?articleTopcate=개발&articleBotcate=질문">질문</a></button>
+          <button class="bjs-askDetail-category-btn"><a href="${pageContext.request.contextPath}/dev/listAsk.dev?articleTopcate=개발&articleBotcate=꿀팁">꿀팁</a></button>
         </div>
       </div>
       <!-- 준혁님 코드 들어갈 부분 (게시글 내용) -->
