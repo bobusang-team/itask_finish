@@ -1,57 +1,70 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-   <settings>
-      <!-- 카멜 케이스 매핑 설정 -->
-      <setting name="mapUnderscoreToCamelCase" value="true" />
-      
-      <!-- 쿼리 결과 필드가 null인 경우 누락되지 않도록 설정 -->
-      <setting name="callSettersOnNulls" value="true" />
-      
-      <!-- 쿼리에 보내는 파라미터가 null인 경우 오류가 발생하는 것을 방지 설정 -->
-      <setting name="jdbcTypeForNull" value="NULL" />   
-   </settings>
-   
-   <!-- DTO 별칭 설정 -->
-   <typeAliases>
-      <typeAlias type="com.itask.app.dto.UserDTO" alias="UserDTO"></typeAlias>
-      <typeAlias type="com.itask.app.dto.ArticleDTO" alias="ArticleDTO"></typeAlias>
-      <typeAlias type="com.itask.app.dto.ArticleListDTO" alias="ArticleListDTO"></typeAlias>
-      <typeAlias type="com.itask.app.dto.ArticleDetailDTO" alias="ArticleDetailDTO"></typeAlias>
-      <typeAlias type="com.itask.app.dto.AttachedFileDTO" alias="AttachedFileDTO"></typeAlias>
-      <typeAlias type="com.itask.app.dto.CommentDTO" alias="CommentDTO"></typeAlias>
-      <typeAlias type="com.itask.app.dto.CommentListDTO" alias="CommentListDTO"></typeAlias>
-      <typeAlias type="com.itask.app.dto.AdminDTO" alias="AdminDTO"></typeAlias>   
-      <typeAlias type="com.itask.app.dto.MypageMainDTO" alias="MypageMainDTO"></typeAlias>
-      <typeAlias type="com.itask.app.dto.NoticeDTO" alias="NoticeDTO"></typeAlias>
-      <typeAlias type="com.itask.app.dto.NoticeListDTO" alias="NoticeListDTO"></typeAlias>
-      <typeAlias type="com.itask.app.dto.MyTotalCommentDTO" alias="MyTotalCommentDTO"></typeAlias>
-   </typeAliases>
+	<settings>
+		<!-- 카멜 케이스 매핑 설정 -->
+		<setting name="mapUnderscoreToCamelCase" value="true" />
 
-   <environments default="oracle">
-      <environment id="oracle">
-         <transactionManager type="JDBC"></transactionManager>
-         <dataSource type="POOLED">
-            <property name="driver" value="oracle.jdbc.OracleDriver" />
-            <property name="url" value="jdbc:oracle:thin:@localhost:1521/xe" />
-            <property name="username" value="test" />
-            <property name="password" value="1234" />
-         </dataSource>
-      </environment>
-   </environments>
-   
-   <mappers>
-      <mapper resource="com/mybatis/mapper/UserMapper.xml" />
-     <mapper resource="com/mybatis/mapper/MypageMapper.xml" />
-    <mapper resource="com/mybatis/mapper/DevMapper.xml" />
-      <mapper resource="com/mybatis/mapper/IntroMapper.xml" /> 
-       <mapper resource="com/mybatis/mapper/QualMapper.xml" />
-      <mapper resource="com/mybatis/mapper/SecMapper.xml" />
-      <mapper resource="com/mybatis/mapper/WriteMapper.xml" />
-      <mapper resource="com/mybatis/mapper/AdminMapper.xml" />
-      <mapper resource="com/mybatis/mapper/NoticeMapper.xml" />
-      <mapper resource="com/mybatis/mapper/CommentMapper.xml" />
-      <mapper resource="com/mybatis/mapper/AttachedFileMapper.xml" />
-   </mappers>
-   
+		<!-- 쿼리 결과 필드가 null인 경우 누락되지 않도록 설정 -->
+		<setting name="callSettersOnNulls" value="true" />
+
+		<!-- 쿼리에 보내는 파라미터가 null인 경우 오류가 발생하는 것을 방지 설정 -->
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+
+	<!-- DTO 별칭 설정 -->
+	<typeAliases>
+		<typeAlias type="com.itask.app.dto.UserDTO" alias="UserDTO"></typeAlias>
+		<typeAlias type="com.itask.app.dto.ArticleDTO"
+			alias="ArticleDTO"></typeAlias>
+		<typeAlias type="com.itask.app.dto.ArticleListDTO"
+			alias="ArticleListDTO"></typeAlias>
+		<typeAlias type="com.itask.app.dto.ArticleDetailDTO"
+			alias="ArticleDetailDTO"></typeAlias>
+		<typeAlias type="com.itask.app.dto.AttachedFileDTO"
+			alias="AttachedFileDTO"></typeAlias>
+		<typeAlias type="com.itask.app.dto.CommentDTO"
+			alias="CommentDTO"></typeAlias>
+		<typeAlias type="com.itask.app.dto.CommentListDTO"
+			alias="CommentListDTO"></typeAlias>
+		<typeAlias type="com.itask.app.dto.AdminDTO"
+			alias="AdminDTO"></typeAlias>
+		<typeAlias type="com.itask.app.dto.MypageMainDTO"
+			alias="MypageMainDTO"></typeAlias>
+		<typeAlias type="com.itask.app.dto.NoticeDTO"
+			alias="NoticeDTO"></typeAlias>
+		<typeAlias type="com.itask.app.dto.NoticeListDTO"
+			alias="NoticeListDTO"></typeAlias>
+		<typeAlias type="com.itask.app.dto.MyTotalCommentDTO"
+			alias="MyTotalCommentDTO"></typeAlias>
+	</typeAliases>
+
+	<environments default="oracle">
+		<environment id="oracle">
+			<transactionManager type="JDBC"></transactionManager>
+			<dataSource type="POOLED">
+				<property name="driver" value="oracle.jdbc.OracleDriver" />
+				<property name="url"
+					value="jdbc:oracle:thin:@localhost:1521/xe" />
+				<property name="username" value="test" />
+				<property name="password" value="1234" />
+			</dataSource>
+		</environment>
+	</environments>
+
+	<mappers>
+		<mapper resource="com/mybatis/mapper/MainMapper.xml" />
+		<mapper resource="com/mybatis/mapper/UserMapper.xml" />
+		<mapper resource="com/mybatis/mapper/MypageMapper.xml" />
+		<mapper resource="com/mybatis/mapper/DevMapper.xml" />
+		<mapper resource="com/mybatis/mapper/IntroMapper.xml" />
+		<mapper resource="com/mybatis/mapper/QualMapper.xml" />
+		<mapper resource="com/mybatis/mapper/SecMapper.xml" />
+		<mapper resource="com/mybatis/mapper/WriteMapper.xml" />
+		<mapper resource="com/mybatis/mapper/AdminMapper.xml" />
+		<mapper resource="com/mybatis/mapper/NoticeMapper.xml" />
+		<mapper resource="com/mybatis/mapper/CommentMapper.xml" />
+		<mapper resource="com/mybatis/mapper/AttachedFileMapper.xml" />
+	</mappers>
+
 </configuration>
