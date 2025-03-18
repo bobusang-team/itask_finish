@@ -1,0 +1,8 @@
+#Tomcat publish data
+#Tue Mar 18 09:42:33 KST 2025
+org.eclipse.jst.j2ee.server\:gson-2.9.1=WEB-INF/lib/gson-2.9.1.jar
+org.eclipse.jst.j2ee.server\:jstl=WEB-INF/lib/jstl.jar
+org.eclipse.jst.j2ee.server\:mybatis-3.5.11=WEB-INF/lib/mybatis-3.5.11.jar
+org.eclipse.jst.j2ee.server\:ojdbc8=WEB-INF/lib/ojdbc8.jar
+org.eclipse.jst.j2ee.server\:standard=WEB-INF/lib/standard.jar
+org.eclipse.jst.j2ee.server\:tomcat-dbcp=WEB-INF/lib/tomcat-dbcp.jar
