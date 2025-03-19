@@ -62,9 +62,15 @@ public class MypageDAO {
 	// 마이페이지 메인에 출력해야할 정보를 받아오는 쿼리
 	public MypageMainDTO mainPageSelect(String userId) {
 		MypageMainDTO mypageMainDTO = new MypageMainDTO();
-
 		mypageMainDTO = sqlSession.selectOne("mypage.main", userId);
-
+		return mypageMainDTO;
+	}
+	
+	// 해당 유저의 닉네임으로부터 유저페이지에 출력할 DTO 뽑아오기
+	public MypageMainDTO userPageSelect(String userNick) {
+		MypageMainDTO mypageMainDTO = new MypageMainDTO();
+		mypageMainDTO = sqlSession.selectOne("mypage.userPage", userNick);
+		System.out.println("해당 유저의 DTO : " + mypageMainDTO);
 		return mypageMainDTO;
 	}
 
@@ -141,4 +147,12 @@ public class MypageDAO {
 		System.out.println("쿼리 실행 후 게시글 상세 정보 : " + articleListDTO);
 		return articleListDTO;
 	}
+	
+	// 클릭한 유저의 닉네임으로부터 유저번호를 가져오기
+	public int getUserNum(String userNick) {
+		int userNum = sqlSession.selectOne("mypage.getUserNum", userNick);
+		System.out.println("쿼리실행한 후의 클릭한 유저의 Num : " + userNum);
+		return userNum;
+	}
+	
 }
