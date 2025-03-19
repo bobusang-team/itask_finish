@@ -42,7 +42,7 @@ public class userTotalArticleOkController implements Execute {
 		// 로그인 상태라면
 		path = "/app/mypage/userTotalArticle.jsp";
 
-		// 사용자의 아이디 값 받아오기
+		// 사용자의 닉네임 값 받아오기
 		String userNick = request.getParameter("userNick");
 		System.out.println("================모든 게시글을 볼 유저의 닉네임 : " + userNick);
 

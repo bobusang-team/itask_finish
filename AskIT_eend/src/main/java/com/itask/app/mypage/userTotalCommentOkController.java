@@ -50,7 +50,7 @@ public class userTotalCommentOkController implements Execute {
 		MypageDAO mypageDAO = new MypageDAO();
 		MypageMainDTO mypageMainDTO = new MypageMainDTO();
 
-		// 쿼리 실행 여기서의 mypageMainDTO는 게시글에서 클릭한 유저의 DTO임
+		// 쿼리 실행 여기서 mypageMainDTO는 게시글에서 클릭한 유저의 DTO임
 		mypageMainDTO = mypageDAO.userPageSelect(userNick);
 		request.setAttribute("mypageMainDTO", mypageMainDTO);
 

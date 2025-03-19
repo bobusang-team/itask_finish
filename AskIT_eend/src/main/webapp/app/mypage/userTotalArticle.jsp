@@ -47,7 +47,6 @@
 
          <hr>
          <!-- 선 -->
-
          <!-- 프로필사진 - 수정/인증/전체글/댓글 메뉴 -->
          <ul class="keh-mypageMain-myMenu">
             <li><a href="${pageContext.request.contextPath}/mypage/userTotalArticle.my?userNick=${mypageMainDTO.userNick}">작성한 게시글 보기</a></li>

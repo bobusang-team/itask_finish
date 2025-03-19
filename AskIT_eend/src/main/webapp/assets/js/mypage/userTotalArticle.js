@@ -22,7 +22,6 @@ categoryBtns.forEach((categoryBtn) => {
 	  } else {
 	    post.style.display = 'none'; // 숨기기
 	  }
-
     });
   });
 });

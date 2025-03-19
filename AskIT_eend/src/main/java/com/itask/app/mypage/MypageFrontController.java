@@ -177,7 +177,6 @@ public class MypageFrontController extends HttpServlet {
 			System.out.println("userTotalCommentOk 실행!");
 			result = new userTotalCommentOkController().execute(request, response);
 			break;
-			
 		}
 	
 	// 다음 동작 처리
