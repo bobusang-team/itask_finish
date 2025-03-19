@@ -17,7 +17,7 @@ import com.itask.app.dto.MypageMainDTO;
 import com.itask.app.dto.UserDTO;
 import com.itask.app.mypage.dao.MypageDAO;
 
-public class myTotalCommentOkController implements Execute {
+public class userTotalCommentOkController implements Execute {
 
 	@Override
 	public Result execute(HttpServletRequest request, HttpServletResponse response)
@@ -40,21 +40,21 @@ public class myTotalCommentOkController implements Execute {
 		}
 
 		// 로그인 상태라면
-		path = "/app/mypage/myTotalComment.jsp";
+		path = "/app/mypage/userTotalComment.jsp";
 
 		// 사용자의 아이디 값 받아오기
-		String userId = thisUser.getUserId();
-		System.out.println("================userId확인용 : " + userId);
+		String userNick = request.getParameter("userNick");
+		System.out.println("================모든 댓글을 볼 유저의 닉네임 : " + userNick);
 
 		MyTotalCommentDTO myTotalCommentDTO = new MyTotalCommentDTO();
 		MypageDAO mypageDAO = new MypageDAO();
 		MypageMainDTO mypageMainDTO = new MypageMainDTO();
 
-		// 쿼리 실행
-		mypageMainDTO = mypageDAO.mainPageSelect(userId);
+		// 쿼리 실행 여기서 mypageMainDTO는 게시글에서 클릭한 유저의 DTO임
+		mypageMainDTO = mypageDAO.userPageSelect(userNick);
 		request.setAttribute("mypageMainDTO", mypageMainDTO);
 
-		int profileNum = thisUser.getProfileNum();
+		int profileNum = mypageMainDTO.getProfileNum();
 		String profileFileName = mypageDAO.profileSelect(profileNum);
 
 		// contextPath 경로 설정
@@ -111,9 +111,10 @@ public class myTotalCommentOkController implements Execute {
 		request.setAttribute("profileImgSrc", profileImgSrc);
 		request.setAttribute("profileAlt", profileAlt);
 
-		// 댓글리스트 부분
-		int userNum = thisUser.getUserNum();
-		System.out.println("==========userNum 확인용 : " + userNum);
+		
+		// 닉네임으로부터 유저번호를 알아오는 쿼리문을 작성하자(바로 적용을 위함)
+		int userNum = mypageDAO.getUserNum(userNick);
+		System.out.println("==쿼리 이후 컨트롤러에서 출력하는 userNum : " + userNum);
 
 		String temp = request.getParameter("page");
 		int page = (temp == null) ? 1 : Integer.valueOf(temp); // 페이지번호 기본값 : 1
@@ -160,7 +161,6 @@ public class myTotalCommentOkController implements Execute {
 		System.out.println("startPage : " + startPage + ", endPage : " + endPage + ", prev : " + prev + ", next : " + next);
 		System.out.println("===============================");
 
-//		System.out.println(path);
 		result.setPath(path);
 		result.setRedirect(false);
 

@@ -11,7 +11,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>My Page</title>
+<title>해당 유저의 프로필</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/header.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/footer.css">
 <link rel="stylesheet"
@@ -22,7 +22,7 @@
    <jsp:include page="./../basic/userheader.jsp"/>
    <main class="itAskBox">
       <!-- 마이페이지 페이지 제목 -->
-      <h3>${mypageMainDTO.userNick}님의 프로필</h3>
+      <h3><a href="${pageContext.request.contextPath}/mypage/userPageSearch.my?userNick=${mypageMainDTO.userNick}">${mypageMainDTO.userNick}</a>님의 프로필</h3>
       <!-- 좌측 프로필사진 -->
       <section class="keh-mypageMain-profile-left">
          <!-- 프로필사진 - 내 정보 -->
@@ -41,7 +41,7 @@
             </li>
             <li class="keh-mypageMain-memNickName">
             <!-- 닉네임을 표시하는 부분 -->
-            <span><c:out value = "${mypageMainDTO.userNick }" />님</span>
+            <span><a href="${pageContext.request.contextPath}/mypage/userPageSearch.my?userNick=${mypageMainDTO.userNick}"><c:out value = "${mypageMainDTO.userNick }" /></a>님</span>
             </li>
             <li class="keh-mypageMain-myMonitor"><img
                src="${pageContext.request.contextPath}/assets/img/Monitor.png" alt=""> 
@@ -57,8 +57,8 @@
 
          <!-- 프로필사진 - 수정/인증/전체글/댓글 메뉴 -->
          <ul class="keh-mypageMain-myMenu">
-            <li><a href="${pageContext.request.contextPath}/mypage/myTotalArticle.my">작성한 게시글 보기</a></li>
-            <li><a href="${pageContext.request.contextPath}/mypage/myTotalComment.my">작성한 댓글 보기</a></li>
+            <li><a href="${pageContext.request.contextPath}/mypage/userTotalArticle.my?userNick=${mypageMainDTO.userNick}">작성한 게시글 보기</a></li>
+            <li><a href="${pageContext.request.contextPath}/mypage/userTotalComment.my?userNick=${mypageMainDTO.userNick}">작성한 댓글 보기</a></li>
          </ul>
       </section>
 
@@ -68,10 +68,10 @@
          <div class="keh-mypageMain-article">
             <ul>
                <li>작성한 게시글
-                  <p><a href="${pageContext.request.contextPath}/mypage/myTotalArticle.my">${mypageMainDTO.articleCount}개</a></p>
+                  <p><a href="${pageContext.request.contextPath}/mypage/userTotalArticle.my?userNick=${mypageMainDTO.userNick}">${mypageMainDTO.articleCount}개</a></p>
                </li>
                <li>작성한 댓글
-                  <p><a href="${pageContext.request.contextPath}/mypage/myTotalComment.my">${mypageMainDTO.commentCount}개</a></p>
+                  <p><a href="${pageContext.request.contextPath}/mypage/userTotalComment.my?userNick=${mypageMainDTO.userNick}">${mypageMainDTO.commentCount}개</a></p>
                </li>
             </ul>
          </div>
