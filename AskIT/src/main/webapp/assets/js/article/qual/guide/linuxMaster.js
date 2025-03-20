@@ -10,7 +10,7 @@ function calculateDay(target){
 }
 
 // 날짜 바꾸려면 여기만 t 의 값만 업뎃해주면됨
-const t = '2025-01-20';
+const t = '2025-07-28';
 const dDay = calculateDay(t);
 
 document.addEventListener("DOMContentLoaded", function() {

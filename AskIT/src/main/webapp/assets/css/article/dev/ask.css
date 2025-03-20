@@ -39,7 +39,7 @@
 }
 
 /* 개발 태그 버튼 */
-.bjs-ask-tag-btn {
+/* .bjs-ask-tag-btn {
   border: 1px solid #D96073;
   color: #D96073;
   background: none;
@@ -50,6 +50,10 @@
   margin: 20px 20px;
   cursor: pointer;
 }
+.bjs-ask-tag-btn a{
+  color: #D96073;
+
+} */
 
 .bjs-ask-tag-btn:hover {
   background-color: #e7d4d7;
@@ -119,6 +123,35 @@
   align-items: center;
   margin-bottom: 10px;
 }
+
+.bjs-ask-tag-btn {
+  border: 1px solid #D96073;
+  color: #D96073;
+  background: none;
+  width: 120px;
+  height: 25px;
+  border-radius: 40px;
+  padding: 10px 20px;
+  margin: 20px 20px;
+  cursor: pointer;
+}
+
+.bjs-ask-tag1 {
+  /* width: 1000px; */
+  /* white-space: wrap; */
+  display: flex;
+  justify-content: center;
+}
+
+.bjs-ask-tag-btn:hover {
+    background-color: #e7d4d7;
+}
+
+ .bjs-ask-select {
+    background-color: #D96073;
+    color: white;
+} 
+
 
 /* 태그 스타일 */
 .bjs-ask-post-tag {
@@ -191,29 +224,39 @@
 .bjs-ask-post-author {
   cursor: pointer;
 }
-/* 페이지네이션 */
+/* 페이징 스타일 */
 .pagination {
-  text-align: center;
-  margin: 50px auto;
-  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  margin-bottom:50px;
+}
+
+.pagination > ul {
+  display: flex;
+  list-style: none;
 }
 
 .pagination a {
-  align-content: center;
-  width: 35px;
-  height: 35px;
-  display: inline-block;
-  border-radius: 30px;
-  margin: 0 5px;
+  color: #333;
   text-decoration: none;
-  color: #606060;
-  border: 1px solid #DFDFDF;
-  cursor: pointer;
-}
-.pagination a:hover {
   font-weight: bold;
-  background-color: #D96073;
-  color: white;
-  border: 1px solid white;
-  transition: .3s;
+  padding: 10px;
+  margin: 0 5px;
+  border-radius: 5px;
+  border: 1px solid #333;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.pagination a:hover {
+  background-color: rgb(255, 87, 87);
+  border-color: rgb(255, 87, 87);
+  color: #fff;
+}
+
+.pagination .active {
+  background-color: #333;
+  border-color: #333;
+  color: #fff;
 }

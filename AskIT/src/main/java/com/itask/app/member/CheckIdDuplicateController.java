@@ -1,14 +1,15 @@
 package com.itask.app.member;
 
-import com.google.gson.Gson;
-import com.itask.app.Execute;
-import com.itask.app.Result;
-import com.itask.app.member.dao.UserDAO;
+import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+
+import com.google.gson.Gson;
+import com.itask.app.Execute;
+import com.itask.app.Result;
+import com.itask.app.member.dao.UserDAO;
 
 public class CheckIdDuplicateController implements Execute {
 

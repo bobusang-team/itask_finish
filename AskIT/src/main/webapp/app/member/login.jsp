@@ -110,7 +110,7 @@
       <p>
          <a href="${pageContext.request.contextPath }/app/member/pwfind.jsp"
             class="keh-login-pwBtn">비밀번호 찾기</a> <a
-            href="${pageContext.request.contextPath }/app/member/join.jsp"
+            href="${pageContext.request.contextPath }/app/member/agreement.jsp"
             class="keh-login-joinBtn">회원가입</a>
       </p>
    </main>

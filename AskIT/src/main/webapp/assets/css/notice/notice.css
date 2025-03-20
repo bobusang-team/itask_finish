@@ -9,15 +9,13 @@
 .mjh-notice-articel-list {
   margin: auto;
   width: 60%;
-  border-top: 2px solid #a2a2a2;
+  border-top: 2px solid #dfdfdf;
 }
 
 .mjh-notice-articel-item {
   font-size: 20px;
-  display: flex;
   padding: 20px 0;
-  border-bottom: 1px solid #a2a2a2;
-  /* border: 1px solid black; */
+  border-bottom: 1px solid  #dfdfdf;
 }
 .mjh-notice-articel-title{
   /* width: ; */
@@ -27,17 +25,24 @@
 }
 
 .mjh-notice-articel-category {
-  /* margin-right: 5%; */
-  width:100px;
-  color: #D96073;
-  font-weight: bold;
-  display: block;
-  /* border: 1px solid black; */
+width: 70px;
+    color: #D96073;
+    font-weight: bold;
+    display: inline-block;
 }
 .mjh-notice-articel-title a{
   text-decoration: none;
   color: black;
 }
+.mjh-notice-articel-title a:hover{
+	color: #D96073;
+}
+
+.mjh-notice-articel-date{
+	float:right;
+	text-align:right;
+}
+
 /* 페이지네이션 */
 .pagination {
   text-align: center;
@@ -53,7 +58,7 @@
   border-radius: 30px;
   margin: 0 5px;
   text-decoration: none;
-  color: #606060;
+ /*  color: #606060; */
   border: 1px solid #DFDFDF;
   cursor: pointer;
 }
@@ -63,4 +68,9 @@
   color: white;
   border: 1px solid white;
   transition: .3s;
+}
+.active{
+ font-weight: bold;
+  background-color: #D96073;
+  color: white;
 }

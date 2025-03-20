@@ -47,7 +47,7 @@
           <input type="text" name="checkNum" class="keh-pwFind-checkNum2" placeholder="수신된 인증번호를 입력하세요">
           <input type="button" name="keh-pwFind-phoneNum-btn" class="keh-pwFind-phoneNum-btn2" value="인증번호확인">
         </div>
-        <p class="keh-pwFind-checkInfo">인증번호가 확인되었습니다.</p>
+        <p class="keh-pwFind-checkInfo"></p>
         <input type="submit" name="keh-pwFind-pwBtn" class="keh-pwFind-pwBtn" value="비밀번호 재설정">        
       </form>
     </main>

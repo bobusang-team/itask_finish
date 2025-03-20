@@ -21,6 +21,8 @@ document.addEventListener("DOMContentLoaded", function() {
 	const checkInput = document.querySelector(".lsa-join-info-certiNumber");
 	// 핸드폰 번호 입력창
 	const phoneInput = document.querySelector(".lsa-join-info-phoneNumber");
+	// 이메일 입력창
+	const mailInput = document.querySelector(".lsa-join-info-email");
 	
 	// 아이디 유효성 검사
 	const idRegex = /^[A-Za-z0-9]{6,15}$/;
@@ -28,10 +30,11 @@ document.addEventListener("DOMContentLoaded", function() {
 	const pwRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,20}$/;
 	// 닉네임 유효성 검사
 	const nickRegex = /^[가-힣a-zA-Z0-9]{2,10}$/;
-	// 인증번호 고정값
-	const checkNum = "0316";
 	// 핸드폰 번호 유효성 검사
 	const phoneRegex = /^010\d{8}$/;
+	// 이메일 주소 유효성 검사
+	const mailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+;
 	
 	// 아이디 메시지
 	const idCheckResult1 = document.querySelector(".lsa-join-info-id-check1"); 
@@ -53,6 +56,10 @@ document.addEventListener("DOMContentLoaded", function() {
 	//휴대폰 메시지 
 	const phoneCheckResult1 = document.querySelector(".lsa-join-info-phone-check");
 	
+	// 이메일 메시지
+	const mailCheckResult1 = document.querySelector(".lsa-join-info-email-check1");
+	const mailCheckResult2 = document.querySelector(".lsa-join-info-email-check2");
+	
 	let idFlag = false; // 아이디 유효성 체크 플래그
 	let pwFlag = false; // 비밀번호 유효성 체크 플래그
 	let pwCheckFlag = false; // 비밀번호 재확인 체크 플래그
@@ -61,6 +68,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	let nickFinFlag = false;
 	let checkFlag = false;
 	let phoneCheckFlag = false;
+	let mailFlag = false;
 	
 	
 	// 아이디 중복 체크
@@ -98,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 	
 	//인증번호 받기 버튼 
-	phoneCheckBtn.addEventListener("click", function(){
+	phoneCheckBtn.addEventListener("click", function(event){
 		event.preventDefault(); // 폼 제출 방지
 		const phone = phoneInput.value;
 		phoneCheckFlag = false;
@@ -107,6 +115,31 @@ document.addEventListener("DOMContentLoaded", function() {
 			phoneCheckFlag = true;
 			phoneCheckResult1.textContent = "인증번호가 전송되었습니다.";
 			phoneCheckResult1.style.color = "#22A309";
+			
+			/*인증번호 보내는 fetch 시작 */
+			const phoneNumber = phoneInput.value.trim();
+		        if (phoneNumber === "") {
+		            alert("핸드폰 번호를 입력해주세요.");
+		            return;
+		        }
+
+		        fetch("sendSMS.me", {
+		            method: "POST",
+		            headers: { "Content-Type": "application/json" },
+		            body: JSON.stringify({ phoneNumber: phoneNumber })
+		        })
+		         .then(response => {
+		                 if (!response.ok) throw new Error(`HTTP 오류! 상태 코드: ${response.status}`);
+		             })
+		         .then(() => {
+		            console.log("발송 성공");
+		         })
+	            .catch(error => {
+	                console.error("SMS 발송 오류:", error);
+	                alert("인증번호 발송 중 오류가 발생했습니다.");
+	            });
+			/*인증번호 보내는 fetch 끝 */
+			
 		}else if(phone === ""){
 			phoneCheckResult1.textContent = "핸드폰 번호를 입력해주세요 (-없이 입력)";
 			phoneCheckResult1.style.color = "red";
@@ -118,28 +151,42 @@ document.addEventListener("DOMContentLoaded", function() {
 	});
 	
 	// 인증번호 확인
-	checkCheckBtn.addEventListener("click", function(){
+    checkCheckBtn.addEventListener("click", function(event) {
 		event.preventDefault(); // 폼 제출 방지
-		const check = checkInput.value;
 		checkFlag = false;
-		if(phoneCheckFlag){
-			if(check===checkNum){
-				checkCheckResult1.textContent = "인증번호가 일치합니다";
-				checkCheckResult1.style.color = "#22A309";
-				checkFlag = true;
-			}else if(check===""){
-				checkCheckResult1.textContent = "인증번호를 입력해주세요";
-				checkCheckResult1.style.color = "red";
-			}else{
-				checkCheckResult1.textContent = "인증번호가 일치하지 않습니다";
-				checkCheckResult1.style.color = "red";
-				checkFlag = false;
-			}
-		}else{
-			checkCheckResult1.textContent = "인증번호를 먼저 받아주세요";
-			checkCheckResult1.style.color = "red";
-		}
-	});
+        const verificationCode = checkInput.value.trim();
+        if (verificationCode === "") {
+            checkCheckResult1.textContent = "인증번호를 입력해주세요."; 
+            checkCheckResult1.style.color = "red";
+            return;
+        }
+
+        fetch("verifyCode.me", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ code: verificationCode })
+        })
+            .then(response => {
+                if (!response.ok) throw new Error(`HTTP 오류! 상태 코드: ${response.status}`);
+                return response.json();
+            })
+            .then(data => {
+            console.log(data);
+                if (data.success) {
+                    checkCheckResult1.textContent = "인증에 성공했습니다.";
+                    checkCheckResult1.style.color = "green";
+					checkFlag = true;
+                } else {
+                    checkCheckResult1.textContent = "인증번호가 일치하지 않습니다.";
+                    checkCheckResult1.style.color = "red";
+                }
+            })
+            .catch(error => {
+                console.error("인증 확인 오류:", error);
+                checkCheckResult1.textContent = "인증 처리 중 오류가 발생했습니다.";
+                checkCheckResult1.style.color = "red";
+            });
+    });
 	
 	// 아이디 유효성 검사
 	idInput.addEventListener("blur", function(){
@@ -175,6 +222,9 @@ document.addEventListener("DOMContentLoaded", function() {
 		}
 		pwCheckAgainResult1.textContent = "비밀번호를 재입력/확인해주십시오." ;
 		pwCheckAgainResult1.style.color = "red";
+		if(pwCheckAgainResult1.style.color == "red"){
+			pwCheckFlag = false;
+		}
 	});
     
 	//비밀번호 재확인 
@@ -182,7 +232,6 @@ document.addEventListener("DOMContentLoaded", function() {
 		pwCheckFlag = false;
 		const pw = pwCheck.value.trim();
 		const check = pwInput.value.trim();
-		pwCheckAgainResult1.textContent = "test";
 		if(pw===check){
 			pwCheckAgainResult1.textContent = "비밀번호가 일치합니다.";
 			pwCheckAgainResult1.style.color = "#22A309";
@@ -247,7 +296,69 @@ document.addEventListener("DOMContentLoaded", function() {
 		}
 	});
 	
-
+	const mailFinFlag = false;
+	
+	//이메일 유효성 검사, 중복검사
+	mailInput.addEventListener("blur", function(){
+		const mail = mailInput.value.trim();
+		
+		if(mailRegex.test(mail)){
+			fetch("checkMailOk.me", {
+				method:"POST",
+				headers:{"Content-Type":"application/json"},
+				body:  JSON.stringify({mail : mail})
+			})
+			.then(response => {
+				if(!response.ok)throw new Error(`HTTP 오류! 상태 코드 : ${response.status}`);
+				return response.json();
+			})
+			.then(data =>{
+				if(data.exists){
+					mailCheckResult1.textContent = "이미 가입된 이메일 주소입니다";
+					mailCheckResult1.style.color = "red";
+					mailFlag = false;
+				}else{
+					mailCheckResult1.textContent = "사용가능한 이메일입니다.";
+					mailCheckResult1.style.color = "#22A309";
+					mailFlag = true;
+				}
+			})
+		}else{
+			mailCheckResult1.textContent = "유효하지 않은 이메일입니다";
+			mailCheckResult1.style.color = "red";
+			mailFlag = false;
+		}
+	});
+	
+	joinCheckBtn.addEventListener("click", function(event){
+		// 
+		if(!idFinFlag || !idFlag){
+			event.preventDefault();
+			alert("아이디를 확인해주세요");
+			idInput.focus();
+		}else if(!phoneCheckFlag){
+			event.preventDefault();
+			alert("휴대폰 번호를 확인해주세요");
+			phoneInput.focus();
+		}else if(!checkFlag){
+			event.preventDefault();
+			alert("인증번호를 확인해주세요");
+			checkInput.focus();
+		}else if(!pwCheckFlag || !pwFlag){
+			event.preventDefault();
+			alert("비밀번호를 확인해주세요");
+			pwInput.focus();
+		}else if(!nickFlag || !nickFinFlag){
+			event.preventDefault();
+			alert("닉네임을 확인해주세요");
+			nickInput.focus();
+		}else if(!mailFlag){
+			event.preventDefault();
+			alert("이메일을 확인해주세요");
+			mailInput.focus();
+		}else{
+		}
+	});
 });
 
 // 눈버튼 누르면 password에서 text박스로 바뀌게 하는 기능
@@ -280,6 +391,5 @@ mark2.addEventListener("click", () => {
   }
   pwStatus2 = !pwStatus2; // 상태 변경
 });
-
 
 

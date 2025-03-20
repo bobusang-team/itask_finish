@@ -11,6 +11,10 @@
   </welcome-file-list>
   
   
+  <error-page>
+    <error-code>404</error-code>
+    <location>/error/404.jsp</location>
+</error-page>
   
   <servlet>
   	<servlet-name>User</servlet-name>
@@ -25,7 +29,7 @@
     <!-- 메인 -->
   <servlet>
      <servlet-name>main</servlet-name>
-     <servlet-class>com.itask.app.dev.MainFrontController</servlet-class>
+     <servlet-class>com.itask.app.main.MainFrontController</servlet-class>
   </servlet>
   <servlet-mapping>
      <servlet-name>main</servlet-name>
@@ -111,6 +115,16 @@
   <servlet-mapping>
      <servlet-name>Admin</servlet-name>
      <url-pattern>*.ad</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 댓글 -->
+  <servlet>
+     <servlet-name>Comment</servlet-name>
+     <servlet-class>com.itask.app.comment.CommentFrontController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+     <servlet-name>Comment</servlet-name>
+     <url-pattern>*.co</url-pattern>
   </servlet-mapping>
   
   

@@ -16,7 +16,7 @@
 
 <body>
  <!-- 헤더 영역 -->
-	<jsp:include page="./../../basic/header.jsp" />
+	<jsp:include page="./../../basic/userheader.jsp" />
   <main class="itAskBox">
     <!-- 메인 -->
     <!-- 카테고리 선택 -->

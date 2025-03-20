@@ -14,7 +14,7 @@
 <body>
 
     	<!-- 헤더 영역 -->
-	<jsp:include page="./../../basic/header.jsp" />
+	<jsp:include page="./../../basic/userheader.jsp" />
 
   <main class="itAskBox">
     <!-- 메인 안에 요소들이 담길 컨테이너 박스 -->

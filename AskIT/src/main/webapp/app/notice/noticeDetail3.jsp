@@ -12,7 +12,7 @@
 </head>
 
 <body>
-   <jsp:include page="../basic/header.jsp" />
+   <jsp:include page="../basic/userheader.jsp" />
    <div class="mjh-noticeDetail-main">
       <div class="mjh-noticeDetail-title">공지사항</div>
       <span id="main-notice-id"></span>

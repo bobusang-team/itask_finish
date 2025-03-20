@@ -3,8 +3,8 @@ package com.itask.app.dto;
 public class ArticleDetailDTO {
 
 	private int userNick;
-	private int userMoniter;
-	private String userCert; 
+	private int userMonitor;
+	private String userMentoCert; 
 	private int articleNum;
 	private String articleTopcate;
 	private String articleBotcate;
@@ -16,25 +16,26 @@ public class ArticleDetailDTO {
 	 * private String articleModifyDate;
 	 */	
 	private int articleView;
-	private int articleMoniter;
-	
+	private int articleMonitor;
+
 	public int getUserNick() {
 		return userNick;
 	}
 	public void setUserNick(int userNick) {
 		this.userNick = userNick;
 	}
-	public int getUserMoniter() {
-		return userMoniter;
+	public int getUserMonitor() {
+		return userMonitor;
 	}
-	public void setUserMoniter(int userMoniter) {
-		this.userMoniter = userMoniter;
+	public void setUserMonitor(int userMonitor) {
+		this.userMonitor = userMonitor;
 	}
-	public String getUserCert() {
-		return userCert;
+	public String getUserMentoCert() {
+		return userMentoCert;
 	}
-	public void setUserCert(String userCert) {
-		this.userCert = userCert;
+	public void setUserMentoCert(String userMentoCert) {
+		this.userMentoCert = userMentoCert;
+
 	}
 	public int getArticleNum() {
 		return articleNum;
@@ -84,20 +85,21 @@ public class ArticleDetailDTO {
 	public void setArticleView(int articleView) {
 		this.articleView = articleView;
 	}
-	public int getArticleMoniter() {
-		return articleMoniter;
+	public int getArticleMonitor() {
+		return articleMonitor;
 	}
-	public void setArticleMoniter(int articleMoniter) {
-		this.articleMoniter = articleMoniter;
+	public void setArticleMonitor(int articleMonitor) {
+		this.articleMonitor = articleMonitor;
 	}
 	@Override
 	public String toString() {
-		return "ArticleDetailDTO [userNick=" + userNick + ", userMoniter=" + userMoniter + ", userCert=" + userCert
-				+ ", articleNum=" + articleNum + ", articleTopcate=" + articleTopcate + ", articleBotcate="
-				+ articleBotcate + ", articleTagname=" + articleTagname + ", articleTitle=" + articleTitle
-				+ ", articleText=" + articleText + ", articleDate=" + articleDate + ", articleView=" + articleView
-				+ ", articleMoniter=" + articleMoniter + "]";
+		return "ArticleDetailDTO [userNick=" + userNick + ", userMonitor=" + userMonitor + ", userMentoCert="
+				+ userMentoCert + ", articleNum=" + articleNum + ", articleTopcate=" + articleTopcate
+				+ ", articleBotcate=" + articleBotcate + ", articleTagname=" + articleTagname + ", articleTitle="
+				+ articleTitle + ", articleText=" + articleText + ", articleDate=" + articleDate + ", articleView="
+				+ articleView + ", articleMonitor=" + articleMonitor + "]";
 	}
 	
+
 	
 }
