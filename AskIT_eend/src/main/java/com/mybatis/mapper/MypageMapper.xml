@@ -231,5 +231,12 @@
 		JOIN TBL_USER U ON A.USER_NUM = U.USER_NUM
 		AND A.ARTICLE_NUM = #{articleNum}
    </select>
+   
+   <!--  해당 유저의 게시글을 확인하기 위해서는 닉네임으로부터 유저번호를 받아와야함 -->
+   <select id = "getUserNum" parameterType="String" resultType="int">
+   		SELECT USER_NUM
+   		FROM TBL_USER
+   		WHERE USER_NICK = #{userNick}
+   </select>
 	
 </mapper>
