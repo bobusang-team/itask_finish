@@ -132,7 +132,6 @@ public class MypageFrontController extends HttpServlet {
 //			System.out.println("myTotalArticleCate 실행!");
 //			result = new myTotalArticleCateOkController().execute(request, response);
 //			break;
-<<<<<<< HEAD
 		case "/mypage/userPageSearch.my":
 			System.out.println("userPageSearchOk 실행!");
 			result = new userPageSearchOkController().execute(request, response);
@@ -146,8 +145,6 @@ public class MypageFrontController extends HttpServlet {
 			result = new userTotalCommentOkController().execute(request, response);
 			break;
 
-=======
->>>>>>> parent of e686813 (지수 : 0319 유저 프로필 페이지 완료)
 		}
 
 		// 다음 동작 처리
