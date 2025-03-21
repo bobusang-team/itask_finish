@@ -4,6 +4,7 @@
   margin: 0; padding: 0; list-style: none;
   color: #606060;
 }
+
 /* 공통메인 - 마이페이지 */
 .itAskBox{
   height: 800px;
@@ -26,7 +27,7 @@ margin: 0px auto 30px;
   /* background-color: antiquewhite; */
   border: 1px solid #DFDFDF;
   width: 320px;
-  height: 650px;
+  height: 730px;
   border-radius:50px;
   margin-left: 80px;
   text-align: center;  

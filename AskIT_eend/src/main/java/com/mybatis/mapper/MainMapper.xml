@@ -5,161 +5,53 @@
 <mapper namespace="main">
 
 
-	<!-- BEST 게시글 (질문/꿀팁) -->
-	<select id="selectBestArticle" parameterType="String"
-		resultType="ArticleDTO">
-		SELECT
-		a.ARTICLE_NUM,
-		a.ARTICLE_TOPCATE,
-		a.ARTICLE_BOTCATE,
-		a.ARTICLE_TAGNAME,
-		a.ARTICLE_TITLE,
-		a.ARTICLE_TEXT,
-		a.ARTICLE_DATE,
-		a.ARTICLE_MODIFY_DATE,
-		a.ARTICLE_VIEW,
-		a.ARTICLE_MONITOR_NUM,
-		u.USER_NICK
-		FROM TBL_ARTICLE a
-		JOIN TBL_USER u ON a.USER_NUM = u.USER_NUM
-		WHERE a.ARTICLE_BOTCATE = #{category}
-		AND (
-		-- 7일 이내 게시글이 있는 경우
-		(a.ARTICLE_DATE >= SYSDATE - 7
-		AND a.ARTICLE_MONITOR_NUM = (
-		SELECT MAX(ARTICLE_MONITOR_NUM)
-		FROM TBL_ARTICLE
-		WHERE ARTICLE_BOTCATE = #{category}
-		AND ARTICLE_DATE >= SYSDATE - 7)
-		)
-		OR
-		-- 7일 이내 게시글이 없을 때 최신글 출력
-		(NOT EXISTS (
-		SELECT 1
-		FROM TBL_ARTICLE
-		WHERE ARTICLE_BOTCATE = #{category}
-		AND ARTICLE_DATE >= SYSDATE - 7
-		) AND a.ARTICLE_MONITOR_NUM = (
-		SELECT MAX(ARTICLE_MONITOR_NUM)
-		FROM TBL_ARTICLE
-		WHERE ARTICLE_BOTCATE = #{category}
-		))
-		)
-		ORDER BY a.ARTICLE_MONITOR_NUM DESC, a.ARTICLE_DATE DESC
-		FETCH FIRST 1 ROW ONLY
-	</select>
+<!-- BEST 질문 -->
+<select id="selectBestMoon " parameterType="ArticleDTO" resultType="ArticleDTO">
+
+SELECT * FROM TBL_ARTICLE
+WHERE ARTICLE_BOTCATE = '질문'
+AND ARTICLE_MONITER_NUM = (
+	SELECT MAX(ARTICLE_MONITER_NUM)
+	FROM TBL_ARTICLE
+	WHERE ARTICLE_BOTCATE = '질문'
+)
+</select>
 
 
-	<!-- RANKING 사용자 조회 -->
-	<select id="selectRanking" resultType="userDTO">
+<!-- BEST 꿀팁  -->
+<select id="selectBestTip" parameterType="ArticleDTO" resultType="ArticleDTO">
 
+SELECT * FROM TBL_ARTICLE
+WHERE TBL_ATRTICLE_BOTCATE ='꿀팁'
+AND ARTICLE_MONITER_NUM = (
+	SELECT MAX(ARTICLE_MONITE R_NUM)
+	FROM TBL_ARTICLE
+	WHERE ARTICLE_BOTACTE = '꿀팁'
+)
 
-		SELECT
-		USER_NUM,
-		USER_ID,
-		USER_NAME,
-		USER_NICK,
-		USER_PW,
-		USER_PHONE,
-		USER_MAIL,
-		USER_MENTO_CERT,  <!-- 수정: USER_CERT → USER_MENTO_CERT -->
-		USER_MONITOR,     <!-- 수정: USER_MONITER → USER_MONITOR -->
-		USER_AGREE,
-		USER_CAREER
-		FROM TBL_USER
-		ORDER BY USER_MONITOR DESC  <!-- TO_NUMBER 제거 -->
-		FETCH FIRST 5 ROWS ONLY
+</select>
 
+<select id="selectRanking" resultType="userDTO">
 
-	</select>
+SELECT
+	USER_NUM,
+	USER_ID,
+	USER_NAME,
+	USER_NICK,
+	USER_PW,
+	USER_PHONE,
+	USER_MAIL,
+	USER_CERT,
+	TO_NUMBER_(USER_MONITER) AS USER_MONITER,
+	USER_AGREE,
+	USER_CAREER,
+	USER_JOIN_DATE
+FROM TBL_USER
+ORDER BY TO_NUMBER(USER_MONITER) DESC
+FETCH FIRST 5 ROWS ONLY
+	
 
-	<!-- 공지사항 -->
-	<select id="selectRecentNotices" resultType="NoticeDTO">
-		SELECT NOTICE_NUM,
-		ADMIN_NUM,
-		NOTICE_CATEGORY,
-		NOTICE_TITLE,
-		NOTICE_TEXT,
-		NOTICE_VIEW,
-		TO_CHAR(NOTICE_DATE, 'YYYY-MM-DD') AS NOTICE_DATE, -- 날짜만 출력
-		NOTICE_MODIFY_DATE
-		FROM (
-		SELECT DISTINCT NOTICE_NUM,
-		ADMIN_NUM,
-		NOTICE_CATEGORY,
-		NOTICE_TITLE,
-		NOTICE_TEXT,
-		NOTICE_VIEW,
-		NOTICE_DATE,
-		NOTICE_MODIFY_DATE,
-		ROW_NUMBER() OVER (PARTITION BY NOTICE_TITLE ORDER BY NOTICE_DATE DESC) AS RN
-		FROM TBL_NOTICE
-		WHERE NOTICE_DATE >= SYSDATE - 7
-
-		UNION ALL
-
-		SELECT DISTINCT NOTICE_NUM,
-		ADMIN_NUM,
-		NOTICE_CATEGORY,
-		NOTICE_TITLE,
-		NOTICE_TEXT,
-		NOTICE_VIEW,
-		NOTICE_DATE,
-		NOTICE_MODIFY_DATE,
-		ROW_NUMBER() OVER (PARTITION BY NOTICE_TITLE ORDER BY NOTICE_DATE DESC) AS RN
-		FROM TBL_NOTICE
-		WHERE NOT EXISTS (
-		SELECT 1 FROM TBL_NOTICE WHERE NOTICE_DATE >= SYSDATE - 7
-		)
-		)
-		WHERE RN = 1  <!-- 같은 제목의 최신 글 1개만 선택 -->
-		ORDER BY NOTICE_DATE DESC
-		FETCH FIRST 5 ROWS ONLY
-	</select>
-
-	<!-- 검색기능 -->
-	<select id="searchArticles" parameterType="map"
-		resultType="ArticleListDTO">
-		SELECT * FROM (
-		SELECT
-		a.ARTICLE_NUM,
-		a.ARTICLE_TOPCATE,
-		a.ARTICLE_BOTCATE,
-		a.ARTICLE_TAGNAME,
-		a.ARTICLE_TITLE,
-		a.ARTICLE_TEXT,
-		a.ARTICLE_DATE,
-		a.ARTICLE_MODIFY_DATE,
-		u.USER_NICK,
-		-- 추가한 category 필드
-		a.ARTICLE_TOPCATE || ' > ' || a.ARTICLE_BOTCATE AS category,
-		ROW_NUMBER() OVER (ORDER BY a.ARTICLE_DATE DESC) AS rn
-		FROM TBL_ARTICLE a
-		JOIN TBL_USER u ON a.USER_NUM = u.USER_NUM
-		WHERE a.ARTICLE_TITLE LIKE '%' || #{query} || '%'
-		OR a.ARTICLE_TEXT LIKE '%' || #{query} || '%'
-		) WHERE rn BETWEEN #{startRow} AND #{endRow}
-	</select>
-
-	<!-- 검색된 게시글 총 수 -->
-	<select id="getTotalCount" parameterType="String"
-		resultType="int">
-		SELECT COUNT(*)
-		FROM TBL_ARTICLE
-		WHERE ARTICLE_TITLE LIKE '%' || #{query} || '%'
-		OR ARTICLE_TEXT LIKE '%' || #{query} || '%'
-	</select>
-
-	<!-- 특정 검색어 검색 -->
-	<select id="searchArticlesByTag"
-		resultType="com.itask.app.dto.ArticleListDTO">
-		SELECT * FROM articles WHERE tag = #{tag} ORDER BY created_at DESC
-	</select>
-
-	<!-- 특정 검색어 개수 -->
-	<select id="getTotalCountByTag" resultType="int">
-		SELECT COUNT(*) FROM articles WHERE tag = #{tag}
-	</select>
+</select>
 
 
 </mapper>

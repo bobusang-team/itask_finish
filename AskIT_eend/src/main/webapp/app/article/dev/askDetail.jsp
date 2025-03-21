@@ -54,7 +54,7 @@ pageEncoding="UTF-8"%>
          
           <div class="bjs-askDetail-text-profile">
             <img src="./../../../assets/img/profile.png" alt="">
-            <span class="bjs-askDetail-text-author"><a href="${pageContext.request.contextPath}/mypage/userPageSearch.my?userNick=${dev.getUserNick()}"><b><c:out value ="${dev.getUserMonitor() / 100}" />inch</b><br><c:out value ="${dev.userNick}" /><c:out value ="${dev.badge}" /></a></span>
+            <span class="bjs-askDetail-text-author"><b><c:out value ="${dev.getUserMonitor() / 100}" />inch</b><br><c:out value ="${dev.userNick}" /><c:out value ="${dev.badge}" /></span>
           </div>
           <div class="bjs-askDetail-text-date"><c:out value ="${dev.articleDate}" /></div>
         </div>

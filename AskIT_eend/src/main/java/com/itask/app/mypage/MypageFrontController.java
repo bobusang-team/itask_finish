@@ -45,50 +45,17 @@ public class MypageFrontController extends HttpServlet {
 	}
 
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
-	         throws ServletException, IOException {
+			throws ServletException, IOException {
 		System.out.println("mypage 서블릿 실행");
-		
-		
-	      // 세션에서 로그인 여부 확인 (세션이 없거나 로그인 정보가 없으면 로그인 페이지로 리다이렉트)
-//        HttpSession session = request.getSession(false);
-//        if (session == null || session.getAttribute("userDTO") == null) {
-//            System.out.println("로그인되지 않음. 로그인 페이지로 이동.");
-//            response.sendRedirect(request.getContextPath() + "/app/member/login.jsp");
-//            return;
-//        }
-		
-		// 해당 회원의 세션에 접근하여 정보 가져오기
-//		HttpSession session = request.getSession();
-		
-//		UserDTO userDTO = (UserDTO) session.getAttribute("userDTO");
-//		System.out.println(userDTO);
-		
-//		if (userDTO == null) {
-//            // 세션에 유저 정보가 없는 경우 -> 로그인 페이지
-//            response.sendRedirect(request.getContextPath() + "/app/member/login.jsp");
-//            return;
-//        }
-		
-		
-		//필요한 Path만 남기기
+
+		// 필요한 Path만 남기기
 		String target = request.getRequestURI().substring(request.getContextPath().length());
 		System.out.println(target + " 경로확인==============!!!");
 		Result result = new Result();
-//			UserDTO userDTO = new UserDTO();
-		
-//			Integer userNum = (Integer)request.getSession().getAttribute("userNum");
-		
-//			HttpSession session = request.getSession();
-//			System.out.println(session);
-//			String check = (String) session.getAttribute(userDTO.getUserId());
-//			session.setAttribute("userDTO", userDTO);
-//			System.out.println(" ========== userDTO.getUserId 확인 :" + userDTO.getUserId());
-//			System.out.println(" ========== check 확인 :" + check);
-//			System.out.println(" ========== userNum 확인 :" + session.getAttribute(userDTO.getUserId()));
-		
+
 		// +++++ 0122 오전
 		// 마이페이지 메인에 접근시 해당 유저의 뱃지수, 게시글수, 댓글수 뽑아와야함
-		switch(target) {
+		switch (target) {
 		case "/mypage/mypageMainOk.my":
 			System.out.println("mypageMainOk 실행!");
 			result = new mypageMainOkController().execute(request, response);
@@ -100,11 +67,11 @@ public class MypageFrontController extends HttpServlet {
 		case "/mypage/pwCheck.my": // 내정보 수정하기 클릭 -> 해당 jsp 이동
 			System.out.println("pwCheck 실행!");
 			result.setPath("/app/mypage/pwCheck.jsp");
-			result.setRedirect(false); //forward 방식
+			result.setRedirect(false); // forward 방식
 			break;
 		case "/mypage/pwCheckOk.my": // 내정보 수정하기 클릭 후 비밀번호 입력하고 클릭시
 			System.out.println("pwCheckOk 실행!");
-			result = new pwCheckOkController().execute(request, response); // 여기 구현해야함 처리할 컨트롤러생성 
+			result = new pwCheckOkController().execute(request, response); // 여기 구현해야함 처리할 컨트롤러생성
 			break;
 		case "/mypage/editInfoOk.my": // 닉네임 변경하기 클릭시 -> 업데이트
 			System.out.println("editInfoOk 실행!");
@@ -165,6 +132,7 @@ public class MypageFrontController extends HttpServlet {
 //			System.out.println("myTotalArticleCate 실행!");
 //			result = new myTotalArticleCateOkController().execute(request, response);
 //			break;
+<<<<<<< HEAD
 		case "/mypage/userPageSearch.my":
 			System.out.println("userPageSearchOk 실행!");
 			result = new userPageSearchOkController().execute(request, response);
@@ -177,20 +145,21 @@ public class MypageFrontController extends HttpServlet {
 			System.out.println("userTotalCommentOk 실행!");
 			result = new userTotalCommentOkController().execute(request, response);
 			break;
+
+=======
+>>>>>>> parent of e686813 (지수 : 0319 유저 프로필 페이지 완료)
 		}
-	
-	// 다음 동작 처리
-	if(result != null) {
-		if(result.isRedirect()) {
-			response.sendRedirect(result.getPath());
-			System.out.println(request.getAttribute("userId"));
-		}else {
-			request.getRequestDispatcher(result.getPath()).forward(request, response);
+
+		// 다음 동작 처리
+		if (result != null) {
+			if (result.isRedirect()) {
+				response.sendRedirect(result.getPath());
+				System.out.println(request.getAttribute("userId"));
+			} else {
+				request.getRequestDispatcher(result.getPath()).forward(request, response);
+			}
 		}
-	}
-	
-	
-	
+
 	}
 
 }

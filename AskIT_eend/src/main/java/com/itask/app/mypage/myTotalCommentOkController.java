@@ -46,6 +46,8 @@ public class myTotalCommentOkController implements Execute {
 		String userId = thisUser.getUserId();
 		System.out.println("================userId확인용 : " + userId);
 
+//		ArticleListDTO articleListDTO = new ArticleListDTO();
+
 		MyTotalCommentDTO myTotalCommentDTO = new MyTotalCommentDTO();
 		MypageDAO mypageDAO = new MypageDAO();
 		MypageMainDTO mypageMainDTO = new MypageMainDTO();
