@@ -154,7 +154,7 @@ public class ArticleListDTO {
 	}
 
 	public void setCategory(String category) {
-		this.category = category;	}
+		this.category = category;
 
 	@Override
 	public String toString() {

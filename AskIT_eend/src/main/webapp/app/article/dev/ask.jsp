@@ -117,9 +117,8 @@
 				            <div class="bjs-ask-post-footer">
 				                <div class="bjs-ask-post-info">
 				                    <span class="bjs-ask-post-author">
-				                    <a href="${pageContext.request.contextPath}/mypage/userPageSearch.my?userNick=${dev.getUserNick()}">
 				                        ${dev.badge} 
-				                        ${dev.getUserNick()}</a>
+				                        ${dev.getUserNick()}
 				                    </span>
 				                    <span class="bjs-ask-post-views">조회수 ${dev.getArticleView()}</span>
 				                    <span class="bjs-ask-post-replies">답글 0</span>

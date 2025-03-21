@@ -165,18 +165,6 @@ public class MypageFrontController extends HttpServlet {
 //			System.out.println("myTotalArticleCate 실행!");
 //			result = new myTotalArticleCateOkController().execute(request, response);
 //			break;
-		case "/mypage/userPageSearch.my":
-			System.out.println("userPageSearchOk 실행!");
-			result = new userPageSearchOkController().execute(request, response);
-			break;
-		case "/mypage/userTotalArticle.my":
-			System.out.println("userTotalArticleOk 실행!");
-			result = new userTotalArticleOkController().execute(request, response);
-			break;
-		case "/mypage/userTotalComment.my":
-			System.out.println("userTotalCommentOk 실행!");
-			result = new userTotalCommentOkController().execute(request, response);
-			break;
 		}
 	
 	// 다음 동작 처리
