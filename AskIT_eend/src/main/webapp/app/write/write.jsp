@@ -15,6 +15,7 @@
    href="${pageContext.request.contextPath }/assets/css/footer.css">
 <link rel="stylesheet"
    href="${pageContext.request.contextPath }/assets/css/write/write.css">
+   	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script defer
    src="${pageContext.request.contextPath }/assets/js/write/write.js"></script>
 
@@ -30,7 +31,7 @@
   
  <main class="itAskBox">
   <form action="${pageContext.request.contextPath}/app/write/writeOk.wr" method="post" enctype="multipart/form-data" >
-    <div class="write-click">
+    <!-- <div class="write-click"> -->
       <h3>카테고리 선택</h3>
       <!-- 카테고리선택 시작 -->
       <div class="topCate">
@@ -105,14 +106,13 @@
 
 
       <!-- 첨부파일 -->
-      <div class="form-group">
+      		<div class="form-group">
 				<label for="file">파일 첨부</label>
 
 				<div class="image-upload-wrap">
-					<input type="file" id="file" name="boardFile" />
-					
-<!-- 					accept=".jpg, .jpeg, .png" multiple /> -->
-<!-- 	파일형식 제한하고 싶으면 윗줄 주석 제거 -->
+					<input type="file" id="file" name="boardFile" accept=".jpg, .jpeg, .png" multiple />
+			
+<!-- 	파일형식 제한하고 싶으면 accept=".jpg, .jpeg, .png" multiple  제거 -->
 
 					<div class="image-upload-box">
 						<div class="upload-text">
@@ -125,9 +125,9 @@
 								이미지 업로드(<span class="cnt">0</span>/1)
 							</div>
 						</div>
-						<div class="upload-text">최대 1개까지 업로드 가능</div>
-						<div class="upload-text">파일 형식 : jpg, png</div>
-						<div class="upload-text">※ 이미지를 등록하면 즉시 반영됩니다.</div>
+						<div class="upload-text">최대 1개까지 업로드가능합니다.(파일 형식 : jpg, png, jpeg) ※ 이미지를 등록하면 즉시 반영됩니다.</div>
+						<!-- <div class="upload-text"></div>
+						<div class="upload-text"></div> -->
 					</div>
 				</div>
 				<div class="img-controller-box">
@@ -138,10 +138,10 @@
 			</div>
       
 
-      <button class="submit-button" type="submit">글 작성하기</button>
+      <button class="submit-button" type="submit">글 작성하기</button>      
     </form>
   </main>
-
+	
    <!-- 푸터 영역 -->
    <jsp:include page="./../basic/footer.jsp" />
 </body>
