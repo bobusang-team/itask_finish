@@ -67,7 +67,6 @@ public class WriteController implements Execute {
 		}
 
 		// 첨부파일 업로드
-//		final String UPLOAD_PATH = "C:/kdt/TEAM_boboosang/itask_finish/AskIT_eend/src/main/webapp/assets/upload";
 		final String UPLOAD_PATH = request.getServletContext().getRealPath("/") + "assets/upload/";
 		final int FILE_SIZE = 1024 * 1024 * 5; // 5mb
 		System.out.println("파일 업로드 경로 : " + UPLOAD_PATH);
