@@ -54,7 +54,7 @@
       border: 1px solid #D96073;
       color: #D96073;
       background: none;
-      width: 170px;
+      width: 180px;
       border-radius: 40px;
       padding: 10px 40px;
       margin: 20px 20px;
@@ -215,10 +215,9 @@
     font-size: 30px;
     padding-left: 20px;
   }
-  #Detail-share-img, #Detail-view-img{
+  #Detail-view-img{
     height: 30px;
-    width: 35px;
-    padding-left: 100px;
+    margin-left: 100px;
   }
   /* 드롭다운 */
   .Detail-dropdown {
@@ -339,3 +338,11 @@
   .askDetail-comment-monitor{
     padding: 10px;
   }
+  
+  #commentDelete{
+  cursor:pointer;
+  }
+  
+  .deleted-comment {
+    color: #888; /* 텍스트 색상도 어두운 회색으로 변경 */
+}

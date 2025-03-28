@@ -23,17 +23,17 @@
 		<!-- 메인 -->
 		<!-- 카테고리 선택 -->
 		<form action="${pageContext.request.contextPath}/admin/writeOk.ad" method="post">
-    <div class="write-click">
+   		 <div class="write-click"><br><br>
         <p class="noticeWrite">공지게시판 글쓰기</p>
         <hr>
-
+		
         <p class="write-title">카테고리 선택</p>
         <div class="write-clickbox1">
-            <input type="hidden" name="noticeCategory" id="noticeCategory" value="전체" />
-            <div class="write-button" id="all" onclick="setCategory('전체')"> 전체</div>
-            <div class="write-button" id="dev" onclick="setCategory('개발')"> 개발</div>
-            <div class="write-button" id="sec" onclick="setCategory('보안')"> 보안</div>
-            <div class="write-button" id="qual" onclick="setCategory('자격증')"> 자격증</div>
+        	<input type="hidden" name="noticeCategory" id="noticeCategory" />
+            <div class="write-buttons" id="전체" onclick="setCategory('전체')"> 전체</div>
+            <div class="write-buttons" id="개발" onclick="setCategory('개발')"> 개발</div>
+            <div class="write-buttons" id="보안" onclick="setCategory('보안')"> 보안</div>
+            <div class="write-buttons" id="자격증" onclick="setCategory('자격증')"> 자격증</div>
         </div>
         <!-- 제목 -->
         <div class="write-title-section">
@@ -45,19 +45,7 @@
             <textarea rows="30" name="noticeText" id="content" minlength="20"
                 placeholder="내용을 입력하세요(최소 20자)" required></textarea>
         </div>
-        <!-- 첨부파일 입력 -->
-        <div class="write-file">
-            <input type="hidden" name="adminNum" id="adminNum" />
-            <div class="file-up-container">
-                <div class="file-upload-container">
-                    <div class="upload-box">
-                        <label for="file-upload">첨부파일 선택</label> 
-                        <input type="file" id="file-upload" name="fileUpload" accept="image/*">
-                    </div>
-                </div>
-            </div>
-            <button class="submit-button" type="submit">글 작성하기</button>
-        </div>
+        <button class="submit-button" type="submit">글 작성하기</button><br><br>   
     </div>
 </form>
 

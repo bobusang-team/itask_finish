@@ -25,13 +25,16 @@ if (userInfo != null) {
             <img src="${pageContext.request.contextPath}/assets/img/logo/logo_b.png" alt="ITASK 로고" class="header-logo">
         </div>
 
-        <div class="search-container">
-            <div class="search-wrapper">
+        
+
+        <div class="admin-info">
+        	<div class="search-container">
+            <%-- <div class="search-wrapper">
                 <input type="text" class="search-input" placeholder="키워드를 입력하세요">
                 <button class="search-button">
                     <img src="${pageContext.request.contextPath}/assets/img/readingGlass.png" alt="검색 아이콘">
                 </button>
-            </div>
+            </div> --%>
 
             <form id="writeForm" method="post" action="${pageContext.request.contextPath}/admin/write.ad" style="display: none;">
                 <!-- adminNum 값 추가 -->
@@ -42,9 +45,7 @@ if (userInfo != null) {
                 <img src="${pageContext.request.contextPath}/assets/img/File Plus 02.png" alt="글쓰기 아이콘"> 글쓰기
             </a>
         </div>
-
-        <div class="admin-info">
-            <span class="admin-nickname"><%= adminNick %>님 환영합니다</span>
+            <span class="admin-nickname">&nbsp;&nbsp;&nbsp;<%= adminNick %>님 환영합니다</span>
             <a href="${pageContext.request.contextPath}/admin/logout.ad" class="logout-link" target="main">로그아웃</a>
         </div>
     </div>
@@ -54,7 +55,7 @@ if (userInfo != null) {
     <ul class="navbar-menu">
         <li class="menu-item"><a href="#" class="menu-link">회원관리</a>
             <div class="submenu">
-                <a href="#" class="submenu-link">블랙리스트</a>
+                <a href="${pageContext.request.contextPath}/admin/blackList.ad" target="main" class="submenu-link" id="blackList">블랙리스트</a>
                 <a href="${pageContext.request.contextPath}/admin/basic/totalMember.ad" target="main" class="submenu-link" id="total">전체회원</a>
                 <a href="${pageContext.request.contextPath}/admin/generalMember.ad" target="main" class="submenu-link" id="general">일반회원</a>
                 <a href="${pageContext.request.contextPath}/admin/mentoMember.ad" target="main" class="submenu-link" id="mento">멘토회원</a>

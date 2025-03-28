@@ -18,8 +18,8 @@
             <div class="head">
                 <div class="title">꿀팁게시판-자격증</div>
                 <div class="buttons">
-                    <button id="editButton">수정</button>
-                    <button id="deleteButton">삭제</button>
+                    <button onclick="submitEditForm()">수정</button>
+					<button onclick="submitDeleteForm()">삭제</button>
                 </div>
             </div>
             <hr>
@@ -40,27 +40,67 @@
 				<div class="tipqualList">
 					<div>
 						<input type="checkbox" class="item-checkbox">
-						<p>${tipDev.articleTagname}</p>
+						<input type="hidden" class="articleNum" value="${tipQual.articleNum }">
+						<input type="hidden" name="articleTopCate" id="articleTopCate" value="${tipQual.articleTopCate }">
+						<input type="hidden" name="articleBotCate" id="articleBotCate" value="${tipQual.articleBotCate }">
+						<p>${tipQual.articleTagName}</p>
 						<a href="${pageContext.request.contextPath}/admin/articleDetail.ad?articleNum=${tipQual.articleNum}">
 						<p class="tipqual-title">${tipQual.articleTitle}</p>
 						</a>
 						<p>${tipQual.userNick}</p>
 						<p>${tipQual.grade}</p>
-						<p>${tipQual.articledate}</p>
+						<p>${tipQual.articleDate}</p>
 						<p>${tipQual.articleView}</p>
 					</div>
 				</div>
 			</c:forEach>
+			
+			<!-- 삭제용 Form -->
+			<form id="deleteForm"
+				action="${pageContext.request.contextPath}/admin/deleteArticle.ad"
+				method="post">
+				<input type="hidden" name="articleNums" id="articleNums">
+				<input type="hidden" name="articleTopcate" id="articleTopcate">
+				<input type="hidden" name="articleBotcate" id="articleBotcate">
+			</form>
 
-            <div class="pagination">
-                <a href="#">«</a>
-                <a href="#">‹</a>
-                <a href="#">1</a>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">›</a>
-                <a href="#">»</a>
-            </div>
+           <div class="pagination">
+      <c:if test="${prev}"> <!-- 아주 처음으로 가는 버튼 -->
+         <a href="${pageContext.request.contextPath}/admin/tipQual.ad?page=1"
+                  class="firstPage">«</a>
+     </c:if>
+      <c:if test="${prev}"> <!-- 이전페이지가 있을 시 이전페이지로 넘어가는 버튼 생성 -->
+         <a href="${pageContext.request.contextPath}/admin/tipQual.ad?page=1"
+                  class="prev">‹</a>
+     </c:if>
+     <c:set var="realStartPage" value="${startPage < 0 ? 0:startPage }" />
+              <c:forEach var="i" begin="${realStartPage}" end="${endPage}">
+
+            <c:choose>
+               <c:when test="${!(i == page)}">
+                  <a href="${pageContext.request.contextPath}/admin/tipQual.ad?page=${i}">
+                           <c:out value="${i}" />
+                  </a>
+               </c:when>
+               <c:otherwise>
+                     <a href="#" class="active"> <c:out value="${i}" /> <!-- 선택한 현재페이지를 버튼에서 활성화 시켜주는 부분 -->
+                     </a>
+               </c:otherwise>   
+            </c:choose>
+
+         </c:forEach>
+      <c:if test="${next}"> <!-- 다음 페이지가 있다면 다음으로 넘어가는 버튼 생성 -->
+            <a href="${pageContext.request.contextPath}/admin/tipQual.ad?page=${endPage + 1}"
+                  class="next">›</a>
+      </c:if>
+      <c:if test="${next}"> <!-- 완전 끝으로 가는 버튼 생성 -->
+            <a href="${pageContext.request.contextPath}/admin/tipQual.ad?page=${realEndPage}"
+                  class="realEndPage">»</a>
+      </c:if>
+            
+         <!-- <a href="#">«</a> <a href="#">‹</a> <a href="#">1</a> <a href="#">2</a>
+         <a href="#">3</a> <a href="#">›</a> <a href="#">»</a> -->
+      </div>
         </nav>
     </main>
 </body>
