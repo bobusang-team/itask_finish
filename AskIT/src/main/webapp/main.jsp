@@ -110,16 +110,66 @@
             </a>
           </section>
 
-          <section class="bestT">
-            <h3>이달의 Best 질문</h3>
-            <a href="#">
-              <span>java</span>
-              <div><img src="./assets/img/best-tip.png" alt=""></div>
-              <h4>게시물 제목</h4>
-              <p>이달의 베스트 질문 게시물 내용입니다 이달의 베스트 질문 게시물 내용입니다 이달의 베스트 질문 게시물 내용입니다 이달의 베스트 질문 게시물 내용입니다 이달의 베스트 질문 게시물 내용입니다</p>
-            </a>
-          </section>
-      </main>
+				<!-- 이달의 Best 꿀팁 -->
+				<section class="bestT">
+					<h3>이달의 Best 꿀팁</h3>
+					<a id="bestTipLink" href="#"> <span id="bestTipTag">카테고리</span>
+						<div>
+							<img src="./assets/img/best-tip.png" alt="">
+						</div>
+						<h4 id="bestTipTitle">게시물 제목</h4>
+						<p id="bestTipText">이달의 베스트 꿀팁 게시물 내용입니다.</p>
+						<p>
+							작성자 : <span id="bestTipUserNick"> 닉네임 없음</span> <img
+								src="${pageContext.request.contextPath}/assets/img/monitor.png"
+								alt="monitor" class="monitor-icon"> <span
+								id="bestTipMonitor"> 0 </span>
+						</p>
+					</a>
+				</section>
+
+				<script> 
+				console.log(window.location.pathname); 
+				document.addEventListener("DOMContentLoaded", function () {
+					const contextPath = document.getElementById("context-path").getAttribute("data-path"); 
+					console.log("contextPath 확인1:", contextPath);
+					console.log("contextPath 확인2:", contextPath + '/bestArticles/mainBestArticles.main');
+				    fetch(contextPath + '/bestArticles/mainBestArticles.main')
+				        .then(response => {
+				            if (!response.ok) {
+				                throw new Error(`서버 응답 오류 : ${response.status}`);
+				            }
+				            return response.json();
+				        })
+				        .then(data => {
+				            console.log("받은 데이터:", data);
+				            console.log("받은 게시물의 번호 " + data.bestMoon.articleNum);
+				            let thisArticleNum = data.bestMoon.articleNum;
+
+				            if (data.bestMoon) {
+				                document.getElementById("bestMoonTag").textContent = data.bestMoon.articleBotCate || "카테고리 없음";
+				                document.getElementById("bestMoonTitle").textContent = data.bestMoon.articleTitle || "제목 없음";
+				                document.getElementById("bestMoonText").textContent = data.bestMoon.articleText || "내용 없음";
+				                document.getElementById("bestMoonUserNick").textContent = data.bestMoon.userNick || "닉네임 없음";
+				                document.getElementById("bestMoonMonitor").textContent = data.bestMoon.articleMonitorNum || "0";
+				                document.getElementById("bestMoonLink").href = contextPath + '/dev/detailAsk.dev?articleNum=' + data.bestMoon.articleNum;
+				            }
+
+				            if (data.bestTip) {
+				                document.getElementById("bestTipTag").textContent = data.bestTip.articleBotCate || "카테고리 없음";
+				                document.getElementById("bestTipTitle").textContent = data.bestTip.articleTitle || "제목 없음";
+				                document.getElementById("bestTipText").textContent = data.bestTip.articleText || "내용 없음";
+				                document.getElementById("bestTipUserNick").textContent = data.bestTip.userNick || "닉네임 없음";
+				                document.getElementById("bestTipMonitor").textContent = data.bestTip.articleMonitorNum || "0";
+				                document.getElementById("bestTipLink").href = contextPath + '/dev/detailAsk.dev?articleNum=' + data.bestTip.articleNum;
+				            }
+				        })
+				        .catch(error => {
+				            console.error("데이터 로딩 오류:", error);
+				        });
+				});
+				</script>
+	</main>
 
       <!-- 메인 공지사항 -->
 
