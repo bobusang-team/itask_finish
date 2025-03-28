@@ -1,179 +1,550 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="admin">   
-   <select id="adminLogin" parameterType="AdminDTO" resultType="AdminDTO">
-      SELECT ADMIN_NUM, ADMIN_NICK, ADMIN_ID, ADMIN_PW
-      from tbl_admin
-      where admin_id = #{adminId} and admin_pw = #{adminPw}
-   </select>
-   
-   <select id="totalMember" parameterType="UserDTO" resultType="UserDTO">
-      SELECT 
-       CASE WHEN USER_CERT = 'T' THEN '멘토' ELSE '일반' END AS grade,
-       USER_ID AS userId,
-         USER_NICK AS userNick,
-       CASE WHEN USER_CERT = 'T' THEN '🏅' ELSE '-' END AS badge,
-         USER_MONITER AS userMoniter,
-       USER_JOIN_DATE AS userJoinDate FROM TBL_USER
-   </select>
- 
-   <select id="generalMember" parameterType="UserDTO" resultType="UserDTO">
-      SELECT 
-       CASE WHEN USER_CERT = 'T' THEN '멘토' ELSE '일반' END AS grade,
-       USER_ID AS userId,
-       USER_NICK AS userNick,
-       CASE WHEN USER_CERT = 'T' THEN '🏅' ELSE '-' END AS badge,
-       USER_MONITER AS userMoniter,
-       USER_JOIN_DATE AS userJoinDate FROM TBL_USER WHERE USER_CERT = 'F'
-   </select>
-   
-   <select id="mentoMember" parameterType="UserDTO" resultType="UserDTO">
-      SELECT 
-       CASE WHEN USER_CERT = 'T' THEN '멘토' ELSE '일반' END AS grade,
-       USER_ID AS userId,
-       USER_NICK AS userNick,
-       CASE WHEN USER_CERT = 'T' THEN '🏅' ELSE '-' END AS badge,
-       USER_MONITER AS userMoniter,
-       USER_JOIN_DATE AS userJoinDate FROM TBL_USER WHERE USER_CERT = 'T'
-   </select>
+<mapper namespace="admin">
+	<select id="adminLogin" parameterType="AdminDTO"
+		resultType="AdminDTO">
+		SELECT ADMIN_NUM, ADMIN_NICK, ADMIN_ID, ADMIN_PW
+		from
+		tbl_admin
+		where admin_id = #{adminId} and admin_pw = #{adminPw}
+	</select>
 
-   <select id="notice" parameterType="NoticeDTO" resultType="NoticeDTO">
-      SELECT NOTICE_CATEGORY ,NOTICE_TITLE, NOTICE_DATE, NOTICE_VIEW, NOTICE_TEXT FROM TBL_NOTICE ORDER BY NOTICE_DATE DESC 
-   </select>
-    
-   <select id="tipDev" parameterType="ArticleDTO" resultType="ArticleDTO">
-      SELECT 
-      A.ARTICLE_NUM, 
-      A.ARTICLE_TAGNAME AS articleTagname, 
-      A.ARTICLE_TITLE AS articleTitle, 
-      U.USER_NICK AS userNick,
-        CASE 
-           WHEN U.USER_CERT = 'T' THEN '멘토'
-           WHEN U.USER_CERT = 'F' THEN '일반'
-       END AS grade,
-       A.ARTICLE_DATE AS articledate, A.ARTICLE_VIEW AS articleView 
-      FROM TBL_ARTICLE A JOIN TBL_USER U ON 
-      A.USER_NUM = U.USER_NUM WHERE A.ARTICLE_TOPCATE = '개발' 
-      AND A.ARTICLE_BOTCATE = '꿀팁'
-      ORDER BY A.ARTICLE_DATE DESC
-   </select>
+	<select id="getTotal" resultType="int">
+        <![CDATA[
+        SELECT COUNT(USER_NUM) 
+        FROM tbl_USER
+        ]]>
+	</select>
+	
+	<select id="getSearchTotal" resultType="int">
+    <![CDATA[
+    SELECT COUNT(USER_NUM) 
+    FROM tbl_USER 
+    WHERE USER_ID LIKE '%' || #{search} || '%' 
+    OR USER_NICK LIKE '%' || #{search} || '%'
+    ]]>
+	</select>
+	
+	<select id="getGeneralTotal" resultType="int">
+        <![CDATA[
+        SELECT COUNT(USER_NUM) 
+        FROM tbl_USER WHERE USER_MENTO_CERT = 'F'
+        ]]>
+	</select>
 
-   <select id="tipSec" parameterType="ArticleDTO" resultType="ArticleDTO">
-      SELECT  
-      A.ARTICLE_NUM,
-      A.ARTICLE_TAGNAME AS articleTagname, 
-      A.ARTICLE_TITLE AS articleTitle, 
-      U.USER_NICK AS userNick,
-        CASE 
-           WHEN U.USER_CERT = 'T' THEN '멘토'
-           WHEN U.USER_CERT = 'F' THEN '일반'
-       END AS grade,
-       A.ARTICLE_DATE AS articledate, A.ARTICLE_VIEW AS articleView 
-      FROM TBL_ARTICLE A JOIN TBL_USER U ON 
-      A.USER_NUM = U.USER_NUM WHERE A.ARTICLE_TOPCATE = '보안' AND A.ARTICLE_BOTCATE = '꿀팁'
-      ORDER BY A.ARTICLE_DATE DESC
-   </select>
-   
-   <select id="tipQual" parameterType="ArticleDTO" resultType="ArticleDTO">
-      SELECT
-      A.ARTICLE_NUM, 
-      A.ARTICLE_TAGNAME AS articleTagname, 
-      A.ARTICLE_TITLE AS articleTitle, 
-      U.USER_NICK AS userNick,
-        CASE 
-           WHEN U.USER_CERT = 'T' THEN '멘토'
-           WHEN U.USER_CERT = 'F' THEN '일반'
-       END AS grade,
-       A.ARTICLE_DATE AS articledate, A.ARTICLE_VIEW AS articleView 
-      FROM TBL_ARTICLE A JOIN TBL_USER U ON 
-      A.USER_NUM = U.USER_NUM WHERE A.ARTICLE_TOPCATE = '자격증' AND A.ARTICLE_BOTCATE = '꿀팁'
-      ORDER BY A.ARTICLE_DATE DESC
-   </select>
-   
-   <select id="askDev" parameterType="ArticleDTO" resultType="ArticleDTO">
-      SELECT  
-      A.ARTICLE_NUM,
-      A.ARTICLE_TAGNAME AS articleTagname, 
-      A.ARTICLE_TITLE AS articleTitle, 
-      U.USER_NICK AS userNick,
-        CASE 
-           WHEN U.USER_CERT = 'T' THEN '멘토'
-           WHEN U.USER_CERT = 'F' THEN '일반'
-       END AS grade,
-       A.ARTICLE_DATE AS articledate, A.ARTICLE_VIEW AS articleView 
-      FROM TBL_ARTICLE A JOIN TBL_USER U ON 
-      A.USER_NUM = U.USER_NUM WHERE A.ARTICLE_TOPCATE = '개발' AND A.ARTICLE_BOTCATE = '질문'
-      ORDER BY A.ARTICLE_DATE DESC
-   </select>
+	<select id="getMentoTotal" resultType="int">
+        <![CDATA[
+        SELECT COUNT(USER_NUM) 
+        FROM tbl_USER WHERE USER_MENTO_CERT = 'T'
+        ]]>
+	</select>
 
-   <select id="askSec" parameterType="ArticleDTO" resultType="ArticleDTO">
-      SELECT  
-      A.ARTICLE_NUM,
-      A.ARTICLE_TAGNAME AS articleTagname, 
-      A.ARTICLE_TITLE AS articleTitle, 
-      U.USER_NICK AS userNick,
-        CASE 
-           WHEN U.USER_CERT = 'T' THEN '멘토'
-           WHEN U.USER_CERT = 'F' THEN '일반'
-       END AS grade,
-       A.ARTICLE_DATE AS articledate, A.ARTICLE_VIEW AS articleView 
-      FROM TBL_ARTICLE A JOIN TBL_USER U ON 
-      A.USER_NUM = U.USER_NUM WHERE A.ARTICLE_TOPCATE = '보안' AND A.ARTICLE_BOTCATE = '질문'
-      ORDER BY A.ARTICLE_DATE DESC
-   </select>
+	<select id="getBlackTotal" resultType="int">
+        <![CDATA[
+        SELECT COUNT(BLACKLIST_NUM) 
+        FROM tbl_BLACKLIST
+        ]]>
+	</select>
 
-   <select id="askQual" parameterType="ArticleDTO" resultType="ArticleDTO">
-      SELECT 
-      A.ARTICLE_NUM, 
-      A.ARTICLE_TAGNAME AS articleTagname, 
-      A.ARTICLE_TITLE AS articleTitle, 
-      U.USER_NICK AS userNick,
-        CASE 
-           WHEN U.USER_CERT = 'T' THEN '멘토'
-           WHEN U.USER_CERT = 'F' THEN '일반'
-       END AS grade,
-       A.ARTICLE_DATE AS articledate, A.ARTICLE_VIEW AS articleView 
-      FROM TBL_ARTICLE A JOIN TBL_USER U ON 
-      A.USER_NUM = U.USER_NUM WHERE A.ARTICLE_TOPCATE = '자격증' AND A.ARTICLE_BOTCATE = '질문'
-      ORDER BY A.ARTICLE_DATE DESC
-   </select>
-   
-    <insert id="write" parameterType="NoticeDTO">
-      INSERT INTO tbl_notice (notice_num, notice_category, notice_title, notice_text, notice_view, notice_date, admin_num)
-    VALUES (seq_notice.nextVal, #{noticeCategory}, #{noticeTitle}, #{noticeText}, 0, sysdate, #{adminNum})
-   </insert>  
-   
-   <select id="articleDetail" parameterType="int" resultType="ArticleDTO">
-        SELECT 
-            a.article_num, a.article_Title, a.article_text, a.article_Date, a.article_topcate,
-             a.article_botcate, a.article_tagname, a.article_view,  a.ARTICLE_MONITER_NUM, 
-             u.user_num, u.user_nick, u.user_moniter 
-        FROM TBL_ARTICLE a INNER JOIN tbl_user u
-            ON a.user_num = u.user_num
-        WHERE
-            article_num = #{articleNum}
-     </select>
+	<select id="totalMember" resultType="UserAdminDTO">
+	<![CDATA[
+    SELECT * FROM (
+        SELECT ROWNUM AS rnum, subquery.*
+        FROM (
+		SELECT 
+    	CASE WHEN USER_MENTO_CERT = 'T' THEN '멘토' ELSE '일반' END AS grade,
+    	USER_ID AS userId,
+    	USER_NICK AS userNick,
+    	CASE WHEN USER_MENTO_CERT = 'T' THEN '🏅' ELSE '-' END AS badge,
+    	USER_MONITOR AS userMonitor,
+    	USER_JOIN_DATE AS userJoinDate FROM TBL_USER
+    	 ) subquery
+    ) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+    ]]>
+	</select>
 
-    <select id="commentArticle" parameterType="int" resultType="CommentDTO">
-SELECT 
-    C.COMMENT_NUM,                     
-    C.USER_NUM,                    
-    U.USER_NAME,                     
-    U.USER_NICK,                   
-    C.COMMENT_TEXT,                 
-    C.COMMENT_MONITOR_NUM,         
-    C.COMMENT_DATE,             
-    U.USER_MONITER AS USER_MONITER,
-    U.user_nick 
-FROM 
-    TBL_COMMENT C
-JOIN 
-    TBL_USER U ON C.USER_NUM = U.USER_NUM  
-WHERE 
-    C.ARTICLE_NUM = #{articleNum}                  
-ORDER BY 
-    C.COMMENT_DATE DESC       
+	<select id="generalMember" resultType="UserAdminDTO">
+		<![CDATA[
+    SELECT * FROM (
+        SELECT ROWNUM AS rnum, subquery.*
+        FROM (
+		SELECT 
+    	CASE WHEN USER_MENTO_CERT = 'T' THEN '멘토' ELSE '일반' END AS grade,
+    	USER_ID AS userId,
+    	USER_NICK AS userNick,
+    	CASE WHEN USER_MENTO_CERT = 'T' THEN '🏅' ELSE '-' END AS badge,
+    	USER_MONITOR AS userMonitor,
+    	USER_JOIN_DATE AS userJoinDate FROM TBL_USER WHERE USER_MENTO_CERT = 'F'
+    	 ) subquery
+    ) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+    ]]>
+	</select>
 
-    </select> 
+	<select id="mentoMember" resultType="UserAdminDTO">
+		<![CDATA[
+    SELECT * FROM (
+        SELECT ROWNUM AS rnum, subquery.*
+        FROM (
+		SELECT 
+    	CASE WHEN USER_MENTO_CERT = 'T' THEN '멘토' ELSE '일반' END AS grade,
+    	USER_ID AS userId,
+    	USER_NICK AS userNick,
+    	CASE WHEN USER_MENTO_CERT = 'T' THEN '🏅' ELSE '-' END AS badge,
+    	USER_MONITOR AS userMonitor,
+    	USER_JOIN_DATE AS userJoinDate FROM TBL_USER WHERE USER_MENTO_CERT = 'T'
+    	 ) subquery
+    ) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+    ]]>
+	</select>
 
+	<select id="notice" parameterType="NoticeDTO"
+		resultType="NoticeDTO">
+		<![CDATA[
+    	SELECT * FROM (SELECT ROWNUM AS rnum, subquery.* FROM (
+		SELECT NOTICE_NUM, NOTICE_CATEGORY ,NOTICE_TITLE, NOTICE_DATE, NOTICE_VIEW, NOTICE_TEXT FROM TBL_NOTICE ORDER BY NOTICE_DATE DESC
+		) subquery) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+    ]]>
+	</select>
+
+	<select id="tipDev" parameterType="ArticleAdminDTO"
+		resultType="ArticleAdminDTO">
+	<![CDATA[
+    	SELECT * FROM (SELECT ROWNUM AS rnum, subquery.* FROM (
+		SELECT 
+		A.ARTICLE_NUM, 
+		A.ARTICLE_TAGNAME AS articleTagName, 
+		A.ARTICLE_TITLE AS articleTitle, 
+		U.USER_NICK AS userNick,
+  		CASE 
+        	WHEN U.USER_MENTO_CERT = 'T' THEN '멘토'
+        	WHEN U.USER_MENTO_CERT = 'F' THEN '일반'
+    	END AS grade,
+    	A.ARTICLE_DATE AS articleDate, A.ARTICLE_VIEW AS articleView 
+		FROM TBL_ARTICLE A JOIN TBL_USER U ON 
+		A.USER_NUM = U.USER_NUM WHERE A.ARTICLE_TOPCATE = '개발' 
+		AND A.ARTICLE_BOTCATE = '꿀팁'
+		ORDER BY A.ARTICLE_DATE DESC
+	) subquery) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+    ]]>
+	</select>
+
+	<select id="tipSec" parameterType="ArticleAdminDTO"
+		resultType="ArticleAdminDTO">
+	<![CDATA[
+    	SELECT * FROM (SELECT ROWNUM AS rnum, subquery.* FROM (
+		SELECT  
+		A.ARTICLE_NUM,
+		A.ARTICLE_TAGNAME AS articleTagName, 
+		A.ARTICLE_TITLE AS articleTitle, 
+		U.USER_NICK AS userNick,
+  		CASE 
+        	WHEN U.USER_MENTO_CERT = 'T' THEN '멘토'
+        	WHEN U.USER_MENTO_CERT = 'F' THEN '일반'
+    	END AS grade,
+    	A.ARTICLE_DATE AS articleDate, A.ARTICLE_VIEW AS articleView 
+		FROM TBL_ARTICLE A JOIN TBL_USER U ON 
+		A.USER_NUM = U.USER_NUM WHERE A.ARTICLE_TOPCATE = '보안' AND A.ARTICLE_BOTCATE = '꿀팁'
+		ORDER BY A.ARTICLE_DATE DESC
+	) subquery) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+    ]]>
+	</select>
+
+	<select id="tipQual" parameterType="ArticleAdminDTO"
+		resultType="ArticleAdminDTO">
+	<![CDATA[
+    	SELECT * FROM (SELECT ROWNUM AS rnum, subquery.* FROM (
+		SELECT
+		A.ARTICLE_NUM, 
+		A.ARTICLE_TAGNAME AS articleTagName, 
+		A.ARTICLE_TITLE AS articleTitle, 
+		U.USER_NICK AS userNick,
+  		CASE 
+        	WHEN U.USER_MENTO_CERT = 'T' THEN '멘토'
+        	WHEN U.USER_MENTO_CERT = 'F' THEN '일반'
+    	END AS grade,
+    	A.ARTICLE_DATE AS articleDate, A.ARTICLE_VIEW AS articleView 
+		FROM TBL_ARTICLE A JOIN TBL_USER U ON 
+		A.USER_NUM = U.USER_NUM WHERE A.ARTICLE_TOPCATE = '자격증' AND A.ARTICLE_BOTCATE = '꿀팁'
+		ORDER BY A.ARTICLE_DATE DESC
+	) subquery) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+    ]]>
+	</select>
+
+	<select id="askDev" parameterType="ArticleAdminDTO"
+		resultType="ArticleAdminDTO">
+	<![CDATA[
+    	SELECT * FROM (SELECT ROWNUM AS rnum, subquery.* FROM (
+		SELECT  
+		A.ARTICLE_NUM,
+		A.ARTICLE_TAGNAME AS articleTagName, 
+		A.ARTICLE_TITLE AS articleTitle, 
+		U.USER_NICK AS userNick,
+  		CASE 
+        	WHEN U.USER_MENTO_CERT = 'T' THEN '멘토'
+        	WHEN U.USER_MENTO_CERT = 'F' THEN '일반'
+    	END AS grade,
+    	A.ARTICLE_DATE AS articleDate, A.ARTICLE_VIEW AS articleView 
+		FROM TBL_ARTICLE A JOIN TBL_USER U ON 
+		A.USER_NUM = U.USER_NUM WHERE A.ARTICLE_TOPCATE = '개발' AND A.ARTICLE_BOTCATE = '질문'
+		ORDER BY A.ARTICLE_DATE DESC
+	) subquery) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+    ]]>
+	</select>
+
+	<select id="askSec" parameterType="ArticleAdminDTO"
+		resultType="ArticleAdminDTO">
+	<![CDATA[
+    	SELECT * FROM (SELECT ROWNUM AS rnum, subquery.* FROM (
+		SELECT  
+		A.ARTICLE_NUM,
+		A.ARTICLE_TAGNAME AS articleTagName, 
+		A.ARTICLE_TITLE AS articleTitle, 
+		U.USER_NICK AS userNick,
+  		CASE 
+        	WHEN U.USER_MENTO_CERT = 'T' THEN '멘토'
+        	WHEN U.USER_MENTO_CERT = 'F' THEN '일반'
+    	END AS grade,
+    	A.ARTICLE_DATE AS articleDate, A.ARTICLE_VIEW AS articleView 
+		FROM TBL_ARTICLE A JOIN TBL_USER U ON 
+		A.USER_NUM = U.USER_NUM WHERE A.ARTICLE_TOPCATE = '보안' AND A.ARTICLE_BOTCATE = '질문'
+		ORDER BY A.ARTICLE_DATE DESC
+	 ) subquery) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+    ]]>
+	</select>
+
+	<select id="askQual" parameterType="ArticleAdminDTO"
+		resultType="ArticleAdminDTO">
+	<![CDATA[
+    	SELECT * FROM (SELECT ROWNUM AS rnum, subquery.* FROM (
+		SELECT 
+		A.ARTICLE_NUM, 
+		A.ARTICLE_TAGNAME AS articleTagName, 
+		A.ARTICLE_TITLE AS articleTitle, 
+		U.USER_NICK AS userNick,
+  		CASE 
+        	WHEN U.USER_MENTO_CERT = 'T' THEN '멘토'
+        	WHEN U.USER_MENTO_CERT = 'F' THEN '일반'
+    	END AS grade,
+    	A.ARTICLE_DATE AS articleDate, A.ARTICLE_VIEW AS articleView 
+		FROM TBL_ARTICLE A JOIN TBL_USER U ON 
+		A.USER_NUM = U.USER_NUM WHERE A.ARTICLE_TOPCATE = '자격증' AND A.ARTICLE_BOTCATE = '질문'
+		ORDER BY A.ARTICLE_DATE DESC
+		 ) subquery) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+    ]]>
+	</select>
+
+	<insert id="write" parameterType="NoticeDTO">
+		INSERT INTO tbl_notice
+		(notice_num, notice_category, notice_title, notice_text, notice_view,
+		notice_date, admin_num)
+		VALUES (seq_notice.nextVal, #{noticeCategory},
+		#{noticeTitle},
+		#{noticeText}, 0, sysdate, #{adminNum})
+	</insert>
+
+	<select id="articleDetail" parameterType="int"
+		resultType="ArticleAdminDTO">
+		SELECT
+		a.article_num, a.article_Title, a.article_text,
+		a.article_Date, a.article_TopCate,
+		a.article_BotCate,
+		a.article_tagname, a.article_view,
+		a.ARTICLE_MONITOR_NUM,
+		u.user_num,
+		u.user_nick, u.user_monitor
+		FROM TBL_ARTICLE a INNER JOIN tbl_user u
+		ON
+		a.user_num = u.user_num
+		WHERE
+		article_num = #{articleNum}
+	</select>
+
+	<select id="commentArticle" parameterType="int"
+		resultType="CommentAdminDTO">
+		SELECT
+		C.COMMENT_NUM, C.USER_NUM, U.USER_NAME, U.USER_NICK,
+		C.COMMENT_TEXT,
+		C.COMMENT_MONITOR_NUM,
+		C.COMMENT_DATE, U.USER_MONITOR AS
+		USER_MONITOR, U.user_nick
+		FROM TBL_COMMENT C JOIN TBL_USER U ON
+		C.USER_NUM = U.USER_NUM WHERE
+		C.ARTICLE_NUM = #{articleNum} ORDER BY
+		C.COMMENT_DATE DESC
+	</select>
+
+	<select id="blackList" parameterType="BlackListDTO"
+		resultType="BlackListDTO">
+	<![CDATA[
+    	SELECT * FROM (SELECT ROWNUM AS rnum, subquery.* FROM (
+		SELECT BLACKLIST_NUM, BLACKlIST_NAME, BLACKLIST_ID, BLACKLIST_DATE, BLACKLIST_RELEASEDATE, BLACKLIST_COMMENT 
+		FROM TBL_BLACKLIST WHERE BLACKLIST_ISBLACK = 1
+	 ) subquery) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+    ]]>
+	</select>
+
+	<delete id="deleteMember">
+		DELETE FROM tbl_user
+		WHERE user_id IN
+		<foreach item="userId" collection="list" open="("
+			separator="," close=")">
+			#{userId}
+		</foreach>
+	</delete>
+
+	<insert id="addBlackList" parameterType="BlackListDTO">
+		INSERT INTO
+		TBL_BLACKLIST (BLACKLIST_NUM, BLACKLIST_COMMENT, BLACKLIST_DATE,
+		BLACKLIST_NAME,
+		BLACKLIST_ID, BLACKLIST_RELEASEDATE, BLACKLIST_ISBLACK) VALUES
+		(SEQ_BLACKLIST.NEXTVAL,
+		#{blackListComment},
+		#{blackListDate},
+		#{blackListName}, #{blackListId}, #{blackListReleaseDate}, 1)
+	</insert>
+
+	<select id="userPage" parameterType="String"
+		resultType="MypageMainDTO">
+		SELECT U.USER_NUM, U.USER_NICK, U.USER_MONITOR,
+		U.USER_MENTO_CERT, U.USER_CAREER,
+		T.CERTS_IPE, T.CERTS_IPIE,
+		T.CERTS_IPT, T.CERTS_ISE, T.CERTS_ISIE,
+		T.CERTS_NETMANAGER1,
+		T.CERTS_NETMANAGER2,
+		T.CERTS_SQLD, T.CERTS_LINUXMASTER1,
+		T.CERTS_LINUXMASTER2,
+		COUNT(DISTINCT A.ARTICLE_NUM) AS ARTICLE_COUNT,
+		COUNT(DISTINCT C.COMMENT_NUM) AS COMMENT_COUNT
+		FROM TBL_USER U
+		LEFT JOIN
+		TBL_ARTICLE A
+		ON U.USER_NUM = A.USER_NUM
+		LEFT JOIN TBL_COMMENT C
+		ON
+		U.USER_NUM = C.USER_NUM
+		LEFT JOIN TBL_CERTS T
+		ON U.USER_NUM = T.USER_NUM
+		WHERE U.USER_NICK = #{userNick}
+		GROUP BY
+		U.USER_NUM,
+		U.USER_NICK,
+		U.USER_MONITOR,
+		U.USER_MENTO_CERT,
+		U.USER_CAREER,
+		T.CERTS_IPE,
+		T.CERTS_IPIE,
+		T.CERTS_IPT,
+		T.CERTS_ISE,
+		T.CERTS_ISIE,
+		T.CERTS_NETMANAGER1,
+		T.CERTS_NETMANAGER2,
+		T.CERTS_SQLD,
+		T.CERTS_LINUXMASTER1,
+		T.CERTS_LINUXMASTER2
+
+	</select>
+
+	<select id="getAskDevTotal" resultType="int">
+        <![CDATA[
+        SELECT COUNT(Article_NUM) 
+        FROM tbl_ARTICLE WHERE ARTICLE_TOPCATE = '개발' AND ARTICLE_BOTCATE = '질문'
+        ]]>
+	</select>
+
+	<select id="getAskQualTotal" resultType="int">
+        <![CDATA[
+        SELECT COUNT(Article_NUM) 
+        FROM tbl_ARTICLE WHERE ARTICLE_TOPCATE = '자격증' AND ARTICLE_BOTCATE = '질문'
+        ]]>
+	</select>
+
+	<select id="getAskSecTotal" resultType="int">
+        <![CDATA[
+        SELECT COUNT(Article_NUM) 
+        FROM tbl_ARTICLE WHERE ARTICLE_TOPCATE = '보안' AND ARTICLE_BOTCATE = '질문'
+        ]]>
+	</select>
+
+	<select id="getNoticeTotal" resultType="int">
+        <![CDATA[
+        SELECT COUNT(NOTICE_NUM) 
+        FROM tbl_NOTICE
+        ]]>
+	</select>
+
+	<select id="getTipDevTotal" resultType="int">
+        <![CDATA[
+        SELECT COUNT(Article_NUM) 
+        FROM tbl_ARTICLE WHERE ARTICLE_TOPCATE = '개발' AND ARTICLE_BOTCATE = '꿀팁'
+        ]]>
+	</select>
+
+	<select id="getTipQualTotal" resultType="int">
+        <![CDATA[
+        SELECT COUNT(Article_NUM) 
+        FROM tbl_ARTICLE WHERE ARTICLE_TOPCATE = '자격증' AND ARTICLE_BOTCATE = '꿀팁'
+        ]]>
+	</select>
+
+	<select id="getTipSecTotal" resultType="int">
+        <![CDATA[
+        SELECT COUNT(Article_NUM) 
+        FROM tbl_ARTICLE WHERE ARTICLE_TOPCATE = '보안' AND ARTICLE_BOTCATE = '꿀팁'
+        ]]>
+	</select>
+
+	<update id="updateCerts">
+		UPDATE TBL_CERTS
+		<set>
+			<choose>
+				<when test="CERTS_IPE != null"> CERTS_IPE = 'T', </when>
+				<otherwise> CERTS_IPE = 'F', </otherwise>
+			</choose>
+
+			<choose>
+				<when test="CERTS_IPIE != null"> CERTS_IPIE = 'T', </when>
+				<otherwise> CERTS_IPIE = 'F', </otherwise>
+			</choose>
+
+			<choose>
+				<when test="CERTS_IPT != null"> CERTS_IPT = 'T', </when>
+				<otherwise> CERTS_IPT = 'F', </otherwise>
+			</choose>
+
+			<choose>
+				<when test="CERTS_ISE != null"> CERTS_ISE = 'T', </when>
+				<otherwise> CERTS_ISE = 'F', </otherwise>
+			</choose>
+
+			<choose>
+				<when test="CERTS_ISIE != null"> CERTS_ISIE = 'T', </when>
+				<otherwise> CERTS_ISIE = 'F', </otherwise>
+			</choose>
+
+			<choose>
+				<when test="CERTS_NETMANAGER1 != null"> CERTS_NETMANAGER1 = 'T', </when>
+				<otherwise> CERTS_NETMANAGER1 = 'F', </otherwise>
+			</choose>
+
+			<choose>
+				<when test="CERTS_NETMANAGER2 != null"> CERTS_NETMANAGER2 = 'T', </when>
+				<otherwise> CERTS_NETMANAGER2 = 'F', </otherwise>
+			</choose>
+
+			<choose>
+				<when test="CERTS_SQLD != null"> CERTS_SQLD = 'T', </when>
+				<otherwise> CERTS_SQLD = 'F', </otherwise>
+			</choose>
+
+			<choose>
+				<when test="CERTS_LINUXMASTER1 != null"> CERTS_LINUXMASTER1 = 'T', </when>
+				<otherwise> CERTS_LINUXMASTER1 = 'F', </otherwise>
+			</choose>
+
+			<choose>
+				<when test="CERTS_LINUXMASTER2 != null"> CERTS_LINUXMASTER2 = 'T', </when>
+				<otherwise> CERTS_LINUXMASTER2 = 'F', </otherwise>
+			</choose>
+		</set>
+		WHERE USER_NUM = #{userNum}
+	</update>
+
+	<update id="updateGrade">
+		UPDATE TBL_USER
+		SET USER_MENTO_CERT = CASE
+		WHEN
+		USER_MENTO_CERT = 'T' THEN 'F'
+		ELSE 'T'
+		END
+		WHERE USER_NUM = #{userNum}
+	</update>
+
+	<update id="updateCareer">
+		UPDATE TBL_USER
+		SET user_career = #{userCareer}
+		WHERE
+		user_num = #{userNum}
+	</update>
+
+	<delete id="deleteBlackList">
+		DELETE FROM tbl_blackList
+    WHERE BlackList_NUM IN
+    <foreach item="item" collection="list" open="(" separator="," close=")">
+        #{item}
+    </foreach>
+	</delete>
+
+	<update id="updateBlackList">
+   		UPDATE TBL_BLACKLIST
+    	SET blackList_ReleaseDate = blackList_Date + #{period}
+    	WHERE blackList_Id IN
+    	<foreach item="item" collection="blackListIds" open="(" separator="," close=")">
+        	#{item, jdbcType=VARCHAR}
+    	</foreach>
+	</update>
+	
+	<delete id="deleteNotice">
+		DELETE FROM tbl_NOTICE
+		WHERE NOTICE_NUM IN
+		<foreach item="NoticeNum" collection="list" open="("
+			separator="," close=")">
+			#{NoticeNum}
+		</foreach>
+	</delete>
+	
+	<select id="noticeDetail" parameterType="int"
+		resultType="NoticeDTO">
+		SELECT
+		NOTICE_NUM, ADMIN_NUM, NOTICE_CATEGORY,
+		NOTICE_TITLE, NOTICE_TEXT,
+		NOTICE_VIEW,
+		NOTICE_DATE, NOTICE_MODIFY_DATE
+		FROM TBL_NOTICE
+		WHERE
+		notice_Num = #{noticeNum}
+	</select>
+	
+	<update id="noticeUpdate">
+		UPDATE TBL_NOTICE SET
+		notice_category = #{noticeCategory}, notice_title = #{noticeTitle},
+		notice_text = #{noticeText}, NOTICE_MODIFY_DATE = sysdate, admin_num = #{adminNum}
+		WHERE notice_num = #{noticeNum}
+	</update>
+	
+	<select id="searchMember" resultType="UserAdminDTO">
+	<![CDATA[
+    SELECT * FROM (
+        SELECT ROWNUM AS rnum, subquery.* 
+        FROM (
+            SELECT 
+                CASE WHEN USER_MENTO_CERT = 'T' THEN '멘토' ELSE '일반' END AS grade,
+                USER_ID AS userId,
+                USER_NICK AS userNick,
+                CASE WHEN USER_MENTO_CERT = 'T' THEN '🏅' ELSE '-' END AS badge,
+                USER_MONITOR AS userMonitor,
+                USER_JOIN_DATE AS userJoinDate
+            FROM TBL_USER
+            WHERE USER_ID LIKE '%' || #{search} || '%'
+               OR USER_NICK LIKE '%' || #{search} || '%'
+        ) subquery
+    ) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+    ]]>
+	</select>
+	<update id="updateArticle" parameterType="articleAdminDTO">
+		UPDATE TBL_ARTICLE SET
+		ARTICLE_BOTCATE = #{articleBotCate}, ARTICLE_TAGNAME = #{articleTagName},
+		ARTICLE_TITLE = #{articleTitle}, ARTICLE_TEXT = #{articleText} 
+		WHERE ARTICLE_NUM = #{articleNum}
+	</update>
+	<delete id="deleteArticle">
+		DELETE FROM tbl_ARTICLE
+		WHERE ARTICLE_NUM IN
+		<foreach item="ArticleNum" collection="list" open="("
+			separator="," close=")">
+			#{ArticleNum}
+		</foreach>
+	</delete>
+	<update id="deleteComment">
+		UPDATE tbl_comment SET COMMENT_TEXT= '(관리자에 의해 삭제된 댓글입니다)' WHERE COMMENT_NUM = #{commentNum}
+	</update>
 </mapper>

@@ -1,7 +1,6 @@
 package com.itask.app.admin;
 
 import java.io.IOException;
-import java.nio.file.spi.FileSystemProvider;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -132,12 +131,79 @@ public class AdminFrontController extends HttpServlet {
 			System.out.println("addComment");
 			result = new AddCommentController().execute(request, response);
 			break;
+		case "/admin/blackList.ad":
+			System.out.println("blackList");
+			result = new BlackListController().execute(request, response);
+			break;
+		case "/admin/addBlackList.ad":
+			System.out.println("addBlackList");
+			result = new AddBlackListController().execute(request, response);
+			break;
+		case "/admin/deleteMember.ad":
+			System.out.println("deleteMember.ad");
+			System.out.println("deleteMemeber");
+			result = new DeleteMemberController().execute(request, response);
+			break;
+		case "/admin/userPage.ad":
+			System.out.println("userPage");
+			result = new UserPageController().execute(request, response);
+			break; 
+		case "/admin/UserCerts.ad":
+			result = new UserCertsController().execute(request, response);
+			break;
+		case "/admin/updateGrade.ad":
+			System.out.println("updateGrade");
+			result = new UpdateGradeController().execute(request, response);
+			break;
+		case "/admin/updateCareer.ad":
+			System.out.println("updateCareer");
+			result = new UpdateCareerController().execute(request, response);
+			break;
+		case "/admin/deleteBlackList.ad":
+			System.out.println("deleteBlackList");
+			result = new DeleteBlackListController().execute(request, response);
+			break;
+		case "/admin/updateBlackList.ad":
+			System.out.println("updateBlackList");
+			result = new UpdateBlackListController().execute(request, response);
+			break;
+		case "/admin/deleteNotice.ad":
+			System.out.println("deleteNotice");
+			result = new DeleteNoticeController().execute(request, response);
+			break;
+		case "/admin/noticeDetail.ad":
+			System.out.println("noticeDetail");
+			result = new NoticeDetailController().execute(request, response);
+			break;
+		case "/admin/noticeEdit.ad":
+			System.out.println("noticeEdit");
+			result = new NoticeEditController().execute(request, response);
+			break;
+		case "/admin/deleteArticle.ad":
+			System.out.println("deleteArticle");
+			result = new DeleteArticleController().execute(request, response);
+			break;
+		case "/admin/updateArticle.ad":
+			System.out.println("updateArticle");
+			result = new UpdateArticleController().execute(request, response);
+			break;
+		case "/admin/searchMembers.ad":
+			System.out.println("searchMember");
+			result = new SearchMemberController().execute(request, response);
+			System.out.println("search2");
+			break;
+		case "/admin/deleteComment.ad":
+			System.out.println("deleteComment");
+			result = new DeleteCommentController().execute(request, response);
+			break;
 		}
 		
 		if(result != null) {
 			if(result.isRedirect()) {
+				System.out.println("Redirect");
 				response.sendRedirect(result.getPath());
 			}else {
+				System.out.println("forward");
 				request.getRequestDispatcher(result.getPath()).forward(request, response);
 			}
 		}
