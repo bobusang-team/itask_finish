@@ -19,8 +19,9 @@ public class ArticleDTO {
 //		    CONSTRAINT TBL_USER_FK FOREIGN KEY (USER_NUM) REFERENCES TBL_USER (USER_NUM) ON DELETE CASCADE
 //		);
 	
-	private int userNum;
+	//필드
 	private int articleNum;
+	private String userNick;
 	private String articleTopcate;
 	private String articleBotcate;
 	private String articleTagname;
@@ -34,11 +35,8 @@ public class ArticleDTO {
 	private String grade;
 	private String userMoniter;
 	
-	
-	
-	
-	public String getUserNick() {
-		return userNick;
+	public int getArticleNum() {
+		return articleNum;
 	}
 	public void setUserNick(String userNick) {
 		this.userNick = userNick;
@@ -57,6 +55,18 @@ public class ArticleDTO {
 	}
 	public int getArticleNum() {
 		return articleNum;
+	}
+	public void setArticleNum(int articleNum) {
+		this.articleNum = articleNum;
+	}
+	public String getUserNick() {
+		return userNick;
+	}
+	public void setUserNick(String userNick) {
+		this.userNick = userNick;
+	}
+	public String getArticleTopcate() {
+		return articleTopcate;
 	}
 	public void setArticleNum(int articleNum) {
 		this.articleNum = articleNum;
@@ -138,13 +148,16 @@ public class ArticleDTO {
 	}
 
 	
+	
 	@Override
 	public String toString() {
-		return "ArticleDTO [userNum=" + userNum + ", articleNum=" + articleNum + ", articleTopcate="
-				+ articleTopcate + ", articleBotcate=" + articleBotcate + ", articleTagname=" + articleTagname
-				+ ", articleTitle=" + articleTitle + ", articleText=" + articleText + ", articledate=" + articledate
-				+ ", articleModifyDate=" + articleModifyDate + ", articleView=" + articleView + ", articleMoniter="
-				+ articleMoniter + "]";
+		return "ArticleDTO [articleNum=" + articleNum + ", userNum=" + userNum + ", userNick=" + userNick
+				+ ", articleTopCate=" + articleTopCate + ", articleBotCate=" + articleBotCate + ", articleTagName="
+				+ articleTagName + ", articleTitle=" + articleTitle + ", articleText=" + articleText + ", articleDate="
+				+ articleDate + ", articleModifyDate=" + articleModifyDate + ", articleView=" + articleView
+				+ ", articleMonitorNum=" + articleMonitorNum + "]";
 	}
+	
+	
 
 }
