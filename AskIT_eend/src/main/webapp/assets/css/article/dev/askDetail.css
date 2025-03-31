@@ -147,6 +147,10 @@
   margin-bottom: 20px;
 }
 
+#askDetail-img-box{
+	width:80%
+}
+
 /* 본문 작성자자 프로필 */
 .bjs-askDetail-text-profile {
   display: flex;
