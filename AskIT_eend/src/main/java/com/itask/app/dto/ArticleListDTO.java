@@ -12,9 +12,6 @@ public class ArticleListDTO {
 	private String articleTitle;
 	private String articleText;
 	private String articleDate;
-	/*
-	 * private String articleModifyDate;
-	 */
 	private int articleView;
 	private int articleMonitorNum;
 	private int userMonitor;
