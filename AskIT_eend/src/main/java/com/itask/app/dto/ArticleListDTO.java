@@ -1,21 +1,8 @@
-package com.itask.app.dto;import java.util.List;public class ArticleListDTO {
-//   CREATE TABLE TBL_ARTICLE (
-//          ARTICLE_NUM NUMBER NOT NULL,
-//          USER_NUM NUMBER NOT NULL,
-//          ARTICLE_TOPCATE VARCHAR2(100) CHECK (UPPER(ARTICLE_TOPCATE) IN ('개발', '보안', '자격증')),
-//          ARTICLE_BOTCATE VARCHAR2(100) CHECK (UPPER(ARTICLE_BOTCATE) IN ('질문', '꿀팁')),
-//          ARTICLE_TAGNAME VARCHAR2(100) CHECK (UPPER(ARTICLE_TAGNAME) IN ('JAVA', 'HTML', 'CSS', 'JAVASCRIPT', 'ORACLE', 
-//              'NETWORK', 'WEB', 'MOBILE', '포렌식', '악성코드', 
-//              '정보보안', '정보처리', '네트워크관리사', '리눅스마스터', 'SQLD')),
-//          ARTICLE_TITLE VARCHAR2(100) NOT NULL,
-//          ARTICLE_TEXT VARCHAR2(3000) NOT NULL,
-//          ARTICLE_DATE DATE NOT NULL,
-//          ARTICLE_MODIFY_DATE DATE NULL,
-//          ARTICLE_VIEW NUMBER DEFAULT 0 NOT NULL,
-//          ARTICLE_MONITER_NUM NUMBER DEFAULT 0 NOT NULL,
-//          CONSTRAINT TBL_ARTICLE_PK PRIMARY KEY (ARTICLE_NUM),
-//          CONSTRAINT TBL_USER_FK FOREIGN KEY (USER_NUM) REFERENCES TBL_USER (USER_NUM) ON DELETE CASCADE
-//      );
+package com.itask.app.dto;
+
+import java.util.List;
+
+public class ArticleListDTO {
 
 	private int articleNum;
 	private int userNum;
@@ -34,7 +21,8 @@ package com.itask.app.dto;import java.util.List;public class ArticleListDTO 
 	private String userMentoCert;
 	private String userNick; // 관리자페이지에서 필요한 DTO
 	private String badge;
-	private String category; // 검색결과에 필요한 DTO	private List<AttachedFileDTO> files;
+	private String category; // 검색결과에 필요한 DTO
+	private List<AttachedFileDTO> files;
 
 	public int getArticleNum() {
 		return articleNum;
@@ -153,7 +141,14 @@ package com.itask.app.dto;import java.util.List;public class ArticleListDTO 
 	}
 
 	public void setCategory(String category) {
-		this.category = category;	}	public List<AttachedFileDTO> getFiles() {		return files;	}	public void setFiles(List<AttachedFileDTO> files) {		this.files = files;	}
+		this.category = category;
+	}
+	public List<AttachedFileDTO> getFiles() {
+		return files;
+	}
+	public void setFiles(List<AttachedFileDTO> files) {
+		this.files = files;
+	}
 
 	@Override
 	public String toString() {
