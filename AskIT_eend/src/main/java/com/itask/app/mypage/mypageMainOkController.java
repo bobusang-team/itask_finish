@@ -38,7 +38,7 @@ public class mypageMainOkController implements Execute{
 		
 		// 로그인 상태가 아니라면
 		if(thisUser == null) {
-			path = "/app/member/login.jsp";
+			path = request.getContextPath() + "/app/member/login.jsp";
 			result.setPath(path);
 			result.setRedirect(true);
 		}
