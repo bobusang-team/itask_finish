@@ -3,13 +3,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ page import="com.itask.app.dto.UserDTO" %>
-<%@ page import="com.itask.app.dto.MypageMainDTO" %>
+<%-- <%@ page import="com.itask.app.dto.UserDTO" %>
+<%@ page import="com.itask.app.dto.MypageMainDTO" %> --%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>내가 쓴 전체 게시글</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/header.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/footer.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/mypage/myTotalArticle.css">
@@ -39,14 +39,9 @@
             <!-- 닉네임을 표시하는 부분 -->
             <span><c:out value = "${mypageMainDTO.userNick }" />님</span>
             </li>
-            <li class="keh-mypageMain-myMonitor"><img
-               src="${pageContext.request.contextPath}/assets/img/Monitor.png" alt=""> 
+            <li class="keh-mypageMain-myMonitor">
                <!-- 인치 표시하는 부분 -->
-               <b>
-               <fmt:formatNumber value="${mypageMainDTO.userMonitor / 100}" type="number" maxFractionDigits="0"/>
-               </b>inch 
-               <!-- 모니터 표시하는 부분 -->
-               <b>${mypageMainDTO.userMonitor % 100} </b>m
+               <span>${mypageMainDTO.getFormattedMonitor()}</span>
             </li>
          </ul>
 
@@ -59,6 +54,7 @@
             <li><a href="${pageContext.request.contextPath}/mypage/pwCheck.my">내 정보 수정하기</a></li>
             <li><a href="${pageContext.request.contextPath}/mypage/mentoCheck.my">자격/멘토 뱃지 추가하기</a></li>
             <li><a href="${pageContext.request.contextPath}/mypage/myTotalArticle.my">내가 쓴 전체 게시글 보기</a></li>
+            <li><a href="${pageContext.request.contextPath}/mypage/myTotalComment.my">내가 쓴 전체 댓글 보기</a></li>
          </ul>
       </section>
       
@@ -90,7 +86,6 @@
 					  </div>
 					  <div class="bjs-ask-post-body">
 						${myList.articleText}
-						<%--  <c:out value="${fn:length(dev.articleText) > 50 ? fn:substring(dev.articleText, 0, 50) + '...' : dev.articleText}" /> --%>
 						<a href="${pageContext.request.contextPath}/mypage/myArticleDetail.my?articleNum=${myList.articleNum}"></a> 
 				      </div>
 					  <div class="bjs-ask-post-footer">
@@ -121,15 +116,6 @@
 			</c:otherwise>
 		   </c:choose> 
 	      </div>
-	      <!-- <div class="pagination">
-		    <a href="#">«</a>
-		    <a href="#">‹</a>
-		    <a href="#">1</a>
-		    <a href="#">2</a>
-		    <a href="#">3</a>
-		    <a href="#">›</a>
-		    <a href="#">»</a>
-		  </div> -->
 		  <div class="pagination">
 		    <ul>
 		      <c:if test="${prev}">

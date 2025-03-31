@@ -125,17 +125,26 @@
 }
 
 .bjs-ask-tag-btn {
-    display: inline-block;
-    padding: 10px 15px;
-    border-radius: 5px;
-    background-color: #f1f1f1;
-    color: #333;
-    text-decoration: none; /* 밑줄 제거 */
-    text-align: center;
+  border: 1px solid #D96073;
+  color: #D96073;
+  background: none;
+  width: 120px;
+  height: 25px;
+  border-radius: 40px;
+  padding: 10px 20px;
+  margin: 20px 20px;
+  cursor: pointer;
+}
+
+.bjs-ask-tag1 {
+  /* width: 1000px; */
+  /* white-space: wrap; */
+  display: flex;
+  justify-content: center;
 }
 
 .bjs-ask-tag-btn:hover {
-    background-color: #ddd;
+    background-color: #e7d4d7;
 }
 
  .bjs-ask-select {

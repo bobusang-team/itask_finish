@@ -63,3 +63,43 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+document.addEventListener("DOMContentLoaded", function () {
+    // URL에서 articleTagname 값을 가져오기
+    const urlParams1 = new URLSearchParams(window.location.search);
+    const articleBotcate = urlParams1.get('articleBotcate');
+	console.log(articleBotcate)
+    // 모든 <a> 태그 찾기
+    const links1 = document.querySelectorAll(".bjs-ask-category-btn");
+
+    // URL 파라미터 값과 일치하는 <a> 태그에 클래스 추가
+    let hasSelected1 = false;
+    links1.forEach(link1 => {
+        const url1 = new URL(link1.href);
+        const botcate = url1.searchParams.get("articleBotcate");
+
+        if (botcate === articleBotcate) {
+            link1.classList.add("bjs-ask-select");
+            hasSelected1 = true;
+        } else {
+            link1.classList.remove("bjs-ask-select");
+        }
+    });
+
+    // 만약 URL에 articleTagname이 없으면 첫 번째 <a>를 기본 선택
+    if (!hasSelected1 && links1.length > 0) {
+        links1[0].classList.add("bjs-ask-select");
+    }
+
+    // 클릭 이벤트 추가
+    links1.forEach(link => {
+        link.addEventListener("click", function () {
+            // 기존 선택 해제
+            document.querySelector(".bjs-ask-select")?.classList.remove("bjs-ask-select");
+
+            // 새 선택 추가
+            this.classList.add("bjs-ask-select");
+        });
+    });
+});
+
+

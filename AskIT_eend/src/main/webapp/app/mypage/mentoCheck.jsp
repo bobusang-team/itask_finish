@@ -26,7 +26,7 @@
       <section class="keh-mentoCheck-profile-left">
         <!-- 프로필사진 - 내 정보 -->
         <ul>
-          <li class="keh-mypageMain-pic">
+          <li class="keh-mentoCheck-pic">
             <img src="${profileImgSrc}" alt="${profileAlt}">
           </li>
           <li class="keh-mentoCheck-memType">
@@ -43,11 +43,7 @@
           </li>
           <li class="keh-mentoCheck-myMonitor">
             <img src="${pageContext.request.contextPath}/assets/img/Monitor.png" alt="" />
-            <b>
-               <fmt:formatNumber value="${mypageMainDTO.userMonitor / 100}" type="number" maxFractionDigits="0"/>
-               </b>inch 
-               <!-- 모니터 표시하는 부분 -->
-               <b>${mypageMainDTO.userMonitor % 100} </b>m
+                 <span>${mypageMainDTO.getFormattedMonitor()}</span>
             </li>
          </ul>
 
@@ -60,6 +56,7 @@
           <li><a href="${pageContext.request.contextPath}/mypage/pwCheck.my">내 정보 수정하기</a></li>
           <li><a href="${pageContext.request.contextPath}/mypage/mentoCheck.my">자격/멘토 뱃지 추가하기</a></li>
           <li><a href="${pageContext.request.contextPath}/mypage/myTotalArticle.my">내가 쓴 전체 게시글 보기</a></li>
+          <li><a href="${pageContext.request.contextPath}/mypage/myTotalComment.my">내가 쓴 전체 댓글 보기</a></li>
         </ul>
       </section>
 

@@ -1,4 +1,4 @@
-const buttons = document.querySelectorAll(".write-button");
+const buttons = document.querySelectorAll(".write-buttons");
 const fileUploadInput = document.getElementById("file-upload");
 const uploadButton = document.querySelector(".upload-button");
 const uploadBoxLabel = document.querySelector(".upload-box label");

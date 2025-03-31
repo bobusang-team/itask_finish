@@ -130,10 +130,10 @@ public class myTotalArticleOkController implements Execute {
 		pageMap.put("userNum", userNum);
 
 		// 게시글의 총 개수를 먼저 알아와야함
-		int total = mypageDAO.getTotal(userNum);
+		int total = mypageDAO.getTotalArticleNum(userNum);
 
 		// 게시글 목록 조회
-		List<ArticleListDTO> myList = mypageDAO.selectAllMy(pageMap);
+		List<ArticleListDTO> myList = mypageDAO.selectAllMyArticle(pageMap);
 		request.setAttribute("myArticleList", myList);
 
 		// 올림 함수를 사용해서 페이지네이션 총 수를 구해야함

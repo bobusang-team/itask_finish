@@ -65,17 +65,20 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+/**
+ * 첨부파일
+ */
 
 // 파일 유효성 검사 함수
 function validateFile(fileName) {
   const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
-  return allowedExtensions.exec(attachedFileName);
+  return allowedExtensions.exec(fileName);
 }
 
 
-let $fileInput = $('#file');
-let $fileList = $('.file-list');
-let $cnt = $('.cnt');
+let $fileInput = $('#file'); //첨부파일 넣는 부분
+let $fileList = $('.file-list'); //첨부파일 미리보기가 생성될 구역
+let $cnt = $('.cnt'); //업로드 갯수 카운트
 let cnt = 0;
 
 console.log($fileInput);
@@ -114,9 +117,10 @@ $fileInput.on('change', function(){
       </li>`);
    }
    
-   $cnt.text(files.length);
+   $cnt.text(files.length); //파일갯수 세는 부분
+   console.log(files.length);
    
-   //첨부파일 삭제 버튼 처리 - 여긴 없음
+   //첨부파일 삭제 버튼 처리
    //클릭 이벤트가 페이지 로딩시 걸리는것이 아니라 이미지가 생성되면 걸려야하므로
    //미리보기 이미지를 생성하는 함수에서 작성한다.
    let $cancelBtns = $('.img-cancel-btn');
@@ -157,179 +161,10 @@ $fileInput.on('change', function(){
 });
 
 
+// 취소 버튼 처리
+$cancel = $('.cancel-btn');
 
-// 파일 선택 이벤트
-document.getElementById('file').addEventListener('change', function(event) {
-    const fileInput = event.target;
-    const fileList = fileInput.files;
-    const fileCount = fileList.length;
-
-    // 파일 개수 표시 업데이트
-    const countElement = document.querySelector('.cnt');
-    countElement.textContent = `${fileCount}/1`;
-
-    // 파일 리스트 초기화
-    const fileListContainer = document.querySelector('.file-list');
-    fileListContainer.innerHTML = '';
-
-    // 파일이 하나 이상 선택되었을 경우, 미리보기 생성
-    if (fileCount > 0) {
-        const file = fileList[0];
-        const reader = new FileReader();
-
-        // 파일 읽기 완료 시 미리보기 이미지 표시
-        reader.onload = function(e) {
-            const imgElement = document.createElement('img');
-            imgElement.src = e.target.result;
-            imgElement.alt = '미리보기 이미지';
-            imgElement.classList.add('preview-img');
-
-            // 미리보기 이미지를 리스트에 추가
-            const li = document.createElement('li');
-            li.appendChild(imgElement);
-
-            // 삭제 버튼 추가
-            const deleteButton = document.createElement('button');
-            deleteButton.textContent = '삭제';
-            deleteButton.classList.add('delete-btn');
-            deleteButton.addEventListener('click', function() {
-                fileListContainer.removeChild(li);
-                fileInput.value = ''; // 파일 입력 초기화
-                updateFileCount();
-            });
-            li.appendChild(deleteButton);
-
-            fileListContainer.appendChild(li);
-        };
-
-        // 파일 읽기 시작
-        reader.readAsDataURL(file);
-    }
-
-    // 파일 개수 업데이트 함수
-    function updateFileCount() {
-        const newFileCount = fileInput.files.length;
-        countElement.textContent = `${newFileCount}/1`;
-    }
-});
-
-// 파일 개수 제한 (최대 1개)
-document.getElementById('file').addEventListener('change', function() {
-    const fileInput = event.target;
-    const fileList = fileInput.files;
-    if (fileList.length > 1) {
-        alert('최대 1개의 파일만 업로드 가능합니다.');
-        fileInput.value = ''; // 두 번째 파일부터 제거
-    }
-});
-
-//기존 이미지 업로드 부분
-/*$(document).ready(function () {
-    let $fileInput = $('#file'); // 파일 선택 input
-    let $fileList = $('.file-list'); // 이미지 미리보기 리스트
-    let $cnt = $('.cnt'); // 업로드 개수 표시
-    
-    // 파일 선택 이벤트
-    $fileInput.on('change', function () {
-        let files = this.files;
-
-        // 파일 개수 제한 (1개)
-        if (files.length > 1) {
-            alert("파일은 최대 1개까지만 첨부 가능합니다.");
-            resetFileInput($fileInput);
-            return;
-        }
-
-        // 기존 이미지 제거 후 새 이미지 추가
-        $fileList.html('');
-        if (files.length > 0) {
-            let src = URL.createObjectURL(files[0]);
-
-            $fileList.append(`
-                <li>
-                    <div class="show-img-box">
-                        <img src="${src}" alt="미리보기 이미지">
-                    </div>
-                    <div class="btn-box">
-                        <button type="button" class="img-cancel-btn" data-name="${files[0].name}">삭제</button>
-                    </div>
-                </li>
-            `);
-        }
-
-        // 파일 개수 업데이트
-        $cnt.text(files.length + "1");
-
-        // 삭제 버튼 이벤트 추가
-        $('.img-cancel-btn').on('click', function () {
-            resetFileInput($fileInput);
-        });
-    });
-
-    // 파일 선택 초기화 함수
-    function resetFileInput($input) {
-        $input.val(''); // 파일 선택 초기화
-        $fileList.html(''); // 미리보기 제거
-        $cnt.text('0/1'); // 파일 개수 업데이트
-    }
-});*/
-
-//새 업로드 부분
-// 파일 선택 후 미리보기 및 업로드 갯수 표시
-/*document.getElementById('file').addEventListener('change', function(event) {
-    const fileInput = event.target;
-    const fileList = fileInput.files;
-    const fileCount = fileList.length;
-
-    // '이미지 업로드(0/1)' 부분을 '이미지 업로드(1/1)'로 변경
-    const countElement = document.querySelector('.cnt');
-    countElement.textContent = fileCount;
-
-    // 파일이 하나 이상 선택되었을 경우, 미리보기 생성
-    const fileListContainer = document.querySelector('.file-list');
-    fileListContainer.innerHTML = ''; // 기존 미리보기 내용 제거
-
-    if (fileCount > 0) {
-        const file = fileList[0]; // 첫 번째 파일만 미리보기
-        const reader = new FileReader();
-
-        // 파일 읽기 완료 시 미리보기 이미지 표시
-        reader.onload = function(e) {
-            const imgElement = document.createElement('img');
-            imgElement.src = e.target.result;
-            imgElement.alt = 'Uploaded Image';
-            imgElement.classList.add('preview-img');
-
-            // 미리보기 이미지를 리스트에 추가
-            const li = document.createElement('li');
-            li.appendChild(imgElement);
-            fileListContainer.appendChild(li);
-        };
-
-        // 파일 읽기 시작
-        reader.readAsDataURL(file);
-    }
-});
-
-// 파일 업로드 시 제한: 최대 1개 이미지
-document.getElementById('file').addEventListener('change', function(event) {
-    const fileInput = event.target;
-    const fileCount = fileInput.files.length;
-
-    // 파일이 1개 이상일 경우, 두 번째 파일부터는 자동으로 선택되지 않게 처리
-    if (fileCount > 1) {
-        alert('최대 1개의 파일만 업로드 가능합니다.');
-        fileInput.value = ''; // 파일 선택 초기화
-        return;
-    }
-});*/
-
-
-
-// 취소 버튼 처리 - 여긴 없음
-/*$cancel = $('.cancel-btn');
-
-$cancel.on('click', () => {
+/*$cancel.on('click', () => {
    window.location.href = '/board/boardListOk.bo';
 });*/
 

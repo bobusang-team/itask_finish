@@ -40,8 +40,8 @@ pageEncoding="UTF-8"%>
         <span class="bjs-askDetail-title"><c:out value ="${dev.articleTopcate}" /></span>
         <!-- 자격증 상위 카테고리 -->
         <div class="bjs-askDetail-category">
-          <button class="bjs-askDetail-category-btn bjs-askDetail-select"><a href="${pageContext.request.contextPath}/dev/listAsk.dev">질문</a></button>
-          <button class="bjs-askDetail-category-btn"><a href="${pageContext.request.contextPath}/dev/listTip.dev">꿀팁</a></button>
+          <button class="bjs-askDetail-category-btn bjs-askDetail-select"><a href="${pageContext.request.contextPath}/dev/listAsk.dev?articleTopcate=개발&articleBotcate=질문">질문</a></button>
+          <button class="bjs-askDetail-category-btn"><a href="${pageContext.request.contextPath}/dev/listAsk.dev?articleTopcate=개발&articleBotcate=꿀팁">꿀팁</a></button>
         </div>
       </div>
       <!-- 준혁님 코드 들어갈 부분 (게시글 내용) -->
@@ -54,13 +54,20 @@ pageEncoding="UTF-8"%>
          
           <div class="bjs-askDetail-text-profile">
             <img src="./../../../assets/img/profile.png" alt="">
-            <span class="bjs-askDetail-text-author"><b><c:out value ="${dev.getUserMonitor() / 100}" />inch</b><br><c:out value ="${dev.userNick}" /><c:out value ="${dev.badge}" /></span>
+            <span class="bjs-askDetail-text-author"><a href="${pageContext.request.contextPath}/mypage/userPageSearch.my?userNick=${dev.getUserNick()}"><b><c:out value ="${dev.getUserMonitor() / 100}" />inch</b><br><c:out value ="${dev.userNick}" /><c:out value ="${dev.badge}" /></a></span>
           </div>
           <div class="bjs-askDetail-text-date"><c:out value ="${dev.articleDate}" /></div>
         </div>
         <!-- 본문 메인인 -->
         <article class="bjs-askDetail-text-textbody">
          <c:out value ="${dev.articleText}" />
+         	<div class="view-attach">
+				<c:forEach var="file" items="${dev.getFiles()}">
+					<div class="bjs-askDetail-img-box">
+						<img id="askDetail-img-box" src="${pageContext.request.contextPath}/assets/upload/${file.getAttachedFileName()}" />
+					</div>
+				</c:forEach>
+			</div>
         </article>
         <!-- 본문 바텀텀 -->
         <article class="bjs-askDetail-text-textbottom">
@@ -129,7 +136,7 @@ pageEncoding="UTF-8"%>
       <article class="bjs-askDetail-comment-box">
 
         <!-- 총 댓글 수 -->
-        <div class="bjs-askDetail-comment-count">댓글 <span id="comment-count">${countComment}</span></div>
+        <%-- <div class="bjs-askDetail-comment-count">댓글 <span id="comment-count">${countComment}</span></div> --%>
         <!-- 댓글 작성 창 -->
 	      <div class="comment-form">
 	      	<form id="comment-form">
@@ -139,46 +146,10 @@ pageEncoding="UTF-8"%>
 			</form>       
 	      </div>
 
-        <!-- 작성된 댓글이 보여지는 리스트 창 -->
-<%--        <c:forEach var="dev" items="${comments}">
-        <div id="comment-section">
-          <!-- --------------------------여기서부터 댓글 하나당-------------------- -->
-          <div class="bjs-askDetail-comment-show">
-            <span class="bjs-askDetail-commnet-author"> ${dev.userNick}</span>
-            <div class="bjs-askDetail-comment-section"> ${dev.commentText}</div>
-            <!-- 작성된 날짜, 조회수, 모니터를 담은 박스 -->
-            <div class="bjs-askDetail-comment-info">
-              <span class="bjs-askDetail-comment-date">${dev.commentDate}</span>
-              <span class="bjs-askDetail-comment-monitor">
-                <img src="${pageContext.request.contextPath}/assets/img/monitor.png" alt="사진오류" class="bjs-askDetail-comment-cnt"> 
-                <span id="askDetail-comment-monitor-num" class="bjs-askDetail-comment-monitor-num">${dev.commentMonitorNum}</span>
-              </span>
-           	</div>
-          	</div>
-           </div>
-         </c:forEach> --%>
          <div class="comment-list">
 				<!-- 리스트 예시 -->
 				<ul id="comment-list">
-					<li>
-						<div class="comment-info">
-							<span class="writer"></span> <span class="date"></span>
-						
-							<div class="comment-content-wrap">
-								<div class="comment-content">
-									<p></p>
-								</div>
-								<div class="comment-btn-group">
-									<button type=button class="comment-modify-ready">수정</button>
-									<button type=button class="comment-delete">삭제</button>
-								</div>
-								<div class="comment-btn-group none">
-									<button type=button class="comment-modify">수정 완료</button>
-								</div>
-							</div>
-							
-						</div>	
-					</li>
+			
 				</ul>
 				<!-- /리스트 예시 -->
 			</div>

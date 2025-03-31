@@ -93,8 +93,43 @@
 		T.CERTS_LINUXMASTER2
 	</select>
 	
+	<!-- 해당 유저를 클릭할 시 -->
+	<!-- 해당 유저의 닉네임, 모니터, 작성한 게시글 수, 작성한 댓글 수, 뱃지수, 회원의 경력 조회 -->
+	<select id="userPage" parameterType="String" resultType="MypageMainDTO">
+		SELECT U.USER_NUM, U.PROFILE_NUM, U.USER_NICK, U.USER_MONITOR, U.USER_MENTO_CERT, U.USER_CAREER,
+		T.CERTS_IPE, T.CERTS_IPIE, T.CERTS_IPT, T.CERTS_ISE, T.CERTS_ISIE, T.CERTS_NETMANAGER1, T.CERTS_NETMANAGER2,
+		T.CERTS_SQLD, T.CERTS_LINUXMASTER1, T.CERTS_LINUXMASTER2,
+		COUNT(DISTINCT A.ARTICLE_NUM) AS ARTICLE_COUNT,
+		COUNT(DISTINCT C.COMMENT_NUM) AS COMMENT_COUNT
+		FROM TBL_USER U
+		LEFT JOIN TBL_ARTICLE A
+		ON U.USER_NUM = A.USER_NUM
+		LEFT JOIN TBL_COMMENT C
+		ON U.USER_NUM = C.USER_NUM
+		LEFT JOIN TBL_CERTS T
+		ON U.USER_NUM = T.USER_NUM
+		WHERE U.USER_NICK = #{userNick}
+		GROUP BY
+		U.USER_NUM,
+		U.PROFILE_NUM,
+		U.USER_NICK,
+		U.USER_MONITOR,
+		U.USER_MENTO_CERT,
+		U.USER_CAREER,
+		T.CERTS_IPE,
+		T.CERTS_IPIE,
+		T.CERTS_IPT,
+		T.CERTS_ISE,
+		T.CERTS_ISIE,
+		T.CERTS_NETMANAGER1,
+		T.CERTS_NETMANAGER2,
+		T.CERTS_SQLD,
+		T.CERTS_LINUXMASTER1,
+		T.CERTS_LINUXMASTER2
+	</select>
+	
 	<!-- 내가 쓴 게시글 목록 불러오기 -->
-	<select id = "selectAllMy" resultType = "ArticleListDTO">
+	<select id = "selectAllMyArticle" resultType = "ArticleListDTO">
 	<![CDATA[
 	SELECT * FROM (
 	     SELECT ROWNUM AS rnum, subquery.*
@@ -124,12 +159,51 @@
   </select>
   
   <!-- 내가 쓴 게시글 수 가져오기 -->
-	<select id="getTotal" resultType="int">
+	<select id="getTotalArticleNum" resultType="int">
 		SELECT COUNT(ARTICLE_NUM) 
         FROM TBL_ARTICLE
         WHERE USER_NUM = #{userNum}
 	</select>
 	
+  <!--  내가 쓴 댓글 수 가져오기 -->
+   	<select id="getTotalCommentNum" resultType="int">
+		SELECT COUNT(COMMENT_NUM) 
+        FROM TBL_COMMENT
+        WHERE USER_NUM = #{userNum}
+	</select>
+	
+  <!--  내가 쓴 댓글 목록 가져오기 -->
+	<select id = "selectAllMyComment" resultType = "MyTotalCommentDTO">
+	<![CDATA[
+	SELECT * FROM (
+	     SELECT ROWNUM AS rnum, subquery.*
+	     FROM (
+	      SELECT 
+	         A.ARTICLE_NUM, 
+	         A.ARTICLE_TITLE,     
+	         A.ARTICLE_TOPCATE, 
+	         A.ARTICLE_BOTCATE, 
+	         A.ARTICLE_TAGNAME,
+	         A.USER_NUM AS ARTICLE_USER_NUM,
+	         U.USER_MENTO_CERT,
+	         U.USER_NICK AS ARTICLE_USER_NICK,
+	         C.COMMENT_NUM,
+	         C.COMMENT_MONITOR_NUM,
+	         C.COMMENT_TEXT,
+	         C.COMMENT_DATE,
+	         C.COMMENT_MODIFY_DATE,
+	         CASE WHEN U.USER_MENTO_CERT = 'T' THEN '🏅' END AS badge,
+	         UC.USER_NICK AS COMMENT_USER_NICK
+	      FROM TBL_ARTICLE A
+	      JOIN TBL_USER U ON A.USER_NUM = U.USER_NUM
+	      JOIN TBL_COMMENT C ON A.ARTICLE_NUM = C.ARTICLE_NUM
+	      JOIN TBL_USER UC ON C.USER_NUM = UC.USER_NUM
+	      WHERE C.USER_NUM = #{userNum}
+	      ORDER BY C.COMMENT_DATE DESC
+	   ) subquery
+	   ) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+	    ]]>
+  </select>
 	<!-- fetch 사용시 주석해제 -->
 	<!-- <select id="selectCateList" parameterType="map" resultType="ArticleListDTO">
 	SELECT 
@@ -191,6 +265,14 @@
 		FROM TBL_ARTICLE A
 		JOIN TBL_USER U ON A.USER_NUM = U.USER_NUM
 		AND A.ARTICLE_NUM = #{articleNum}
+   </select>
+   
+   <!--  해당 유저의 게시글을 확인하기 위해서는 닉네임으로부터 유저번
+   -호를 받아와야함 -->
+   <select id = "getUserNum" parameterType="String" resultType="int">
+   		SELECT USER_NUM
+   		FROM TBL_USER
+   		WHERE USER_NICK = #{userNick}
    </select>
 	
 </mapper>

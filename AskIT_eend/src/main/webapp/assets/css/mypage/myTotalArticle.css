@@ -26,7 +26,7 @@ margin: 0px auto 30px;
   /* background-color: antiquewhite; */
   border: 1px solid #DFDFDF;
   width: 320px;
-  height: 682px;
+  height: 730px;
   border-radius:50px;
   margin-left: 80px;
   text-align: center;  
@@ -46,7 +46,7 @@ margin: 0px auto 30px;
 }
 /* 회원구분 */
 .keh-mypageMain-memType{
-  font-size: 16px;
+  font-size: 20px;
   padding-bottom: 10px;
 }
 .keh-mypageMain-memType>span{
@@ -60,6 +60,10 @@ margin: 0px auto 30px;
 /* 내 모니터 총합 */
 .keh-mypageMain-myMonitor{
   font-size: 20px;
+}
+.keh-mypageMain-myMonitor{
+  color: #606060;
+  font-weight: bold;
 }
 /* 구분선 */
 hr{
