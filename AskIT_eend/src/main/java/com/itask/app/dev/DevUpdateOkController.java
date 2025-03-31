@@ -43,10 +43,11 @@ public class DevUpdateOkController implements Execute{
 	        boolean isUpdated = devDAO.update(articleDetailDTO);
 	        
 	        if (isUpdated) {
+	        	request.setAttribute("message", "게시물이 수정되었습니다.");
 	            result.setPath("/dev/listAsk.dev");
 	            result.setRedirect(false); // 리다이렉트 처리
 	        } else {
-	            request.setAttribute("errorMessage", "게시물 수정에 실패했습니다.");
+	            request.setAttribute("errorMessage", "게시물 수정 실패했습니다.");
 	            result.setPath("/dev/askEdit.jsp");
 	        }
 	        return result;

@@ -1,5 +1,4 @@
-package com.itask.app.dto;
-public class ArticleListDTO {
+package com.itask.app.dto;import java.util.List;public class ArticleListDTO {
 //   CREATE TABLE TBL_ARTICLE (
 //          ARTICLE_NUM NUMBER NOT NULL,
 //          USER_NUM NUMBER NOT NULL,
@@ -35,7 +34,7 @@ public class ArticleListDTO {
 	private String userMentoCert;
 	private String userNick; // 관리자페이지에서 필요한 DTO
 	private String badge;
-	private String category; // 검색결과에 필요한 DTO
+	private String category; // 검색결과에 필요한 DTO	private List<AttachedFileDTO> files;
 
 	public int getArticleNum() {
 		return articleNum;
@@ -154,7 +153,7 @@ public class ArticleListDTO {
 	}
 
 	public void setCategory(String category) {
-		this.category = category;	}
+		this.category = category;	}	public List<AttachedFileDTO> getFiles() {		return files;	}	public void setFiles(List<AttachedFileDTO> files) {		this.files = files;	}
 
 	@Override
 	public String toString() {
@@ -163,6 +162,6 @@ public class ArticleListDTO {
 				+ ", articleTitle=" + articleTitle + ", articleText=" + articleText + ", articleDate=" + articleDate
 				+ ", articleView=" + articleView + ", articleMonitor=" + articleMonitorNum + ", userMonitor="
 				+ userMonitor + ", userMentoCert=" + userMentoCert + ", userNick=" + userNick + ", badge=" + badge
-				+ ", category=" + category + "]";
+				+ ", category=" + category + ", files=" + files + "]";
 	}
 }

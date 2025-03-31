@@ -1,6 +1,7 @@
 package com.itask.app.dev;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 
 import javax.servlet.ServletException;
@@ -11,6 +12,8 @@ import com.itask.app.Execute;
 import com.itask.app.Result;
 import com.itask.app.dev.dao.DevDAO;
 import com.itask.app.dto.ArticleListDTO;
+import com.itask.app.dto.AttachedFileDTO;
+import com.itask.app.write.dao.AttachedFileDAO;
 
 public class DevDetailAskOkController implements Execute {
 	@Override
@@ -27,6 +30,7 @@ public class DevDetailAskOkController implements Execute {
 		int articleNum = Integer.valueOf(request.getParameter("articleNum"));
 		DevDAO devDAO = new DevDAO();
 		ArticleListDTO articleListDTO = devDAO.select(articleNum); 
+		AttachedFileDAO attachedFileDAO = new AttachedFileDAO();
 		
 		  //게시글이 존재하지 않을 경우 처리
 	      if(articleListDTO == null) {
@@ -35,6 +39,12 @@ public class DevDetailAskOkController implements Execute {
 	         result.setRedirect(false);
 	         return result;
 	      }
+	      List<AttachedFileDTO> files = attachedFileDAO.select(articleNum);
+	      
+			System.out.println("==파일확인===");
+			System.out.println(files);
+			System.out.println("==파일확인끝===");
+			articleListDTO.setFiles(files);
 	      
 	      //로그인한 사용자 번호 가져오기
 	      Integer loginUserNum = (Integer) request.getSession().getAttribute("userNum");
