@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.itask.app.dto.UserDTO" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +16,14 @@
 
 <body>
   <!-- 헤더 영역 -->
-  <jsp:include page="./../../../basic/userheader.jsp"/>
+	<% UserDTO userInfo = (UserDTO)session.getAttribute("userDTO"); %>
+	<% if(userInfo != null){ %>
+	  <jsp:include page="./../../../basic/userheader.jsp"/>
+	  
+	<% }else{ %>
+		<jsp:include page="./../../../basic/header.jsp"/>
+	  
+	<%} %>
 
   <!-- ------------------------------시험 일정은 1년에 한 번씩 수정됨 -> html 코드내 작성하고 여기서 수정하기-------------------------------------- -->
   <!-- 메인 영역 -->
