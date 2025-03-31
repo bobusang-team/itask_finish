@@ -58,16 +58,16 @@ public class CommentMonitorController implements Execute{
 	        commentDAO.incrementCommentMonitor(commentNum);
 	        System.out.println("댓글 추천수 메소드 완료");
 	        
-	        // 추천 후 경로
-	        result.setPath("/comment/commentListOk.co");
-	        result.setRedirect(true);
-	        System.out.println("너 뭐야");
 	        
 	        //추천 완료 상태 저장
 	        session.setAttribute(likeKey, true);
 	        
-	       
+	        // 추천 후 경로
+	        result.setPath("/dev/detailAsk.dev");  
+	        result.setRedirect(true);
+
 	        
+	     
 		return result;
 	}
 

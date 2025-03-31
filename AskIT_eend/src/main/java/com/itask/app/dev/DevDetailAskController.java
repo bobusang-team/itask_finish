@@ -1,6 +1,7 @@
 package com.itask.app.dev;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +11,9 @@ import com.itask.app.Execute;
 import com.itask.app.Result;
 import com.itask.app.dev.dao.DevDAO;
 import com.itask.app.dto.ArticleListDTO;
+import com.itask.app.dto.AttachedFileDTO;
 import com.itask.app.dto.UserDTO;
+import com.itask.app.write.dao.AttachedFileDAO;
 
 public class DevDetailAskController implements Execute {
 
@@ -33,6 +36,7 @@ public class DevDetailAskController implements Execute {
         DevDAO devDAO = new DevDAO();
         ArticleListDTO articleListDTO = devDAO.selectOne(articleNum);
         System.out.println(articleListDTO);
+        AttachedFileDAO attachedFileDAO = new AttachedFileDAO();
 
         if (articleListDTO == null) {
             System.out.println("존재하지 않는 게시글 입니다." + articleNum);
@@ -62,7 +66,12 @@ public class DevDetailAskController implements Execute {
             System.out.println("예외 발생: " + e.getMessage());
         }
         
-        
+	      List<AttachedFileDTO> files = attachedFileDAO.select(articleNum);
+	      
+			System.out.println("==파일확인===");
+			System.out.println(files);
+			System.out.println("==파일확인끝===");
+			articleListDTO.setFiles(files);
 
         // 게시글 정보 가져오기 (JSP에서 사용할 수 있도록 설정)
         request.setAttribute("dev", articleListDTO);

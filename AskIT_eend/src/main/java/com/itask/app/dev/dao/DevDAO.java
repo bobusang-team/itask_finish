@@ -73,9 +73,10 @@ public class DevDAO {
 		}
 	
 	//게시글 삭제
-	public void delete(int articleNum) {
+	public boolean delete(int articleNum) {
 		System.out.println("DAO delete 실행");
 		sqlSession.delete("dev.delete", articleNum);
+		return true;
 	}
 	
 	//게시글 수정

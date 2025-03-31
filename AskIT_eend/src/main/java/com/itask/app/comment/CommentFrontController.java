@@ -61,6 +61,10 @@ public class CommentFrontController extends HttpServlet {
 		         System.out.println("댓글 모니터 컨트롤러 진입");
 		         result = new CommentMonitorController().execute(request, response);
 		         break;
+	      case "/comment/commentUpdate.co":
+		         System.out.println("댓글 수정 컨트롤러 진입");
+		         result = new CommentUpdateOkController().execute(request, response);
+		         break;
 	      }
 	   }
 
